@@ -54,10 +54,11 @@ export default function Header() {
               <a
                 href="https://www.dropbox.com/scl/fi/an645if7qygouha4cxkai/Zeynep-Dundar-Resume.pdf"
                 target="_blank"
-                className="btn-primary"
+                className="bg-primary hover:bg-primary-hover text-white"
               >
                 Resume
               </a>
+
             </li>
           </ul>
         </div>
