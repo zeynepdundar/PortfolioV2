@@ -9,10 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="color-salmon-500 text-neutral-900 antialiased">
+      <body className="bg-background text-foreground antialiased">
         <Header />
-        <div className="h-20 w-40 bg-salmon rounded-xl text-background p-4">Tailwind v4 works</div>
-
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>
