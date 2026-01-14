@@ -25,10 +25,26 @@ export default function Header() {
             </li>
             <li>
               <a
+                href="#skills"
+                className="text-muted hover:text-primary transition-colors"
+              >
+                Skills
+              </a>
+            </li>
+            <li>
+              <a
                 href="#projects"
                 className="text-muted hover:text-primary transition-colors"
               >
                 Projects
+              </a>
+            </li>
+            <li>
+              <a
+                href="#experience"
+                className="text-muted hover:text-primary transition-colors"
+              >
+                Experience
               </a>
             </li>
             <li>
@@ -39,10 +55,20 @@ export default function Header() {
                 Contact
               </a>
             </li>
+
+            <li>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                className="ml-2 inline-flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-hover transition-colors"
+              >
+                Resume
+              </a>
+            </li>
           </ul>
 
           {/* Social */}
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <a
               href="https://github.com/zeynepdndr"
               aria-label="GitHub"
@@ -74,7 +100,7 @@ export default function Header() {
             >
               Resume
             </a>
-          </div>
+          </div> */}
         </div>
       </nav>
     </header>
