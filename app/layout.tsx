@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
@@ -10,9 +10,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-background text-foreground antialiased">
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <div className="flex min-h-screen">
+          <Sidebar />
+
+          <main className="flex-1">
+            {children}
+            <Footer />
+          </main>
+        </div>
       </body>
     </html>
   );
