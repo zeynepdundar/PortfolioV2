@@ -13,9 +13,11 @@ export default function RootLayout({
         <div className="flex min-h-screen">
           <Sidebar />
 
-          <main className="flex-1">
-            {children}
-            <Footer />
+          <main className="flex flex-1 justify-center">
+            <div className="w-full max-w-6xl">
+              {children}
+              <Footer />
+            </div>
           </main>
         </div>
       </body>

@@ -1,24 +1,16 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
   /* Neutrals */
-  --color-background: #fff7f5;      /* warm white */
-  --color-surface: #ffffff;         /* cards / nav */
-  --color-foreground: #1f1f1f;      /* main text */
-  --color-muted: #6b6b6b;            /* secondary text */
-  --color-border: #f1d7d2;           /* subtle separators */
+  --color-background: #F6F1EB;
+  --color-foreground: #1F1F1F;
+  --color-muted: #6B6B6B;
+  --color-border: #E6DED6;
 
-  /* Brand (salmon) */
-  --color-primary: #fa8072;          /* salmon */
-  --color-primary-hover: #f16a5c;
-}
-
-/* system dark mode */
-@media (prefers-color-scheme: dark) {
-  @theme inline {
-    --color-background: #0a0a0a;
-    --color-foreground: #ededed;
-  }
+  /* Brand */
+  --color-primary: #4F0C28;
+  --color-primary-hover: #3A081E;
+  --color-primary-soft: #F2E6EB;
 }
 
 body {

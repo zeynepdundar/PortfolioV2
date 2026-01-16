@@ -2,8 +2,17 @@ import { Github, LinkedinIcon, Mail } from "lucide-react";
 
 export default function Sidebar() {
   return (
-    <aside className="sticky top-0 h-screen w-64 shrink-0 border-r border-border bg-surface/80 backdrop-blur">
-      <nav className="flex h-full flex-col px-6 py-8">
+    <aside className="sticky top-0 h-screen w-64 shrink-0 relative border-r border-border backdrop-blur">
+      {/* Structural divider */}
+      <span className="pointer-events-none absolute right-0 top-0 h-full w-px bg-border" />
+
+      {/* Light edge highlight */}
+      <span className="pointer-events-none absolute right-[1px] top-0 h-full w-px bg-white/40" />
+
+      {/* Shadow falloff */}
+      <span className="pointer-events-none absolute right-[-1px] top-0 h-full w-px bg-foreground/5" />
+
+      <nav className="flex h-full flex-col px-6 py-8 ">
         {/* Brand */}
         <a
           href="#"
@@ -49,22 +58,20 @@ export default function Sidebar() {
         <div className="flex-1" />
 
         {/* Socials */}
-        <ul className="mb-6 flex items-center gap-4 text-muted">
-          <li>
-            <a
-              href="https://www.linkedin.com/in/zeynep-dundar/"
-              aria-label="LinkedIn"
-              className="rounded-md p-2 hover:bg-primary/10 hover:text-primary transition"
-            >
-              <LinkedinIcon className="h-5 w-5" />
-            </a>
-          </li>
+        <ul className="mb-6 flex items-center justify-center gap-8 text-muted">
+          <a
+            href="https://www.linkedin.com/in/zeynep-dundar/"
+            aria-label="LinkedIn"
+            className="transition-colors duration-200  hover:text-primary"
+          >
+            <LinkedinIcon className="h-5 w-5" />
+          </a>
 
           <li>
             <a
               href="https://github.com/zeynepdndr"
               aria-label="GitHub"
-              className="rounded-md p-2 hover:bg-primary/10 hover:text-primary transition"
+              className="rounded-md p-2 transition-colors duration-200  hover:text-primary "
             >
               <Github className="h-5 w-5" />
             </a>
@@ -74,7 +81,7 @@ export default function Sidebar() {
             <a
               href="mailto:dundarzey@gmail.com"
               aria-label="Email"
-              className="rounded-md p-2 hover:bg-primary/10 hover:text-primary transition"
+              className="rounded-md p-2 transition-colors duration-200  hover:text-primary"
             >
               <Mail className="h-5 w-5" />
             </a>
