@@ -1,8 +1,14 @@
+import { SectionHeader } from "../ui/SectionHeader";
+
 export function About() {
   return (
     <section id="about" className="min-h-screen flex items-center">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
+          <SectionHeader
+            title="About"
+            subtitle="Design-minded frontend engineer"
+          />
           <h1 className="text-4xl font-semibold text-foreground">
             Zeynep Dündar
           </h1>
