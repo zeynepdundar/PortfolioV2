@@ -3,18 +3,19 @@
 @theme inline {
   /* Neutrals */
   --color-background: #fffdfa;
-  --color-foreground: #1F1F1F;
-  --color-muted: #6B6B6B;
-  --color-border: #E6DED6;
+  --color-foreground: #1f1f1f;
+  --color-muted: #6b6b6b;
+  --color-border: #e6ded6;
 
   /* Brand */
-  --color-primary: #4F0C28;
-  --color-primary-hover: #3A081E;
-  --color-primary-soft: #F2E6EB;
+  --color-primary: #4f0c28;
+  --color-primary-hover: #3a081e;
+  --color-primary-soft: #f2e6eb;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  letter-spacing: -0.01em;
 }
