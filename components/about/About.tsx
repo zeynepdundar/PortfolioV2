@@ -1,8 +1,9 @@
+import { PageSection } from "../ui/PageSection";
 import { SectionHeader } from "../ui/SectionHeader";
 
-export function About() {
+export default function About() {
   return (
-    <section id="about" className="min-h-screen flex items-center">
+    <PageSection id="about" >
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
           <SectionHeader
@@ -25,6 +26,6 @@ export function About() {
           </p>
         </div>
       </div>
-    </section>
+    </PageSection>
   );
 }
