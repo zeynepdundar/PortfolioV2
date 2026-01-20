@@ -13,6 +13,15 @@
   --color-primary-soft: #f2e6eb;
 }
 
+:root {
+  --bottom-nav-height: 72px;
+}
+@media (max-width: 640px) {
+  :root {
+    --bottom-nav-height: 64px;
+  }
+}
+
 body {
   background: var(--color-background);
   color: var(--color-foreground);
