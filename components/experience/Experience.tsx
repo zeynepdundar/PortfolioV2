@@ -12,67 +12,44 @@ export default function Experience() {
             title="Experience"
             subtitle="A quick overview of where I've worked."
           />
-
           <div className="flex flex-col gap-16">
             {/* Linga */}
             <ExperienceItem
               role="Frontend Engineer"
               company="Linga rOS"
               period="Feb 2023 – Present"
-              description="Part of the frontend team developing a cloud-based restaurant operating system, focusing on revamping and modernizing the back-office UI to improve usability, performance, and scalability."
+              description="Part of the frontend team developing a cloud-based restaurant operating system..."
+              logo="/logos/linga_logo.jpeg"
               stack={["Angular", "TypeScript", "RxJS", "Next.js", "CSS"]}
             />
-
-            {/* Accenture */}
+          </div>
+          <div className="flex flex-col gap-16">
             <ExperienceItem
               role="Frontend Engineer"
               company="Accenture"
               period="Mar 2021 – May 2022"
-              description="Collaborated with an international team to build and launch a large-scale B2B platform for Mercedes-Benz, released in 19+ countries."
+              description="Collaborated with an international team to build and release a B2B platform for Mercedes-Benz, successfully launched in 19+ countries."
+              logo="/logos/accenture_logo.png"
               link={{
-                label: "Live project",
+                label: "b2bconnect.mercedes-benz.com",
                 href: "https://b2bconnect.mercedes-benz.com",
               }}
-              stack={["React", "Next.js", "Storybook", "Electron.js", "Webpack"]}
-            />
-
-            {/* Renault */}
-            <ExperienceItem
-              role="Full Stack Developer"
-              company="Renault Group"
-              period="Oct 2020 – Jan 2021"
-              description="Developed a full-stack internal web application to automate HR processes, including payroll, scheduling, and performance tracking."
-              stack={["Java", "Spring Boot", "AngularJS", "PostgreSQL", "React"]}
-            />
-
-            {/* Softtech */}
-            <ExperienceItem
-              role="Software Development Assistance Specialist"
-              company="Softtech"
-              period="Jul 2019 – Nov 2019"
-              description="Implemented automated testing workflows to reduce manual testing effort and improve system reliability."
-              stack={["Java", "Selenium", "Cucumber"]}
-            />
-
-            {/* Webbilir */}
-            <ExperienceItem
-              role="Software Developer"
-              company="Webbilir Consulting"
-              period="Jul 2018 – Jun 2019"
-              description="Built and launched a single-page e-commerce application with payment and shipment features."
-              link={{
-                label: "Florist website",
-              }}
-              stack={["Angular", "Firebase", "JavaScript", "C#", ".NET", "MSSQL"]}
+              stack={[
+                "React",
+                "Next.js",
+                "Storybook",
+                "Electron.js",
+                "Webpack",
+              ]}
             />
           </div>
+
         </div>
       </div>
     </PageSection>
   );
 }
 
-/* ---------- Subcomponents ---------- */
 
 type ExperienceItemProps = {
   role: string;
@@ -80,11 +57,13 @@ type ExperienceItemProps = {
   period: string;
   description: string;
   stack: string[];
+  logo: string; // logo image path or URL
   link?: {
     label: string;
     href?: string;
   };
 };
+
 
 function ExperienceItem({
   role,
@@ -93,42 +72,68 @@ function ExperienceItem({
   description,
   stack,
   link,
+  logo,
 }: ExperienceItemProps) {
   return (
     <div className="flex flex-col gap-4">
-      {/* Header */}
-      <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-medium text-foreground">
-          {role} · {company}
-        </h3>
-        <span className="text-sm text-muted">{period}</span>
+      {/* Row 1: Logo + Header | Date */}
+      <div className="flex items-start justify-between gap-6">
+        {/* Left: Logo + Title */}
+        <div className="flex items-start gap-6">
+          {/* Logo */}
+          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg border border-[var(--color-primary)]/30 shadow-sm">
+            <img
+              src={logo}
+              alt={`${company} logo`}
+              className="h-8 w-8 object-contain"
+            />
+          </div>
+
+          {/* Header */}
+          <div className="flex flex-col gap-1">
+            <h2 className="text-lg font-medium text-foreground">{role}</h2>
+            <h3 className="text-sm text-muted">{company}</h3>
+          </div>
+        </div>
+
+        {/* Right: Date */}
+        <span className="whitespace-nowrap text-xs text-muted">
+          {period}
+        </span>
       </div>
 
-      {/* Description */}
-      <p className="max-w-3xl text-muted leading-relaxed">{description}</p>
+      {/* Row 2: Content */}
+      <div className="flex flex-col gap-4">
+        {/* Description */}
+        <p className="max-w-3xl leading-relaxed text-muted">
+          {description}
+        </p>
 
-      {/* Optional link */}
-      {link && (
-        <a
-          href={link.href}
-          target="_blank"
-          className="w-fit text-sm text-primary hover:underline"
-        >
-          {link.label}
-        </a>
-      )}
-
-      {/* Tech stack */}
-      <ul className="flex flex-wrap gap-2 pt-2">
-        {stack.map((tech) => (
-          <li
-            key={tech}
-            className="rounded-md border border-border px-2 py-1 text-xs text-muted"
+        {/* Optional link */}
+        {link && (
+          <a
+            href={link.href}
+            target="_blank"
+            className="w-fit text-sm text-primary hover:underline"
           >
-            {tech}
-          </li>
-        ))}
-      </ul>
+            {link.label}
+          </a>
+        )}
+
+        {/* Tech stack */}
+        <ul className="flex flex-wrap gap-2 pt-1">
+          {stack.map((tech) => (
+            <li
+              key={tech}
+              className="rounded-md border border-border px-2 py-1 text-xs text-muted"
+            >
+              {tech}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
+
+
