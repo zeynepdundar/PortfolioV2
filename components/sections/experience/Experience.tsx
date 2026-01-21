@@ -16,7 +16,7 @@ export default function Experience() {
             <ExperienceItem
               role="Frontend Engineer"
               company="Linga rOS"
-              period="Feb 2023 – Present"
+              period="2023 – Present"
               description="Built and maintained the back-office UI of a global, cloud-based restaurant operating system. Migrated a large-scale interface to Angular 14 within a 15+ engineer Agile team, working closely with product managers, designers, and engineers to deliver reliable, user-focused features at scale."
               logo="/logos/linga_logo.jpeg"
               stack={["Angular", "TypeScript", "RxJS", "CSS"]}
@@ -27,7 +27,7 @@ export default function Experience() {
             <ExperienceItem
               role="Frontend Engineer"
               company="Accenture"
-              period="Mar 2021 – May 2022"
+              period="2021 – 2022"
               description="Contributed to enterprise client projects for Mercedes-Benz and Roche. Built and successfully launched Mercedes-Benz’s B2B e-commerce platform across 19+ countries. Designed and implemented accessible, reusable UI components, contributing to a shared library for improved consistency and faster development."
               logo="/logos/accenture_logo.jpeg"
               companyUrl="https://www.accenture.com/us-en"
@@ -48,7 +48,7 @@ export default function Experience() {
             <ExperienceItem
               role="Full Stack Developer"
               company="Renault Group"
-              period="Oct 2020 – Jan 2021"
+              period="2020 – 2021"
               description="Co-developed an internal HR automation platform for Renault, streamlining payroll, scheduling, and performance tracking, which reduced HR operational time"
               logo="/logos/renault_logo.jpeg"
               companyUrl="https://www.renaultgroup.com/en/"
@@ -65,7 +65,7 @@ export default function Experience() {
             <ExperienceItem
               role="Software Development Assistance Specialist"
               company="Softtech"
-              period="Jul 2019 – Nov 2019"
+              period="2019 – 2019"
               description="Implemented automated testing procedures, reducing manual testing effort and improving system reliability through increased test coverage."
               logo="/logos/softtech_logo.jpeg"
               companyUrl="https://softtech.com.tr/"
@@ -76,7 +76,7 @@ export default function Experience() {
             <ExperienceItem
               role="Software Developer"
               company="Webbilir Consulting"
-              period="Jul 2018 – Jun 2019"
+              period="2018 – 2019"
               description="Collaborated with fellow student developers and engineers on consulting projects to design and launch new brands and websites."
               logo="/logos/webbilir_logo.jpeg"
               companyUrl="https://webbilir.com/"
