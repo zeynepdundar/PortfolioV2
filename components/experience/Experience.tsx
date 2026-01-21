@@ -7,7 +7,7 @@ export default function Experience() {
       id="experience"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <SectionHeader
             title="Experience"
             subtitle="A quick overview of where I've worked."
