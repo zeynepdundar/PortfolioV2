@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { PageSection } from "../ui/PageSection";
-import { SectionHeader } from "../ui/SectionHeader";
+import { PageSection } from "../../ui/PageSection";
+import { SectionHeader } from "../../ui/SectionHeader";
 
 export default function Projects() {
   return (
@@ -25,7 +25,7 @@ export default function Projects() {
               {/* Image */}
               <div className="group relative aspect-video overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/img/horse-race.png"
+                  src="/images/horse-race.png"
                   alt="Fast-Paced Horse Racing Game"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -101,7 +101,7 @@ export default function Projects() {
               {/* Image */}
               <div className="group relative aspect-video overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/img/book-swap.png"
+                  src="/images/book-swap.png"
                   alt="Book Trading Platform"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -180,7 +180,7 @@ export default function Projects() {
               {/* Image */}
               <div className="group relative aspect-video overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/img/shelfie.png"
+                  src="/images/shelfie.png"
                   alt="Shelfie Reading Tracker App"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -258,7 +258,7 @@ export default function Projects() {
               {/* Image */}
               <div className="group relative aspect-video overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/img/pokedex.png"
+                  src="/images/pokedex.png"
                   alt="Pokédex Application"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
