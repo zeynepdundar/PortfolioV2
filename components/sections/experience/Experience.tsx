@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
 
@@ -137,10 +138,12 @@ function ExperienceItem({
             className="flex items-center gap-4 group"
           >
             <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-md border border-border/40 bg-muted/20 flex items-center justify-center">
-              <img
+              <Image
                 src={logo}
                 alt={`${company} logo`}
-                className="h-full w-full object-contain"
+                width={160}
+                height={160}
+                className="object-contain"
               />
             </div>
           </a>
@@ -184,7 +187,7 @@ function ExperienceItem({
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
-            fill="none" 
+            fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}

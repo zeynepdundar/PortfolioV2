@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
 
@@ -10,10 +11,12 @@ export default function About() {
           <header className="flex items-center gap-6">
             {/* Profile photo */}
             <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-border">
-              <img
+              <Image
                 src="/images/profile.jpg"
                 alt="Zeynep Dündar"
-                className="h-full w-full object-cover grayscale contrast-90 brightness-95"
+                width={160}
+                height={160}
+                className="object-cover grayscale contrast-90 brightness-95"
               />
             </div>
 
@@ -42,8 +45,7 @@ export default function About() {
           {/* Description */}
           <div className="mt-6 flex flex-col gap-4 text-md leading-relaxed text-muted">
             <p>
-              I build clean, performant, and accessible user interfaces with a design-minded approach. With 5+ years of experience and a degree in Computer Engineering from Istanbul Technical University, I’ve contributed to large-scale products for global companies like Mercedes-Benz and Renault Group.
-            </p>
+              Frontend Engineer with 5+ years of experience building high-performance Angular, React, and Next.js applications, focusing on UI consistency and web performance.”            </p>
 
             <p>
               Currently, I’m helping build the world’s first complete restaurant operating system at Linga rOS, creating a comprehensive technology ecosystem for the food service industry. Beyond coding, I enjoy crafting UI/UX designs in Figma, primarily for mobile applications. Find me on LinkedIn
@@ -51,10 +53,10 @@ export default function About() {
             </p>
 
             <p>
-            I began my development journey in 2018, working across consulting firms, startups, banks, and large enterprises before specializing in frontend engineering. Along the way, I’ve built everything from e-commerce apps with Vanilla JS, jQuery, and Firebase to complex B2B platforms using React, Next.js, and Angular.            </p>
+              I began my development journey in 2018, working across consulting firms, startups, banks, and large enterprises before specializing in frontend engineering. Along the way, I’ve built everything from e-commerce apps with Vanilla JS, jQuery, and Firebase to complex B2B platforms        </p>
 
             <p>
-            When I'm not coding, I enjoy riding my motorcycle, staying active at the gym, exploring new places, playing guitar, and practicing capoeira.
+              When I'm not coding, I enjoy riding my motorcycle, staying active at the gym, exploring new places, playing guitar, and practicing capoeira.
             </p>
           </div>
         </div>

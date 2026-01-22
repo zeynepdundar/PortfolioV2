@@ -3,6 +3,29 @@ import BottomNav from "@/components/layout/BottomNav";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import type { Metadata } from "next";
+
+export const metadata : Metadata= {
+  openGraph: {
+    title: "Zeynep Dündar | Frontend Engineer",
+    description:
+      "Frontend Engineer specializing in React, Next.js, and high-performance UI development.",
+    url: "https://yourdomain.com",
+    siteName: "Zeynep Dündar Portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
+
+
+
 const plusJakarta = localFont({
   src: [
     { path: "../public/fonts/plus-jakarta-sans/PlusJakartaSans-Regular.ttf", weight: "400" },
@@ -22,8 +45,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-background text-foreground antialiased ${plusJakarta.variable}`}
+        className={`
+    bg-background text-foreground antialiased
+    ${plusJakarta.variable}
+    pb-[calc(var(--bottom-nav-height)+1rem)]
+  `}
       >
+
         {/* Main content */}
         <main className="min-h-[100dvh] flex justify-center">
           <div className="w-full max-w-6xl">
