@@ -91,6 +91,8 @@ export default function BottomNav() {
 
   return (
     <nav
+      role="navigation"
+      aria-label="Primary"
       className="
         fixed left-0 right-0 z-50
         bottom-6
@@ -202,19 +204,19 @@ export default function BottomNav() {
       {/* RIGHT ARROW */}
       {canScrollRight && (
         <button
-  aria-label="Scroll right"
-  onClick={scrollRight}
-  className="
+          aria-label="Scroll right"
+          onClick={scrollRight}
+          className="
     absolute right-3 top-1/2 -translate-y-1/2
     sm:hidden
     w-4 h-4
     pointer-events-auto
     rotate-90
   "
->
-  <span
-    aria-hidden
-    className="
+        >
+          <span
+            aria-hidden
+            className="
       relative block w-full h-full
 
       before:content-['']
@@ -231,8 +233,8 @@ export default function BottomNav() {
       after:rotate-[-45deg]
       after:origin-top
     "
-  />
-</button>
+          />
+        </button>
 
       )}
     </nav>

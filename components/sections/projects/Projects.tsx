@@ -141,7 +141,7 @@ export default function Projects() {
                 </ul>
 
                 <p className="text-muted leading-relaxed">
-                  A mobile app for sustainable peer-to-peer book trading. Users can scan
+                  A mobile app for book exchanges. Users can scan
                   barcodes to search from 28M+ titles, add books to their collection, chat
                   in real time, and manage seamless book exchanges.
                 </p>
