@@ -13,14 +13,15 @@ export default function Contact() {
 
           <div>
             <p className="text-md leading-relaxed text-muted">
-              I think this is the beginning of something great, and I’d love to hear
-              from you. Whether you want to discuss a project, talk about frontend
-              architecture, or just share a good joke — my inbox is always open.
+              I think this is the beginning of something great, and I’d love to
+              hear from you. Whether you want to discuss a project, talk about
+              frontend architecture, or just share a good joke — my inbox is
+              always open.
             </p>
 
             <p className="text-md leading-relaxed text-muted">
-              You can also ask me about motorcycles, help me practice Spanish, or
-              just say hello <span className="not-italic">👋</span>
+              You can also ask me about motorcycles, help me practice Spanish,
+              or just say hello <span className="not-italic">👋</span>
             </p>
 
             {/* Primary CTA */}
@@ -94,16 +95,61 @@ export default function Contact() {
                   </a>
                 </li>
 
+                {/* Mail */}
+                <li>
+                  <a
+                    href="mailto:dundarzey@itu.edu.tr"
+                    aria-label="Email"
+                    className="text-muted transition hover:text-foreground"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="size-5"
+                    >
+                      <rect width="20" height="16" x="2" y="4" rx="2" ry="2" />
+                      <path d="m22 6-10 7L2 6" />
+                    </svg>
+                  </a>
+                </li>
+
                 {/* Resume */}
                 <li>
                   <a
                     href="https://www.dropbox.com/scl/fi/an645if7qygouha4cxkai/Zeynep-Dundar-Resume.pdf?rlkey=btctrp1s9pu99kqxb3p3rb0is&dl=0"
                     target="_blank"
-                    className="text-sm font-medium text-foreground underline-offset-4 transition hover:underline"
+                    rel="noopener noreferrer"
+                    aria-label="Resume"
+                    className="text-muted transition hover:text-foreground"
                   >
-                    Resume
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="size-5"
+                    >
+                      {/* Document icon path */}
+                      <path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" />
+                      <line x1="6" y1="7" x2="15" y2="7" />
+                      <line x1="6" y1="11" x2="15" y2="11" />
+                      <line x1="6" y1="15" x2="15" y2="15" />
+                    </svg>
                   </a>
                 </li>
+
               </ul>
             </div>
           </div>
