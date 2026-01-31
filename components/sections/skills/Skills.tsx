@@ -34,33 +34,42 @@ const Skills = () => {
             Here are some of the technologies and tools I have experience with, ranging from frontend and backend development to design and mobile frameworks.
           </p>
 
-          {/* Skills Grid */}
-          <div className="mt-12 grid grid-cols-7 gap-6">
-            {skills.map((skill) => (
-              <a
-                key={skill.name}
-                href={skill.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative w-18 h-18 rounded-xl border border-border bg-background/50 p-2 hover:bg-border transition-all group flex items-center justify-center"
-              >
-                {/* Skill Logo */}
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2">
+          {skills.map((skill) => (
+            <a
+  key={skill.name}
+  href={skill.href}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    flex items-center gap-2
+    w-40 h-16
+    rounded-md
+    border border-border/30
+    bg-background/40
+    px-2
+    hover:bg-border/60
+    transition
+  "
+>
+                {/* Icon */}
+                <div className="relative h-8 w-8 shrink-0">
                 <Image
-                  src={skill.logo}
-                  alt={`${skill.name} Logo`}
-                  fill
-                  className="object-contain transition-transform duration-300 group-hover:-translate-y-1 p-4"
-                />
-
-                {/* Hover Popup */}
-                <div className="absolute bottom-[calc(100%+4px)] w-max pointer-events-none z-10 text-center pt-1 pb-1 px-2 bg-[#0C0C0CD1] backdrop-blur-md rounded-md transition-all duration-700 scale-0 opacity-0 blur-[4px] translate-y-4 group-hover:scale-100 group-hover:opacity-100 group-hover:translate-y-0 group-hover:blur-0">
-                  <div className="font-serif mb-1 text-xs text-white">{skill.name}</div>
-                  <div className="font-mono text-[10px] text-neutral-300 uppercase">{skill.description}</div>
+    src={skill.logo}
+    alt={`${skill.name} logo`}
+    fill
+    className="object-contain"
+  />
                 </div>
+
+                {/* Content */}
+                <span className="text-sm font-medium text-foreground">
+                  {skill.name}
+                </span>
               </a>
             ))}
           </div>
-          {/* End Skills Grid */}
+
 
         </div>
       </div>
