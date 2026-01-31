@@ -2,6 +2,7 @@
 
 import { Github, Linkedin, FileText } from "lucide-react";
 import Link from "next/link";
+import { ThemeToggle } from "../ui/ThemeToggle";
 
 const socials = [
   {
@@ -51,7 +52,8 @@ export default function UtilityRail() {
         </Link>
       ))}
 
-      {/* vertical line */}
+      <ThemeToggle/>
+
       <span className="mt-2 h-16 w-px bg-foreground/10" />
     </aside>
   );
