@@ -1,6 +1,7 @@
 import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import localFont from "next/font/local";
+import UtilityRail from "@/components/layout/UtilityRail";
 
 const plusJakarta = localFont({
   src: [
@@ -34,32 +35,7 @@ export default function MainLayout({
           <Footer />
         </div>
       </main>
-
-      {/* Overlays */}
-      <div
-        aria-hidden
-        className="
-          pointer-events-none
-          fixed inset-x-0 bottom-0 z-40
-          h-36
-          bg-gradient-to-t
-          from-background/95
-          via-background/70
-          to-transparent
-        "
-      />
-
-      <div
-        aria-hidden
-        className="
-          pointer-events-none
-          fixed inset-x-0 z-45
-          bottom-20
-          h-px
-          bg-foreground/5
-        "
-      />
-
+      <UtilityRail/>
       <BottomNav />
     </div>
   );
