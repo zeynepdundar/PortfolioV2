@@ -17,7 +17,7 @@ const socials = [
   },
   {
     href: "/cv.pdf",
-    label: "CV",
+    label: "Download CV",
     icon: FileText,
   },
 ];
@@ -40,7 +40,7 @@ export default function UtilityRail() {
           rel="noopener noreferrer"
           aria-label={label}
           className="
-            group
+            relative group
             rounded-xl p-3
             text-foreground/70
             hover:text-foreground
@@ -49,12 +49,30 @@ export default function UtilityRail() {
           "
         >
           <Icon className="h-5 w-5" />
+
+          {/* Tooltip */}
+          <span
+            className="
+              pointer-events-none
+              absolute left-full ml-3
+              top-1/2 -translate-y-1/2
+              whitespace-nowrap
+              rounded-md bg-foreground text-background
+              px-2 py-1 text-xs font-medium
+              opacity-0 translate-x-1
+              group-hover:opacity-100 group-hover:translate-x-0
+              transition-all
+            "
+          >
+            {label}
+          </span>
         </Link>
       ))}
 
-      <ThemeToggle/>
+      <ThemeToggle />
 
       <span className="mt-2 h-16 w-px bg-foreground/10" />
     </aside>
   );
 }
+
