@@ -8,9 +8,9 @@ export default function About() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-3xl">
           {/* Intro */}
-          <header className="flex items-center gap-6">
+          <header className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             {/* Profile photo */}
-            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-border">
+            <div className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-full border border-border">
               <Image
                 src="/images/profile.jpg"
                 alt="Zeynep Dündar"
@@ -22,11 +22,11 @@ export default function About() {
 
             {/* Name */}
             <div className="flex flex-col">
-              <span className="text-sm font-medium tracking-widest text-primary">
+              <span className="text-sm sm:text-base font-medium tracking-widest text-primary">
                 Hi
               </span>
 
-              <h1 className="mt-1 text-2xl font-semibold">
+              <h1 className="mt-1 text-2xl sm:text-4xl font-semibold">
                 <span className="bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
                   I’m Zeynep Dündar
                 </span>
@@ -34,31 +34,34 @@ export default function About() {
             </div>
           </header>
 
+
           {/* Accent divider */}
-          <div className="mt-4 h-px w-16 bg-gradient-to-r from-primary/60 to-transparent" />
+          <div className="mt-4 h-1 w-20 sm:w-24 bg-gradient-to-r from-primary/60 to-transparent" />
 
           {/* Role */}
-          <p className="mt-4 text-xs uppercase tracking-[0.2em] text-muted">
+          <p className="mt-4 text-xs sm:text-sm uppercase tracking-[0.2em] text-muted">
             Frontend Engineer · Design-driven · UX-focused
           </p>
 
           {/* Description */}
-          <div className="mt-6 flex flex-col gap-4 text-md leading-relaxed text-muted">
+          <div className="mt-6 flex flex-col gap-4 sm:gap-6 text-sm sm:text-base leading-relaxed text-muted">
             <p>
-              Frontend Engineer with 5+ years of experience building high-performance Angular, React, and Next.js applications, focusing on UI consistency and web performance.”            </p>
-
-            <p>
-              Currently, I’m helping build the world’s first complete restaurant operating system at Linga rOS, creating a comprehensive technology ecosystem for the food service industry. Beyond coding, I enjoy crafting UI/UX designs in Figma, primarily for mobile applications. Find me on LinkedIn
-              .
+              Frontend Engineer with 5+ years of experience building high-performance Angular, React, and Next.js applications, focusing on UI consistency and web performance.
             </p>
 
             <p>
-              I began my development journey in 2018, working across consulting firms, startups, banks, and large enterprises before specializing in frontend engineering. Along the way, I’ve built everything from e-commerce apps with Vanilla JS, jQuery, and Firebase to complex B2B platforms        </p>
+              Currently, I’m helping build the world’s first complete restaurant operating system at Linga rOS, creating a comprehensive technology ecosystem for the food service industry. Beyond coding, I enjoy crafting UI/UX designs in Figma, primarily for mobile applications. Find me on LinkedIn.
+            </p>
+
+            <p>
+              I began my development journey in 2018, working across consulting firms, startups, banks, and large enterprises before specializing in frontend engineering. Along the way, I’ve built everything from e-commerce apps with Vanilla JS, jQuery, and Firebase to complex B2B platforms.
+            </p>
 
             <p>
               When I'm not coding, I enjoy riding my motorcycle, staying active at the gym, exploring new places, playing guitar, and practicing capoeira.
             </p>
           </div>
+
         </div>
       </div>
     </PageSection>
