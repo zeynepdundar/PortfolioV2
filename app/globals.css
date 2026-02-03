@@ -58,5 +58,4 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-plus-jakarta), sans-serif;
   letter-spacing: -0.01em;
-  transition: background-color 0.2s ease, color 0.2s ease;
 }

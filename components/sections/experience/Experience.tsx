@@ -125,9 +125,9 @@ function ExperienceItem({
   logo,
 }: ExperienceItemProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6 sm:gap-8">
       {/* Header row */}
-      <div className="flex items-center justify-between gap-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
         {/* Left: logo + titles */}
         <div className="flex items-center gap-4">
           {/* Logo */}
@@ -137,7 +137,7 @@ function ExperienceItem({
             rel="noopener noreferrer"
             className="flex items-center gap-4 group"
           >
-            <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-md border border-border/40 bg-muted/20 flex items-center justify-center">
+            <div className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 overflow-hidden rounded-md border border-border/40 bg-muted/20 flex items-center justify-center">
               <Image
                 src={logo}
                 alt={`${company} logo`}
@@ -148,17 +148,16 @@ function ExperienceItem({
             </div>
           </a>
 
-
           {/* Text */}
           <div className="flex flex-col leading-tight">
-            <h2 className="text-sm font-medium text-foreground">
+            <h2 className="text-base sm:text-lg font-semibold text-foreground">
               {role}
             </h2>
             <a
               href={companyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex w-fit items-center gap-1 text-xs text-muted hover:text-foreground"
+              className="group inline-flex w-fit items-center gap-1 text-sm sm:text-base text-muted hover:text-foreground"
             >
               <span>{company}</span>
               <span className="transition-transform group-hover:translate-x-0.5">
@@ -169,24 +168,26 @@ function ExperienceItem({
         </div>
 
         {/* Right: date */}
-        <span className="text-xs text-muted leading-tight">
+        <span className="text-sm sm:text-base text-muted leading-snug">
           {period}
         </span>
       </div>
 
       {/* Content */}
-      <p className="leading-relaxed text-muted">{description}</p>
+      <p className="leading-relaxed text-sm sm:text-base text-muted">
+        {description}
+      </p>
 
       {link && (
         <a
           href={link.href}
           target="_blank"
-          className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+          className="inline-flex items-center gap-1 text-sm sm:text-base text-primary hover:underline"
         >
           {link.label}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
+            className="h-4 w-4 sm:h-5 sm:w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -206,15 +207,18 @@ function ExperienceItem({
         </a>
       )}
 
-      <ul className="flex flex-wrap gap-2 pt-1">
+      {/* Tech stack badges */}
+      <ul className="flex flex-wrap gap-2 pt-2">
         {stack.map((tech) => (
-          <li key={tech} className="rounded-md border border-border px-2 py-1 text-xs text-muted">
+          <li
+            key={tech}
+            className="rounded-md border border-border px-3 py-1 text-sm sm:text-base text-muted"
+          >
             {tech}
           </li>
         ))}
       </ul>
-
     </div>
-
   );
 }
+
