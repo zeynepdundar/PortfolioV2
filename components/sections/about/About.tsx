@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
+import { SectionContainer } from "../../ui/SectionContainer";
 
 export default function About() {
   return (
     <PageSection id="about">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-3xl">
+      <SectionContainer>
+        <div className="w-full">
           {/* Intro */}
           <header className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             {/* Profile photo */}
@@ -63,7 +64,7 @@ export default function About() {
           </div>
 
         </div>
-      </div>
+      </SectionContainer>
     </PageSection>
 
   );

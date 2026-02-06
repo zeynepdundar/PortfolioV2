@@ -53,7 +53,7 @@ export default function MainLayout({
   return (
     <div
       className={`
-        bg-background text-foreground antialiased
+        text-foreground antialiased
         ${plusJakarta.variable}
         pb-[calc(var(--bottom-nav-height)+1rem)]
       `}

@@ -2,12 +2,13 @@ import Image from "next/image";
 
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
+import { SectionContainer } from "../../ui/SectionContainer";
 
 export default function Projects() {
   return (
     <PageSection id="projects">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-3xl">
+      <SectionContainer>
+        <div className="w-full">
           <SectionHeader
             title="Projects"
             subtitle="Selected projects showcasing my personal work"
@@ -331,7 +332,7 @@ export default function Projects() {
           {/* End Project Card */}
 
         </div>
-      </div>
+      </SectionContainer>
     </PageSection>
   );
 }
