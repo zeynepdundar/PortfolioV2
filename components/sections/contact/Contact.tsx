@@ -1,11 +1,12 @@
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
+import { SectionContainer } from "../../ui/SectionContainer";
 
 export default function Contact() {
   return (
     <PageSection id="contact">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-3xl">
+      <SectionContainer>
+        <div className="w-full">
           <SectionHeader
             title="Get In Touch"
             subtitle="Let’s build something great together."
@@ -23,17 +24,6 @@ export default function Contact() {
               You can also ask me about motorcycles, help me practice Spanish,
               or just say hello <span className="not-italic">👋</span>
             </p>
-
-            {/* Primary CTA */}
-            <div className="pt-4">
-              <a
-                href="mailto:dundarzey@itu.edu.tr"
-                target="_blank"
-                className="inline-flex items-center text-sm font-medium text-foreground underline-offset-4 transition hover:underline"
-              >
-                Email me →
-              </a>
-            </div>
 
             {/* Divider */}
             <div className="pt-10">
@@ -154,7 +144,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </PageSection>
   );
 }

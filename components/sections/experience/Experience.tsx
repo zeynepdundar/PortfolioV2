@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
+import { SectionContainer } from "../../ui/SectionContainer";
 
 export default function Experience() {
   return (
     <PageSection id="experience">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-3xl">
+      <SectionContainer>
+        <div className="w-full">
           <SectionHeader
             title="Experience"
             subtitle="A quick overview of where I’ve worked."
@@ -95,7 +96,7 @@ export default function Experience() {
             />
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </PageSection>
   );
 }
@@ -107,7 +108,7 @@ type ExperienceItemProps = {
   description: string;
   stack: string[];
   logo: string;
-  companyUrl: string,
+  companyUrl: string;
   link?: {
     label: string;
     href?: string;
@@ -137,13 +138,13 @@ function ExperienceItem({
             rel="noopener noreferrer"
             className="flex items-center gap-4 group"
           >
-            <div className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 overflow-hidden rounded-md border border-border/40 bg-muted/20 flex items-center justify-center">
+            <div className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 overflow-hidden rounded-md bg-background/80 shadow-[0_6px_18px_-12px_rgba(0,0,0,0.35)] flex items-center justify-center p-2">
               <Image
                 src={logo}
                 alt={`${company} logo`}
-                width={160}
-                height={160}
-                className="object-contain"
+                width={32}
+                height={32}
+                className="object-contain rounded-sm"
               />
             </div>
           </a>
@@ -160,15 +161,12 @@ function ExperienceItem({
               className="group inline-flex w-fit items-center gap-1 text-sm sm:text-base text-muted hover:text-foreground"
             >
               <span>{company}</span>
-              <span className="transition-transform group-hover:translate-x-0.5">
-                ↗
-              </span>
             </a>
           </div>
         </div>
 
         {/* Right: date */}
-        <span className="text-sm sm:text-base text-muted leading-snug">
+        <span className="text-[10px] sm:text-xs text-muted/70 leading-snug rounded-full border border-border/10 bg-muted/5 px-3 py-1">
           {period}
         </span>
       </div>
@@ -208,7 +206,8 @@ function ExperienceItem({
       )}
 
       {/* Tech stack badges */}
-      <ul className="flex flex-wrap gap-2 pt-2">
+
+      {/*       <ul className="flex flex-wrap gap-2 pt-2">
         {stack.map((tech) => (
           <li
             key={tech}
@@ -218,7 +217,8 @@ function ExperienceItem({
           </li>
         ))}
       </ul>
+            
+            */}
     </div>
   );
 }
-
