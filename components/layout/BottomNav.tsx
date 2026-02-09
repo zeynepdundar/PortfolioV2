@@ -3,12 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Projects", id: "projects" },
-  { label: "About", id: "about" },
-  { label: "Skills", id: "skills" },
-
-  { label: "Experience", id: "experience" },
-  { label: "Contact", id: "contact" },
+  { label: "Projects", emoji: "✨", id: "projects" },
+  { label: "About", emoji: "🌷", id: "about" },
+  { label: "Contact", emoji: "🌈", id: "contact" },
 ];
 
 export default function BottomNav() {
@@ -48,11 +45,11 @@ export default function BottomNav() {
         hidden md:flex
         fixed right-4 top-10
         z-50
-        flex-col items-center gap-1
+        flex-col items-start gap-1
       "
     >
 
-      {NAV_ITEMS.map(({ label, id }) => {
+      {NAV_ITEMS.map(({ label, emoji, id }) => {
         const isActive = activeSection === id;
 
         return (
@@ -61,12 +58,15 @@ export default function BottomNav() {
             href={`#${id}`}
             className={`
               relative group
-              rounded-lg px-1 py-1
+              rounded-lg px-1 py-1 text-left
               text-xs font-medium
               transition
               ${isActive ? "text-primary" : "text-foreground/70 hover:text-foreground hover:bg-foreground/5"}
             `}
           >
+            <span className="mr-1 inline-block text-[13px]">
+              {emoji}
+            </span>
             {label}
           </a>
         );
