@@ -1,74 +1,67 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FolderKanban, Home, Mail, User } from "lucide-react";
 
 const NAV_ITEMS = [
-  { label: "Projects", emoji: "✨", id: "projects" },
-  { label: "About", emoji: "🌷", id: "about" },
-  { label: "Contact", emoji: "🌈", id: "contact" },
+  { label: "Intro", href: "/", icon: Home },
+  { label: "Projects", href: "/projects", icon: FolderKanban },
+  { label: "About", href: "/about", icon: User },
+  { label: "Contact", href: "/contact", icon: Mail },
 ];
 
 export default function BottomNav() {
-  const [activeSection, setActiveSection] = useState<string>("");
-
-  /* -------------------------------------------
-   * Intersection Observer (section tracking)
-   * ----------------------------------------- */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -40% 0px" }
-    );
-
-    const introEl = document.getElementById("intro");
-    if (introEl) observer.observe(introEl);
-
-    NAV_ITEMS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
+  const pathname = usePathname();
   return (
     <nav
       role="navigation"
       aria-label="Primary"
       className="
         hidden md:flex
-        fixed right-4 top-10
+        fixed right-6 top-20
         z-50
-        flex-col items-start gap-1
+        flex-col items-center gap-4
       "
     >
+      <span className="mb-2 h-16 w-px bg-foreground/10" />
 
-      {NAV_ITEMS.map(({ label, emoji, id }) => {
-        const isActive = activeSection === id;
+      {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+        const isActive = pathname === href;
 
         return (
-          <a
-            key={id}
-            href={`#${id}`}
+          <Link
+            key={href}
+            href={href}
             className={`
               relative group
-              rounded-lg px-1 py-1 text-left
-              text-xs font-medium
+              rounded-xl p-3
+              text-foreground/70
+              hover:text-foreground
+              hover:bg-foreground/5
               transition
-              ${isActive ? "text-primary" : "text-foreground/70 hover:text-foreground hover:bg-foreground/5"}
+              ${isActive ? "text-foreground bg-gradient-to-br from-rose-200/40 via-sky-200/40 to-amber-200/40" : ""}
             `}
           >
-            <span className="mr-1 inline-block text-[13px]">
-              {emoji}
+            <Icon className="h-5 w-5" />
+
+            {/* Tooltip */}
+            <span
+              className="
+                pointer-events-none
+                absolute right-full mr-3
+                top-1/2 -translate-y-1/2
+                whitespace-nowrap
+                rounded-md bg-foreground text-background
+                px-2 py-1 text-xs font-medium
+                opacity-0 translate-x-1
+                group-hover:opacity-100 group-hover:translate-x-0
+                transition-all
+              "
+            >
+              {label}
             </span>
-            {label}
-          </a>
+          </Link>
         );
       })}
     </nav>

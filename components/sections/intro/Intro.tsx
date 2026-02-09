@@ -4,7 +4,7 @@ import { SectionContainer } from "../../ui/SectionContainer";
 
 export default function Intro() {
   return (
-    <PageSection id="intro">
+    <PageSection id="home">
       <SectionContainer>
         <div className="w-full pt-10 sm:pt-16">
           <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
@@ -20,12 +20,12 @@ export default function Intro() {
                 </span>
                 
               </div>
-                            <div className="mt-6 max-w-2xl space-y-4 text-base sm:text-lg leading-relaxed text-muted">
+              <div className="mt-6 max-w-2xl space-y-4 text-lg sm:text-xl leading-relaxed text-muted">
                 <p className="text-foreground/90">
                   I build interfaces that feel calm, intentional, and easy to trust.
                 </p>
                 <p>
-                  My work sits at the intersection of engineering and design —
+                  My work sits at the intersection of engineering and design
                   where performance, accessibility, and small details quietly
                   shape the user experience.
                 </p>
