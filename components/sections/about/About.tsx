@@ -3,69 +3,248 @@ import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
 import { SectionContainer } from "../../ui/SectionContainer";
 
+type ExperienceItemProps = {
+  role: string;
+  company: string;
+  period: string;
+  description: string;
+  stack: string[];
+  logo: string;
+  companyUrl: string;
+  link?: {
+    label: string;
+    href?: string;
+  };
+};
+
+export function ExperienceItem({
+  role,
+  company,
+  period,
+  description,
+  stack,
+  companyUrl,
+  link,
+  logo,
+}: ExperienceItemProps) {
+  return (
+    <div className="flex flex-col gap-6 sm:gap-8">
+      {/* Header row */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+        {/* Left: logo + titles */}
+        <div className="flex items-center gap-4">
+          {/* Logo */}
+          <a
+            href={companyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 group"
+          >
+            <div className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 overflow-hidden rounded-md bg-background/80 shadow-[0_6px_18px_-12px_rgba(0,0,0,0.35)] flex items-center justify-center p-2">
+              <Image
+                src={logo}
+                alt={`${company} logo`}
+                width={32}
+                height={32}
+                className="object-contain rounded-sm"
+              />
+            </div>
+          </a>
+
+          {/* Text */}
+          <div className="flex flex-col leading-tight">
+            <h2 className="text-base sm:text-lg font-semibold text-foreground">
+              {role}
+            </h2>
+            <a
+              href={companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex w-fit items-center gap-1 text-sm sm:text-base text-muted hover:text-foreground"
+            >
+              <span>{company}</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Right: date */}
+        <span className="text-[10px] sm:text-xs text-muted/70 leading-snug rounded-full border border-border/10 bg-muted/5 px-3 py-1">
+          {period}
+        </span>
+      </div>
+
+      {/* Content */}
+      <p className="leading-relaxed text-sm sm:text-base text-muted">
+        {description}
+      </p>
+
+      {link && (
+        <a
+          href={link.href}
+          target="_blank"
+          className="inline-flex items-center gap-1 text-sm sm:text-base text-primary hover:underline"
+        >
+          {link.label}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 sm:h-5 sm:w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10 14a3 3 0 004.242 0l3.536-3.536a3 3 0 00-4.242-4.242l-1.414 1.414"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M14 10a3 3 0 00-4.242 0L6.222 13.778a3 3 0 004.242 4.242l1.414-1.414"
+            />
+          </svg>
+        </a>
+      )}
+
+      {/* Tech stack badges */}
+
+      {/*       <ul className="flex flex-wrap gap-2 pt-2">
+        {stack.map((tech) => (
+          <li
+            key={tech}
+            className="rounded-md border border-border px-3 py-1 text-sm sm:text-base text-muted"
+          >
+            {tech}
+          </li>
+        ))}
+      </ul>
+            
+            */}
+    </div>
+  );
+}
 export default function About() {
   return (
     <PageSection id="about">
+
       <SectionContainer>
-        <div className="w-full">
-          {/* Intro */}
-          <header className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-            {/* Profile photo */}
-            <div className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-full border border-border">
-              <Image
-                src="/images/profile.jpg"
-                alt="Zeynep Dündar"
-                width={160}
-                height={160}
-                className="object-cover grayscale contrast-90 brightness-95"
-              />
-            </div>
+        <div className="w-full ">
+          <SectionHeader
+            title="About Me"
+            subtitle="A bit about me and my experience"
+          />
+          {/* Section intro */}
+          <header className="mb-12">
+            <div className="mt-6 space-y-4 text-sm sm:text-base leading-relaxed text-muted">
+              <p>
+                I’m a Frontend Engineer with 5+ years of experience building high-performance web applications using Angular, React, and Next.js. I focus on UI consistency, accessibility, and long-term maintainability, with a strong attention to detail.
+              </p>
 
-            {/* Name */}
-            <div className="flex flex-col">
-              <span className="text-sm sm:text-base font-medium tracking-widest text-primary">
-                Hi
-              </span>
+              <p>
+                I hold a degree in Computer Engineering from Istanbul Technical University and have been working as a developer since 2018. Over the years, I’ve contributed to projects across startups, consulting firms, and large enterprises — including work at Accenture on the Mercedes-Benz B2B platform and at Renault Group.
+              </p>
 
-              <h1 className="mt-1 text-2xl sm:text-4xl font-semibold">
-                <span className="bg-gradient-to-r from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent">
-                  I’m Zeynep Dündar
-                </span>
-              </h1>
+              <p className="text-muted/80">
+                Currently, I’m helping build the world’s first complete restaurant operating system at{" "}
+                <a
+                  href="https://www.lingapos.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/80 transition-colors duration-300 hover:text-[#2aa0c9]"
+                >
+                  Linga rOS
+                </a>
+                , developing a comprehensive technology ecosystem for the food service industry. Alongside engineering, I enjoy crafting thoughtful UI/UX designs in Figma, primarily for mobile applications.
+              </p>
+              <p className="text-muted/80">
+                Outside of work, you’ll usually find me riding my motorcycle, staying active at the gym, exploring new places, playing guitar, or practicing capoeira.              </p>
             </div>
           </header>
 
+          {/* Experience */}
+          <div className="flex flex-col gap-20">
+            <ExperienceItem
+              role="Frontend Engineer"
+              company="Linga rOS"
+              period="2023 – Present"
+              description="Built and maintained the back-office UI of a global, cloud-based restaurant operating system. Migrated a large-scale interface to Angular 14 within a 15+ engineer Agile team, working closely with product managers, designers, and engineers to deliver reliable, user-focused features at scale."
+              logo="/logos/linga_logo.jpeg"
+              stack={["Angular", "TypeScript", "RxJS", "CSS"]}
+              companyUrl="https://www.lingapos.com/"
+            />
 
-          {/* Accent divider */}
-          <div className="mt-4 h-1 w-20 sm:w-24 bg-gradient-to-r from-primary/60 to-transparent" />
+            <ExperienceItem
+              role="Frontend Engineer"
+              company="Accenture"
+              period="2021 – 2022"
+              description="Contributed to enterprise client projects for Mercedes-Benz and Roche. Built and launched Mercedes-Benz’s B2B e-commerce platform across 19+ countries. Designed accessible, reusable UI components and contributed to a shared component library."
+              logo="/logos/accenture_logo.jpeg"
+              companyUrl="https://www.accenture.com/us-en"
+              stack={[
+                "React",
+                "Next.js",
+                "Storybook",
+                "Electron.js",
+                "Webpack",
+              ]}
+              link={{
+                label: "Mercedes-Benz B2B Platform",
+                href: "https://b2bconnect.mercedes-benz.com/de",
+              }}
+            />
 
-          {/* Role */}
-          <p className="mt-4 text-xs sm:text-sm uppercase tracking-[0.2em] text-muted">
-            Frontend Engineer · Design-driven · UX-focused
-          </p>
+            <ExperienceItem
+              role="Full Stack Developer"
+              company="Renault Group"
+              period="2020 – 2021"
+              description="Co-developed an internal HR automation platform streamlining payroll, scheduling, and performance tracking, significantly reducing HR operational workload."
+              logo="/logos/renault_logo.jpeg"
+              companyUrl="https://www.renaultgroup.com/en/"
+              stack={[
+                "Java",
+                "Spring Boot",
+                "AngularJS",
+                "PostgreSQL",
+                "React",
+              ]}
+            />
 
-          {/* Description */}
-          <div className="mt-6 flex flex-col gap-4 sm:gap-6 text-sm sm:text-base leading-relaxed text-muted">
-            <p>
-              Frontend Engineer with 5+ years of experience building high-performance Angular, React, and Next.js applications, focusing on UI consistency and web performance.
-            </p>
+            <ExperienceItem
+              role="Software Development Assistance Specialist"
+              company="Softtech"
+              period="2019"
+              description="Implemented automated testing procedures, reducing manual testing effort and improving system reliability through increased test coverage."
+              logo="/logos/softtech_logo.jpeg"
+              companyUrl="https://softtech.com.tr/"
+              stack={["Java", "Selenium", "Cucumber"]}
+            />
 
-            <p>
-              Currently, I’m helping build the world’s first complete restaurant operating system at Linga rOS, creating a comprehensive technology ecosystem for the food service industry. Beyond coding, I enjoy crafting UI/UX designs in Figma, primarily for mobile applications. Find me on LinkedIn.
-            </p>
-
-            <p>
-              I began my development journey in 2018, working across consulting firms, startups, banks, and large enterprises before specializing in frontend engineering. Along the way, I’ve built everything from e-commerce apps with Vanilla JS, jQuery, and Firebase to complex B2B platforms.
-            </p>
-
-            <p>
-              When I'm not coding, I enjoy riding my motorcycle, staying active at the gym, exploring new places, playing guitar, and practicing capoeira.
-            </p>
+            <ExperienceItem
+              role="Software Developer"
+              company="Webbilir Consulting"
+              period="2018 – 2019"
+              description="Worked on consulting projects to design and launch websites and early-stage products, collaborating closely with designers and fellow developers."
+              logo="/logos/webbilir_logo.jpeg"
+              companyUrl="https://webbilir.com/"
+              stack={[
+                "Angular",
+                "Firebase",
+                "JavaScript",
+                "C# & .NET",
+                "MSSQL",
+              ]}
+              link={{
+                label: "Florist website",
+                href: "https://www.jardinerie.com.tr/",
+              }}
+            />
           </div>
 
         </div>
       </SectionContainer>
     </PageSection>
+
 
   );
 }

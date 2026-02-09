@@ -1,5 +1,6 @@
-import Image from "next/image";
+// Skills section intentionally omitted from the portfolio.
 
+import Image from "next/image";
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
 import { SectionContainer } from "../../ui/SectionContainer";
