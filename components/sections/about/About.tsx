@@ -74,7 +74,7 @@ export function ExperienceItem({
       </div>
 
       {/* Content */}
-      <p className="leading-relaxed text-sm sm:text-base text-muted">
+      <p className="leading-relaxed text-base sm:text-lg text-muted">
         {description}
       </p>
 
@@ -136,15 +136,21 @@ export default function About() {
           />
           {/* Section intro */}
           <header className="mb-12">
-            <div className="mt-6 space-y-4 text-sm sm:text-base leading-relaxed text-muted">
+            <div className="mt-6 space-y-4 text-base sm:text-lg leading-relaxed text-muted">
               <p>
-                I’m a Frontend Engineer with 5+ years of experience building high-performance web applications using Angular, React, and Next.js. I focus on UI consistency, accessibility, and long-term maintainability, with a strong attention to detail.
-              </p>
+                I’m a frontend engineer who enjoys working where design meets code. I care about quality in a deeply human sense — how interfaces feel, how intuitive they are, and how small details influence trust and ease. I pay close attention to perception, motion, and interaction, and I’m the kind of person who notices when something feels off and takes the time to fix it.              </p>
 
               <p>
-                I hold a degree in Computer Engineering from Istanbul Technical University and have been working as a developer since 2018. Over the years, I’ve contributed to projects across startups, consulting firms, and large enterprises — including work at Accenture on the Mercedes-Benz B2B platform and at Renault Group.
-              </p>
+                I hold a degree in Computer Engineering from Istanbul Technical University and have been working as a developer since 2018. My background naturally draws me toward UI consistency, accessibility, and maintainable systems — the unglamorous details that make products feel solid, reliable, and trustworthy.              </p>
 
+
+              <p>Outside of work, I reset by riding my motorcycle, training at the gym, playing guitar, and practicing capoeira. I love exploring new places and experiences; they often find their way back into my work in unexpected ways.</p>
+              <div className="mb-6">
+                <h3 className="text-xs font-medium uppercase tracking-widest text-muted">
+                  Work
+                </h3>
+                <div className="mt-4 h-px w-14 bg-border/60" />
+              </div>
               <p className="text-muted/80">
                 Currently, I’m helping build the world’s first complete restaurant operating system at{" "}
                 <a
@@ -163,6 +169,7 @@ export default function About() {
           </header>
 
           {/* Experience */}
+
           <div className="flex flex-col gap-20">
             <ExperienceItem
               role="Frontend Engineer"
