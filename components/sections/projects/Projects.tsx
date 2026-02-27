@@ -62,67 +62,65 @@ const projects = [
   },
 ];
 
+
 export default function Projects() {
   return (
     <PageSection id="projects">
       <SectionContainer>
-        <div className="w-full">
-          <SectionHeader
-            title="Projects"
-            subtitle="Selected projects showcasing my personal work"
-          />
+        <SectionHeader
+          title="Projects"
+          subtitle="Selected personal and exploratory work"
+        />
 
-          <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted">
-            I develop projects both to explore new frameworks and to bring ideas
-            to life. Some projects are learning playgrounds, while others evolve
-            into fully launched products.
-          </p>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-foreground/85">
+          I build projects to explore ideas, test assumptions, and refine my
+          approach to frontend architecture and user experience. Some are small
+          experiments, others grow into long-term products.
+        </p>
 
-          <div className="mt-12 space-y-16">
-            {projects.map((project, index) => (
-              <article
-                key={project.title}
-                className={`${index === 0 ? "" : "border-t border-border/40 pt-12"}`}
-              >
-                <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
-                      {project.title}
-                    </h3>
-                    <div className="mt-4 space-y-4 text-base sm:text-lg leading-relaxed text-muted">
-                      {project.summary.map((text) => (
-                        <p key={text}>{text}</p>
-                      ))}
-                    </div>
+        <div className="mt-16 space-y-24">
+          {projects.map((project) => (
+            <article key={project.title}>
+              <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+                {/* Text */}
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-medium text-foreground">
+                    {project.title}
+                  </h3>
 
-                    <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-foreground">
-                      {project.links.map((link) => (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 transition-colors hover:text-primary"
-                        >
-                          {link.label}
-                          <span aria-hidden>↗</span>
-                        </a>
-                      ))}
-                    </div>
+                    <div className="mt-4 space-y-4 text-base sm:text-lg leading-relaxed text-foreground/85">
+                    {project.summary.map((text) => (
+                      <p key={text}>{text}</p>
+                    ))}
                   </div>
 
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/40 bg-muted/10">
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="mt-6 flex flex-wrap gap-6 text-sm">
+                    {project.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground/80 transition hover:text-foreground underline-offset-4 hover:underline"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
+
+                {/* Image */}
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted/20">
+                  <Image
+                    src={project.image}
+                    alt={project.alt}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </SectionContainer>
     </PageSection>

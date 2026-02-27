@@ -57,7 +57,7 @@
 
 body {
   background: transparent;
-  color: var(--color-foreground);
+  color: var(--color-muted);
   font-family: var(--font-plus-jakarta), sans-serif;
   letter-spacing: -0.01em;
   position: relative;
