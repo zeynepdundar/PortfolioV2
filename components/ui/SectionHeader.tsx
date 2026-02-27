@@ -3,23 +3,21 @@ type SectionHeaderProps = {
   subtitle?: string;
 };
 
-export function SectionHeader({ title, subtitle }: SectionHeaderProps) {
+export function SectionHeader({
+  title,
+  subtitle,
+}: SectionHeaderProps) {
   return (
-    <div className="mb-16">
-      {/* Title */}
-      <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-foreground/80">
+    <header className="mb-8">
+      <h2 className="text-xl sm:text-2xl font-medium text-foreground">
         {title}
       </h2>
 
-      {/* Subtitle */}
       {subtitle && (
-        <p className="mt-3 text-base sm:text-lg text-muted">
+        <p className="mt-2 max-w-2xl text-sm sm:text-base font-light leading-snug text-foreground/65">
           {subtitle}
         </p>
       )}
-
-      {/* Accent line */}
-      <div className="mt-6 h-px w-16 bg-border" />
-    </div>
+    </header>
   );
 }

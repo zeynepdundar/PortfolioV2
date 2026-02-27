@@ -33,13 +33,13 @@ export default function Intro() {
             </div>
 
             <div className="order-1 lg:order-2 justify-self-center">
-              <div className="relative h-44 w-44 sm:h-56 sm:w-56 lg:h-64 lg:w-64 overflow-hidden rounded-3xl border border-border/60 bg-background shadow-[0_18px_50px_-26px_rgba(0,0,0,0.45)]">
+              <div className="relative h-52 w-52 sm:h-64 sm:w-64 lg:h-80 lg:w-80 overflow-hidden rounded-3xl border border-border/60 bg-background shadow-[0_18px_50px_-26px_rgba(0,0,0,0.45)]">
                 <Image
                   src="/images/profile.jpg"
                   alt="Zeynep Dündar"
-                  width={512}
-                  height={512}
-                  className="object-cover grayscale contrast-90"
+                  width={960}
+                  height={960}
+                  className="object-cover contrast-90"
                   priority
                 />
               </div>

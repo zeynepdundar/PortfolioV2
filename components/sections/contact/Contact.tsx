@@ -13,14 +13,14 @@ export default function Contact() {
           />
 
           <div>
-            <p className="text-base sm:text-lg leading-relaxed text-muted">
+            <p className="text-base sm:text-lg leading-relaxed text-foreground/85">
               I think this is the beginning of something great, and I’d love to
               hear from you. Whether you want to discuss a project, talk about
               frontend architecture, or just share a good joke — my inbox is
               always open.
             </p>
 
-            <p className="text-base sm:text-lg leading-relaxed text-muted">
+            <p className="text-base sm:text-lg leading-relaxed text-foreground/85">
               You can also ask me about motorcycles, help me practice Spanish,
               or just say hello <span className="not-italic">👋</span>
             </p>

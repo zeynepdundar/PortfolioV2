@@ -28,11 +28,11 @@ export function ExperienceItem({
   logo,
 }: ExperienceItemProps) {
   return (
-    <div className="flex flex-col gap-6 sm:gap-8">
+    <div className="flex flex-col gap-4 sm:gap-5">
       {/* Header row */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
         {/* Left: logo + titles */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2.5">
           {/* Logo */}
           <a
             href={companyUrl}
@@ -74,7 +74,7 @@ export function ExperienceItem({
       </div>
 
       {/* Content */}
-      <p className="leading-relaxed text-base sm:text-lg text-muted">
+      <p className="leading-relaxed text-base sm:text-lg text-foreground/85">
         {description}
       </p>
 
@@ -127,50 +127,68 @@ export function ExperienceItem({
 export default function About() {
   return (
     <PageSection id="about">
-
       <SectionContainer>
-        <div className="w-full ">
+        <div className="w-full">
+          {/* Page header */}
           <SectionHeader
             title="About Me"
             subtitle="A bit about me and my experience"
           />
-          {/* Section intro */}
-          <header className="mb-12">
-            <div className="mt-6 space-y-4 text-base sm:text-lg leading-relaxed text-muted">
-              <p>
-                I’m a frontend engineer who enjoys working where design meets code. I care about quality in a deeply human sense — how interfaces feel, how intuitive they are, and how small details influence trust and ease. I pay close attention to perception, motion, and interaction, and I’m the kind of person who notices when something feels off and takes the time to fix it.              </p>
 
-              <p>
-                I hold a degree in Computer Engineering from Istanbul Technical University and have been working as a developer since 2018. My background naturally draws me toward UI consistency, accessibility, and maintainable systems — the unglamorous details that make products feel solid, reliable, and trustworthy.              </p>
+          {/* About narrative */}
+          <div className="mt-6 max-w-2xl space-y-4 text-base sm:text-lg leading-relaxed text-foreground/85">
+            <p>
+              I’m a frontend engineer who enjoys working where design meets code.
+              I care about quality in a deeply human sense — how interfaces feel,
+              how intuitive they are, and how small details influence trust and
+              ease. I pay close attention to perception, motion, and interaction,
+              and I’m the kind of person who notices when something feels off and
+              takes the time to fix it.
+            </p>
+
+            <p>
+              I hold a degree in Computer Engineering from Istanbul Technical
+              University and have been working as a developer since 2018. My
+              background naturally draws me toward UI consistency, accessibility,
+              and maintainable systems — the unglamorous details that make
+              products feel solid, reliable, and trustworthy.
+            </p>
+
+            <p>
+              Outside of work, I reset by riding my motorcycle, training at the
+              gym, playing guitar, and practicing capoeira. I love exploring new
+              places and experiences; they often find their way back into my
+              work in unexpected ways.
+            </p>
+          </div>
+
+          {/* Work subsection */}
+          <div className="mt-24 border-t border-border/40 pt-16">
+            <h3 className="text-xl sm:text-2xl font-semibold text-foreground">
+              Work
+            </h3>
 
 
-              <p>Outside of work, I reset by riding my motorcycle, training at the gym, playing guitar, and practicing capoeira. I love exploring new places and experiences; they often find their way back into my work in unexpected ways.</p>
-              <div className="mb-6">
-                <h3 className="text-xs font-medium uppercase tracking-widest text-muted">
-                  Work
-                </h3>
-                <div className="mt-4 h-px w-14 bg-border/60" />
-              </div>
-              <p className="text-muted/80">
-                Currently, I’m helping build the world’s first complete restaurant operating system at{" "}
-                <a
-                  href="https://www.lingapos.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground/80 transition-colors duration-300 hover:text-[#2aa0c9]"
-                >
-                  Linga rOS
-                </a>
-                , developing a comprehensive technology ecosystem for the food service industry. Alongside engineering, I enjoy crafting thoughtful UI/UX designs in Figma, primarily for mobile applications.
-              </p>
-              <p className="text-muted/80">
-                Outside of work, you’ll usually find me riding my motorcycle, staying active at the gym, exploring new places, playing guitar, or practicing capoeira.              </p>
-            </div>
-          </header>
+            <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-foreground/85">
+              Currently, I’m helping build the world’s first complete restaurant
+              operating system at{" "}
+              <a
+                href="https://www.lingapos.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline-offset-4 hover:underline"
+              >
+                Linga rOS
+              </a>
+              , developing a comprehensive technology ecosystem for the food
+              service industry. Alongside engineering, I enjoy crafting
+              thoughtful UI/UX designs in Figma, primarily for mobile
+              applications.
+            </p>
+          </div>
 
-          {/* Experience */}
-
-          <div className="flex flex-col gap-20">
+          {/* Experience list */}
+          <div className="mt-20 flex flex-col gap-20">
             <ExperienceItem
               role="Frontend Engineer"
               company="Linga rOS"
@@ -247,11 +265,8 @@ export default function About() {
               }}
             />
           </div>
-
         </div>
       </SectionContainer>
     </PageSection>
-
-
   );
 }
