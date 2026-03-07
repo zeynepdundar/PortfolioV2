@@ -106,37 +106,15 @@ const Skills = () => {
 
           <div className="mt-10 w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2">
             {skills.map((skill) => (
-              <a
-                key={skill.name}
-                href={skill.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-    flex items-center gap-2
-    w-full h-16
-    rounded-md
-    border border-border/30
-    bg-background/40
-    px-2
-    hover:bg-border/60
-    transition
-  "
-              >
-                {/* Icon */}
-                <div className="relative h-8 w-8 shrink-0">
-                  <Image
-                    src={skill.logo}
-                    alt={`${skill.name} logo`}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-
-                {/* Content */}
-                <span className="text-sm font-medium text-foreground">
-                  {skill.name}
-                </span>
-              </a>
+              <a className="flex items-center gap-3 w-full h-16 rounded-lg border border-border/20 bg-muted/10 px-3 hover:bg-muted/30 transition">
+  <div className="relative h-7 w-7 shrink-0 opacity-75">
+    <Image src={skill.logo} alt={`${skill.name} logo`} fill className="object-contain" />
+  </div>
+  <div>
+    <span className="block text-sm font-light text-foreground/80">{skill.name}</span>
+    <span className="block text-[10px] tracking-wide text-muted-foreground/40 uppercase">{skill.description}</span>
+  </div>
+</a>
             ))}
           </div>
         </div>
