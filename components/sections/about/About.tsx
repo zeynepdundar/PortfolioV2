@@ -33,37 +33,35 @@ export function ExperienceItem({
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
         {/* Left: logo + titles */}
         <div className="flex items-center gap-2.5">
-          {/* Logo */}
-          <a
-            href={companyUrl}
+          
+            <a href={companyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 group"
           >
-            <div className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 overflow-hidden rounded-md bg-background/80 shadow-[0_6px_18px_-12px_rgba(0,0,0,0.35)] flex items-center justify-center p-2">
+            <div className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 overflow-hidden rounded-md border border-border/20 bg-background/80 shadow-[0_6px_18px_-12px_rgba(0,0,0,0.2)] flex items-center justify-center p-2">
               <Image
                 src={logo}
                 alt={`${company} logo`}
                 width={32}
                 height={32}
-                className="object-contain rounded-sm"
+                className="object-contain rounded-sm opacity-90"
               />
             </div>
           </a>
 
           {/* Text */}
           <div className="flex flex-col leading-tight">
-            <h2 className="text-base sm:text-lg font-semibold text-foreground">
+            <h2 className="text-base sm:text-lg font-light tracking-tight text-foreground/75">
               {role}
             </h2>
             <a
-              href={companyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex w-fit items-center gap-1 text-sm sm:text-base text-muted hover:text-foreground"
-            >
-              <span>{company}</span>
-            </a>
+href={companyUrl}
+target="_blank"
+rel="noopener noreferrer"
+className="text-sm font-light text-muted hover:text-foreground/75 transition"
+>
+{company}
+</a>
           </div>
         </div>
 
@@ -74,7 +72,7 @@ export function ExperienceItem({
       </div>
 
       {/* Content */}
-      <p className="leading-relaxed text-base sm:text-lg text-foreground/85">
+      <p className="text-sm sm:text-base font-light leading-relaxed text-foreground/55">
         {description}
       </p>
 
@@ -82,67 +80,33 @@ export function ExperienceItem({
         <a
           href={link.href}
           target="_blank"
-          className="inline-flex items-center gap-1 text-sm sm:text-base text-primary hover:underline"
-        >
+          rel="noopener noreferrer"
+          className="text-sm font-light text-foreground/55 hover:text-foreground/75 transition before:content-['↗'] before:mr-1.5 before:text-muted-foreground/30"          >
           {link.label}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 sm:h-5 sm:w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10 14a3 3 0 004.242 0l3.536-3.536a3 3 0 00-4.242-4.242l-1.414 1.414"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M14 10a3 3 0 00-4.242 0L6.222 13.778a3 3 0 004.242 4.242l1.414-1.414"
-            />
-          </svg>
         </a>
       )}
-
-      {/* Tech stack badges */}
-
-      {/*       <ul className="flex flex-wrap gap-2 pt-2">
-        {stack.map((tech) => (
-          <li
-            key={tech}
-            className="rounded-md border border-border px-3 py-1 text-sm sm:text-base text-muted"
-          >
-            {tech}
-          </li>
-        ))}
-      </ul>
-            
-            */}
     </div>
   );
 }
+
 export default function About() {
   return (
     <PageSection id="about">
       <SectionContainer>
         <div className="w-full">
-          {/* Page header */}
           <SectionHeader
             title="About Me"
             subtitle="A bit about me and my experience"
           />
 
           {/* About narrative */}
-          <div className="mt-6 max-w-2xl space-y-4 text-base sm:text-lg leading-relaxed text-foreground/85">
+          <div className="mt-6 max-w-2xl space-y-4 text-sm sm:text-base font-light leading-relaxed text-foreground/55">
             <p>
-              I’m a frontend engineer who enjoys working where design meets code.
+              I'm a frontend engineer who enjoys working where design meets code.
               I care about quality in a deeply human sense — how interfaces feel,
               how intuitive they are, and how small details influence trust and
               ease. I pay close attention to perception, motion, and interaction,
-              and I’m the kind of person who notices when something feels off and
+              and I'm the kind of person who notices when something feels off and
               takes the time to fix it.
             </p>
 
@@ -163,20 +127,19 @@ export default function About() {
           </div>
 
           {/* Work subsection */}
-          <div className="mt-24 border-t border-border/40 pt-16">
-            <h3 className="text-xl sm:text-2xl font-semibold text-foreground">
+          <div className="mt-24 border-t border-border/20 pt-16">
+            <span className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium">
               Work
-            </h3>
+            </span>
 
-
-            <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-foreground/85">
-              Currently, I’m helping build the world’s first complete restaurant
+            <p className="mt-4 max-w-2xl text-sm sm:text-base font-light leading-relaxed text-foreground/55">
+              Currently, I'm helping build the world's first complete restaurant
               operating system at{" "}
               <a
                 href="https://www.lingapos.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground underline-offset-4 hover:underline"
+                className="text-foreground/75 underline-offset-4 hover:underline"
               >
                 Linga rOS
               </a>
@@ -188,7 +151,7 @@ export default function About() {
           </div>
 
           {/* Experience list */}
-          <div className="mt-20 flex flex-col gap-20">
+          <div className="mt-20 flex flex-col gap-16">
             <ExperienceItem
               role="Frontend Engineer"
               company="Linga rOS"
@@ -203,16 +166,10 @@ export default function About() {
               role="Frontend Engineer"
               company="Accenture"
               period="2021 – 2022"
-              description="Contributed to enterprise client projects for Mercedes-Benz and Roche. Built and launched Mercedes-Benz’s B2B e-commerce platform across 19+ countries. Designed accessible, reusable UI components and contributed to a shared component library."
+              description="Contributed to enterprise client projects for Mercedes-Benz and Roche. Built and launched Mercedes-Benz's B2B e-commerce platform across 19+ countries. Designed accessible, reusable UI components and contributed to a shared component library."
               logo="/logos/accenture_logo.jpeg"
               companyUrl="https://www.accenture.com/us-en"
-              stack={[
-                "React",
-                "Next.js",
-                "Storybook",
-                "Electron.js",
-                "Webpack",
-              ]}
+              stack={["React", "Next.js", "Storybook", "Electron.js", "Webpack"]}
               link={{
                 label: "Mercedes-Benz B2B Platform",
                 href: "https://b2bconnect.mercedes-benz.com/de",
@@ -226,13 +183,7 @@ export default function About() {
               description="Co-developed an internal HR automation platform streamlining payroll, scheduling, and performance tracking, significantly reducing HR operational workload."
               logo="/logos/renault_logo.jpeg"
               companyUrl="https://www.renaultgroup.com/en/"
-              stack={[
-                "Java",
-                "Spring Boot",
-                "AngularJS",
-                "PostgreSQL",
-                "React",
-              ]}
+              stack={["Java", "Spring Boot", "AngularJS", "PostgreSQL", "React"]}
             />
 
             <ExperienceItem
@@ -252,13 +203,7 @@ export default function About() {
               description="Worked on consulting projects to design and launch websites and early-stage products, collaborating closely with designers and fellow developers."
               logo="/logos/webbilir_logo.jpeg"
               companyUrl="https://webbilir.com/"
-              stack={[
-                "Angular",
-                "Firebase",
-                "JavaScript",
-                "C# & .NET",
-                "MSSQL",
-              ]}
+              stack={["Angular", "Firebase", "JavaScript", "C# & .NET", "MSSQL"]}
               link={{
                 label: "Florist website",
                 href: "https://www.jardinerie.com.tr/",

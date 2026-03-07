@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import { PageSection } from "../../ui/PageSection";
 import { SectionHeader } from "../../ui/SectionHeader";
 import { SectionContainer } from "../../ui/SectionContainer";
@@ -27,10 +26,7 @@ const projects = [
       "Originally built in 2022 as a passion project, the app continues to grow as a community-driven platform with a long-term vision of expanding beyond books.",
     ],
     links: [
-      {
-        label: "GitHub",
-        href: "https://gitlab.com/harmony-org/book-swap/-/tree/dev?ref_type=heads",
-      },
+      { label: "GitHub", href: "https://gitlab.com/harmony-org/book-swap/-/tree/dev?ref_type=heads" },
       { label: "Watch Demo", href: "https://vimeo.com/1037563566?share=copy" },
     ],
   },
@@ -40,7 +36,7 @@ const projects = [
     alt: "Shelfie Reading Tracker App",
     summary: [
       "A personal reading tracker designed to help users build consistent reading habits. Log books, track pages read, favorite titles, and explore detailed reading statistics.",
-      "What started as a simple spreadsheet replacement evolved into a more pleasant and intuitive experience. The roadmap includes visual charts for tracking favorite genres and authors.",
+      "What started as a simple spreadsheet replacement evolved into a more pleasant and intuitive experience.",
     ],
     links: [
       { label: "GitHub", href: "https://github.com/zeynepdndr/shelfie" },
@@ -62,7 +58,6 @@ const projects = [
   },
 ];
 
-
 export default function Projects() {
   return (
     <PageSection id="projects">
@@ -72,7 +67,7 @@ export default function Projects() {
           subtitle="Selected personal and exploratory work"
         />
 
-        <p className="mt-6 text-base sm:text-lg leading-relaxed text-foreground/85">
+        <p className="mt-2 text-sm sm:text-base font-light leading-relaxed text-foreground/55">
           I build projects to explore ideas, test assumptions, and refine my
           approach to frontend architecture and user experience. Some are small
           experiments, others grow into long-term products.
@@ -84,24 +79,24 @@ export default function Projects() {
               <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
                 {/* Text */}
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-medium text-foreground">
+                  <h3 className="text-xl sm:text-2xl font-light tracking-tight text-foreground/75">
                     {project.title}
                   </h3>
 
-                    <div className="mt-4 space-y-4 text-base sm:text-lg leading-relaxed text-foreground/85">
+                  <div className="mt-4 space-y-3 text-sm sm:text-base font-light leading-relaxed text-foreground/55">
                     {project.summary.map((text) => (
                       <p key={text}>{text}</p>
                     ))}
                   </div>
 
-                  <div className="mt-6 flex flex-wrap gap-6 text-sm">
+                  <div className="mt-6 flex gap-6">
                     {project.links.map((link) => (
                       <a
                         key={link.label}
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-foreground/80 transition hover:text-foreground underline-offset-4 hover:underline"
+                        className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium hover:text-foreground/70 transition"
                       >
                         {link.label}
                       </a>
@@ -110,12 +105,12 @@ export default function Projects() {
                 </div>
 
                 {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted/20">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border/20 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.2)] bg-muted/10">
                   <Image
                     src={project.image}
                     alt={project.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover opacity-90 transition-transform duration-500 hover:scale-[1.02]"
                   />
                 </div>
               </div>
