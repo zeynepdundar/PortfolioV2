@@ -9,11 +9,12 @@ import { SectionContainer } from "../../ui/SectionContainer";
 const projects = [
   {
     title: "At The Races",
-    layout: "scattered" as const,
+    layout: "scattered" as Layout,
     media: [
       { type: "video", src: "/videos/horse-race.mp4", alt: "Horse race gameplay" },
-      { type: "image", src: "/images/horse-race-landing.png", alt: "At The Races – Landing screen" },
       { type: "video", src: "/videos/horse-race.mp4", alt: "Race finish" },
+      { type: "image", src: "/images/horse-race-landing.png", alt: "At The Races – Landing screen" },
+
     ],
     summary: [
       "A racing simulation built for fun, driven by curiosity about modeling real-world randomness in the browser. The core challenge was designing a race engine using math-calculating speed variance and position updates each tick with no game library, just logic.",
@@ -43,11 +44,11 @@ const projects = [
   },
   {
     title: "Shelfie",
-    layout: "fan" as const,
+    layout: "fan" as Layout,
     media: [
       { type: "image", src: "/images/shelfie.png", alt: "Shelfie app" },
-      { type: "image", src: "/images/shelfie.png", alt: "Shelfie reading list" },
-      { type: "image", src: "/images/shelfie.png", alt: "Shelfie stats" },
+      { type: "video", src: "/videos/shelfie.mp4", alt: "Shelfie demo" },
+
     ],
     summary: [
       "A personal reading tracker built with React. Started as a spreadsheet replacement and evolved into a proper app — a good exercise in deciding when a side tool deserves real product thinking.",
@@ -59,11 +60,9 @@ const projects = [
   },
   {
     title: "Pokédex",
-    layout: "scattered" as const,
+    layout: "single" as Layout,
     media: [
-      { type: "image", src: "/images/pokedex.png", alt: "Pokédex main view" },
-      { type: "image", src: "/images/pokedex.png", alt: "Pokémon detail" },
-      { type: "image", src: "/images/pokedex.png", alt: "Pokémon list" },
+      { type: "image", src: "/images/pokedex2.png", alt: "Pokédex main view" },
     ],
     summary: [
       "A React weekend project consuming the PokéAPI. Focused on clean data fetching patterns and fast UI iteration — useful as a low-stakes sandbox for experimenting with new approaches.",
@@ -76,7 +75,7 @@ const projects = [
 ];
 
 type MediaItem = { type: string; src: string; alt: string };
-type Layout = "scattered" | "overlap";
+type Layout = "scattered" | "overlap" | "fan" | "single";
 
 const scatteredStyles = `
   .sc-stack {
@@ -381,7 +380,7 @@ function OverlapMediaStack({ media }: { media: MediaItem[] }) {
   const big = media[0];
   const small = media[1];
 
-  const bigGlow   = { border: "#a8a8aa", bg: "#a8a8aa", shadow: "0 4px 24px -4px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)" };
+  const bigGlow = { border: "#a8a8aa", bg: "#a8a8aa", shadow: "0 4px 24px -4px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)" };
   const smallGlow = { border: "#a5a5a8", bg: "#a5a5a8", shadow: "0 4px 20px -4px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.05)" };
 
   function renderMedia(item: MediaItem) {
@@ -463,6 +462,42 @@ function ScatteredMediaStack({ media }: { media: MediaItem[] }) {
   );
 }
 
+function SingleMedia({ media }: { media: MediaItem[] }) {
+  const item = media[0];
+
+  return (
+    <div
+      style={{
+        width: "72%",
+        aspectRatio: "16 / 9",
+        borderRadius: "12px",
+        overflow: "hidden",
+        border: "3px solid #a8a8aa",
+        boxShadow: "0 6px 24px -6px rgba(0,0,0,0.2)",
+        position: "relative",
+      }}
+    >
+      {item.type === "video" ? (
+        <video
+          src={item.src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      ) : (
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          style={{ objectFit: "cover", opacity: 0.93 }}
+        />
+      )}
+    </div>
+  );
+}
+
 export default function Projects() {
   const [isDark, setIsDark] = useState(false);
 
@@ -524,11 +559,13 @@ export default function Projects() {
                 </div>
 
                 <div style={{ marginRight: "-2.5rem", transform: "translateX(1.5rem)" }}>
-                  {(project as any).layout === "overlap"
+                  {(project).layout === "overlap"
                     ? <OverlapMediaStack media={project.media} />
                     : (project as any).layout === "fan"
-                    ? <FanMediaStack media={project.media} />
-                    : <ScatteredMediaStack media={project.media} />
+                      ? <FanMediaStack media={project.media} />
+                      : (project as any).layout === "single"
+                        ? <SingleMedia media={project.media} />
+                        : <ScatteredMediaStack media={project.media} />
                   }
                 </div>
               </div>
