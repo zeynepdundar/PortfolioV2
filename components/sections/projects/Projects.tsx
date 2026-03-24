@@ -62,7 +62,7 @@ const projects = [
     title: "Pokédex",
     layout: "single" as Layout,
     media: [
-      { type: "image", src: "/images/pokedex2.png", alt: "Pokédex main view" },
+      { type: "video", src: "/videos/pokedex.mp4", alt: "Pokédex demo" },
     ],
     summary: [
       "A React weekend project consuming the PokéAPI. Focused on clean data fetching patterns and fast UI iteration — useful as a low-stakes sandbox for experimenting with new approaches.",
