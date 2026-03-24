@@ -431,33 +431,54 @@ function ScatteredMediaStack({ media }: { media: MediaItem[] }) {
     <>
       <style>{scatteredStyles}</style>
       <div className="sc-stack">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            className={`sc-card sc-card-${i}`}
-            style={{
-              borderColor: cardGlows[i].border,
-              boxShadow: cardGlows[i].shadow,
-              backgroundColor: cardGlows[i].bg,
-            }}
-          >
-            <div className="sc-card-inner">
-              <div className="sc-card-media">
-                {item.type === "video" ? (
-                  <video src={item.src} autoPlay loop muted playsInline />
-                ) : (
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    style={{ objectFit: "cover", opacity: 0.93 }}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+  {items.map((item, i) => (
+    <div
+      key={i}
+      className={`sc-card sc-card-${i}`}
+      style={{
+        borderColor: cardGlows[i].border,
+        boxShadow: cardGlows[i].shadow,
+        backgroundColor: cardGlows[i].bg,
+      }}
+    >
+      <div className="sc-card-inner">
+        <div
+          className="sc-card-media"
+          style={{
+            width: "100%",
+            aspectRatio: "16/9", // fixes the card ratio
+            borderRadius: "12px",
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
+          {item.type === "video" ? (
+            <video
+              src={item.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover", // fills card like image
+              }}
+            />
+          ) : (
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              style={{ objectFit: "cover", opacity: 0.93 }}
+            />
+          )}
+        </div>
       </div>
+    </div>
+  ))}
+</div>
+
     </>
   );
 }
@@ -469,7 +490,6 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
     <div
       style={{
         width: "72%",
-        aspectRatio: "16 / 9",
         borderRadius: "12px",
         overflow: "hidden",
         border: "3px solid #a8a8aa",
@@ -484,7 +504,7 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
           loop
           muted
           playsInline
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "auto", display: "block" }}
         />
       ) : (
         <Image
@@ -495,6 +515,7 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
         />
       )}
     </div>
+
   );
 }
 
