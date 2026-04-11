@@ -12,7 +12,7 @@ const projects = [
     layout: "scattered" as Layout,
     media: [
       { type: "video", src: "/videos/horse-race.mp4", alt: "Horse race gameplay" },
-      { type: "video", src: "/videos/horse-race.mp4", alt: "Race finish" },
+      { type: "image", src: "/images/horse-race-list.png", alt: "Race finish" },
       { type: "image", src: "/images/horse-race-landing.png", alt: "At The Races – Landing screen" },
 
     ],
