@@ -22,7 +22,7 @@ const projects = [
     ],
     links: [
       { label: "GitHub", href: "https://github.com/zeynepdndr/HorseRacingGame" },
-      { label: "Live Demo", href: "https://horse-racing-game-steel.vercel.app/" },
+      { label: "Live Preview", href: "https://horse-racing-game-steel.vercel.app/" },
     ],
   },
   {
@@ -539,9 +539,7 @@ export default function Projects() {
         />
 
         <p className="mt-2 text-sm sm:text-base font-light leading-relaxed text-foreground/55">
-          I build projects to explore ideas, test assumptions, and refine my
-          approach to frontend architecture and user experience. Some are small
-          experiments, others grow into long-term products.
+        A collection of projects crafted to explore ideas, test assumptions, and refine my approach to frontend architecture and user experience.
         </p>
 
         <div className="mt-16 flex flex-col gap-6">

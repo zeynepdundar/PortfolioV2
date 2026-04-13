@@ -15,7 +15,7 @@ export default function Intro() {
                 <div className="relative shrink-0 h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem]">
                   <div className="relative h-full w-full overflow-hidden rounded-xl border border-border/20 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.3)]">
                     <Image
-                      src="/images/profile.jpg"
+                      src="/images/profile.png"
                       alt="Zeynep Dündar"
                       width={160}
                       height={160}
@@ -28,7 +28,7 @@ export default function Intro() {
                 {/* Name group */}
                 <div>
                   <span className="block text-[11px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium mb-0.5">
-                    Hey, I'm
+                    Hi, I'm
                   </span>
                   <h1 className="text-4xl sm:text-5xl font-light tracking-tight text-foreground/75 leading-none">
                     Zeynep Dündar
@@ -38,7 +38,7 @@ export default function Intro() {
 
               {/* Badge */}
               <span className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium">
-  Frontend Engineer · UX-focused
+              Software Engineer · Crafting Modern Web Solutions
 </span>
             </header>
 
