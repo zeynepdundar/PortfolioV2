@@ -1,7 +1,10 @@
 import Image from "next/image";
-import { PageSection } from "../../ui/PageSection";
-import { SectionHeader } from "../../ui/SectionHeader";
-import { SectionContainer } from "../../ui/SectionContainer";
+import { PageSection } from "@/components/ui/PageSection";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionContainer } from "@/components/ui/SectionContainer";
+import PhotoGallery from "@/components/ui/PhotoGallery";
+import { personalPhotos } from "@/data/photoGallery";
+
 
 type ExperienceItemProps = {
   role: string;
@@ -33,8 +36,8 @@ export function ExperienceItem({
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
         {/* Left: logo + titles */}
         <div className="flex items-center gap-2.5">
-          
-            <a href={companyUrl}
+
+          <a href={companyUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -55,13 +58,13 @@ export function ExperienceItem({
               {role}
             </h2>
             <a
-href={companyUrl}
-target="_blank"
-rel="noopener noreferrer"
-className="text-sm font-light text-muted hover:text-foreground/75 transition"
->
-{company}
-</a>
+              href={companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-light text-muted hover:text-foreground/75 transition"
+            >
+              {company}
+            </a>
           </div>
         </div>
 
@@ -93,6 +96,7 @@ export default function About() {
   return (
     <PageSection id="about">
       <SectionContainer>
+        <PhotoGallery photos={personalPhotos} />
         <div className="w-full">
           <SectionHeader
             title="About Me"
@@ -103,7 +107,7 @@ export default function About() {
           <div className="mt-6 max-w-2xl space-y-4 text-sm sm:text-base font-light leading-relaxed text-foreground/55">
             <p>
               I'm a frontend engineer who enjoys working where design meets code.
-              I care about quality in a deeply human sense — how interfaces feel,
+              I care about quality in a deeply human sense how interfaces feel,
               how intuitive they are, and how small details influence trust and
               ease. I pay close attention to perception, motion, and interaction,
               and I'm the kind of person who notices when something feels off and
@@ -114,7 +118,7 @@ export default function About() {
               I hold a degree in Computer Engineering from Istanbul Technical
               University and have been working as a developer since 2018. My
               background naturally draws me toward UI consistency, accessibility,
-              and maintainable systems — the unglamorous details that make
+              and maintainable systems the unglamorous details that make
               products feel solid, reliable, and trustworthy.
             </p>
 
@@ -124,6 +128,29 @@ export default function About() {
               places and experiences; they often find their way back into my
               work in unexpected ways.
             </p>
+            <p> Here are a few technologies I’ve been working with recently:</p>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-foreground/65">
+              {[
+                "React",
+                "Next.js",
+                "TypeScript",
+                "React Native",
+                "Tailwind CSS",
+                "Node.js",
+                "Firebase",
+                "AWS",
+              ].map((tech) => (
+                <li key={tech} className="flex items-center gap-2">
+                  <span
+                    className="text-[var(--primary)] text-sm"
+                    aria-hidden="true"
+                  >
+                    ▹
+                  </span>
+                  {tech}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Work subsection */}

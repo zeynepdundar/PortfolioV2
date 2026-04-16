@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-plus-jakarta)", "sans-serif"],
-        jakarta: ["var(--font-plus-jakarta)", "sans-serif"],
+        sans: ["var(--font-satoshi)", "sans-serif"],
+        satoshi: ["var(--font-satoshi)", "sans-serif"],
       },
       fontWeight: {
         normal: "400",
@@ -14,6 +14,6 @@ export default {
         semibold: "600",
         bold: "700",
       },
-    },
+      }
   },
 };

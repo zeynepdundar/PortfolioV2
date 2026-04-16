@@ -431,53 +431,53 @@ function ScatteredMediaStack({ media }: { media: MediaItem[] }) {
     <>
       <style>{scatteredStyles}</style>
       <div className="sc-stack">
-  {items.map((item, i) => (
-    <div
-      key={i}
-      className={`sc-card sc-card-${i}`}
-      style={{
-        borderColor: cardGlows[i].border,
-        boxShadow: cardGlows[i].shadow,
-        backgroundColor: cardGlows[i].bg,
-      }}
-    >
-      <div className="sc-card-inner">
-        <div
-          className="sc-card-media"
-          style={{
-            width: "100%",
-            aspectRatio: "16/9", // fixes the card ratio
-            borderRadius: "12px",
-            overflow: "hidden",
-            position: "relative",
-          }}
-        >
-          {item.type === "video" ? (
-            <video
-              src={item.src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover", // fills card like image
-              }}
-            />
-          ) : (
-            <Image
-              src={item.src}
-              alt={item.alt}
-              fill
-              style={{ objectFit: "cover", opacity: 0.93 }}
-            />
-          )}
-        </div>
+        {items.map((item, i) => (
+          <div
+            key={i}
+            className={`sc-card sc-card-${i}`}
+            style={{
+              borderColor: cardGlows[i].border,
+              boxShadow: cardGlows[i].shadow,
+              backgroundColor: cardGlows[i].bg,
+            }}
+          >
+            <div className="sc-card-inner">
+              <div
+                className="sc-card-media"
+                style={{
+                  width: "100%",
+                  aspectRatio: "16/9", // fixes the card ratio
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+              >
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover", // fills card like image
+                    }}
+                  />
+                ) : (
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    style={{ objectFit: "cover", opacity: 0.93 }}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
 
     </>
   );
@@ -534,13 +534,9 @@ export default function Projects() {
     <PageSection id="projects">
       <SectionContainer>
         <SectionHeader
-          title="Projects"
-          subtitle="Selected personal and exploratory work"
+          title="Selected Works"
+          subtitle="A non-chronological list of select projects covering front-end development and design work."
         />
-
-        <p className="mt-2 text-sm sm:text-base font-light leading-relaxed text-foreground/55">
-        A collection of projects crafted to explore ideas, test assumptions, and refine my approach to frontend architecture and user experience.
-        </p>
 
         <div className="mt-16 flex flex-col gap-6">
           {projects.map((project, idx) => (

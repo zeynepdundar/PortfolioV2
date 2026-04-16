@@ -1,18 +1,7 @@
 import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
-import localFont from "next/font/local";
 import UtilityRail from "@/components/layout/UtilityRail";
 
-const plusJakarta = localFont({
-  src: [
-    { path: "../../public/fonts/plus-jakarta-sans/PlusJakartaSans-Regular.ttf", weight: "400" },
-    { path: "../../public/fonts/plus-jakarta-sans/PlusJakartaSans-Medium.ttf", weight: "500" },
-    { path: "../../public/fonts/plus-jakarta-sans/PlusJakartaSans-SemiBold.ttf", weight: "600" },
-    { path: "../../public/fonts/plus-jakarta-sans/PlusJakartaSans-Bold.ttf", weight: "700" },
-  ],
-  variable: "--font-plus-jakarta",
-  display: "swap",
-});
 
 export default function MainLayout({
   children,
@@ -26,7 +15,6 @@ export default function MainLayout({
       <div
         className={`
           bg-background text-foreground antialiased
-          ${plusJakarta.variable}
         `}
       >
         <main className="min-h-screen bg-gradient-to-b from-[#0b0c10] via-[#11161f] to-[#0b0c10] text-white">
@@ -54,7 +42,6 @@ export default function MainLayout({
     <div
       className={`
         text-foreground antialiased
-        ${plusJakarta.variable}
         pb-[calc(var(--bottom-nav-height)+1rem)]
       `}
     >
