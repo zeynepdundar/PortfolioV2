@@ -2,80 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { PageSection } from "../../ui/PageSection";
-import { SectionHeader } from "../../ui/SectionHeader";
-import { SectionContainer } from "../../ui/SectionContainer";
+import { PageSection } from "@/components/ui/PageSection";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionContainer } from "@/components/ui/SectionContainer";
+import { projects } from "@/data/projects";
 
-const projects = [
-  {
-    title: "At The Races",
-    layout: "scattered" as Layout,
-    media: [
-      { type: "video", src: "/videos/horse-race.mp4", alt: "Horse race gameplay" },
-      { type: "image", src: "/images/horse-race-list.png", alt: "Race finish" },
-      { type: "image", src: "/images/horse-race-landing.png", alt: "At The Races – Landing screen" },
 
-    ],
-    summary: [
-      "A racing simulation built for fun, driven by curiosity about modeling real-world randomness in the browser. The core challenge was designing a race engine using math-calculating speed variance and position updates each tick with no game library, just logic.",
-      "Built with Vue.js and Vuex for centralized race state. All animations handled purely in CSS, keeping the bundle lean and the motion smooth.",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/zeynepdndr/HorseRacingGame" },
-      { label: "Live Preview", href: "https://horse-racing-game-steel.vercel.app/" },
-    ],
-  },
-  {
-    title: "Book Trading Platform",
-    layout: "overlap" as const,
-    media: [
-      { type: "image", src: "/images/book-swap.png", alt: "Book swap home" },
-      { type: "video", src: "/videos/book-swap.mp4", alt: "Book swap demo" },
-      { type: "image", src: "/images/book-swap.png", alt: "Book swap detail" },
-    ],
-    summary: [
-      "A mobile app for book exchanges. Users can scan barcodes to search from 28M+ titles, add books to their collection, chat in real time, and manage seamless book exchanges.",
-      "Originally built in 2022 as a passion project, the app continues to grow as a community-driven platform with a long-term vision of expanding beyond books.",
-    ],
-    links: [
-      { label: "GitHub", href: "https://gitlab.com/harmony-org/book-swap/-/tree/dev?ref_type=heads" },
-      { label: "Watch Demo", href: "https://vimeo.com/1037563566?share=copy" },
-    ],
-  },
-  {
-    title: "Shelfie",
-    layout: "fan" as Layout,
-    media: [
-      { type: "image", src: "/images/shelfie.png", alt: "Shelfie app" },
-      { type: "video", src: "/videos/shelfie.mp4", alt: "Shelfie demo" },
-
-    ],
-    summary: [
-      "A personal reading tracker built with React. Started as a spreadsheet replacement and evolved into a proper app — a good exercise in deciding when a side tool deserves real product thinking.",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/zeynepdndr/shelfie" },
-      { label: "View Project", href: "https://github.com/zeynepdndr/shelfie" },
-    ],
-  },
-  {
-    title: "Pokédex",
-    layout: "single" as Layout,
-    media: [
-      { type: "video", src: "/videos/pokedex.mp4", alt: "Pokédex demo" },
-    ],
-    summary: [
-      "A React weekend project consuming the PokéAPI. Focused on clean data fetching patterns and fast UI iteration — useful as a low-stakes sandbox for experimenting with new approaches.",
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/zeynepdndr/pokedex" },
-      { label: "View Project", href: "https://github.com/zeynepdndr/pokedex" },
-    ],
-  },
-];
 
 type MediaItem = { type: string; src: string; alt: string };
-type Layout = "scattered" | "overlap" | "fan" | "single";
 
 const scatteredStyles = `
   .sc-stack {
@@ -550,22 +484,22 @@ export default function Projects() {
             >
               <div className="grid gap-10 lg:grid-cols-[0.9fr_1.3fr] lg:items-center overflow-visible">
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-light tracking-tight text-foreground/75">
+                  <h3 className="text-2xl sm:text-3xl font-light tracking-tight text-foreground/80">
                     {project.title}
                   </h3>
-                  <div className="mt-4 space-y-3 text-sm sm:text-base font-light leading-relaxed text-foreground/55">
+                  <div className="mt-4 space-y-3 text-base sm:text-lg font-light leading-relaxed text-foreground/55">
                     {project.summary.map((text) => (
                       <p key={text}>{text}</p>
                     ))}
                   </div>
-                  <div className="mt-6 flex gap-6">
+                  <div className="mt-6 flex items-center gap-6 text-xs tracking-[0.2em] uppercase">
                     {project.links.map((link) => (
                       <a
                         key={link.label}
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium hover:text-foreground/70 transition"
+                        className="text-xs tracking-[0.2em] uppercase text-muted-foreground/40 font-medium hover:text-foreground/70 transition"
                       >
                         {link.label}
                       </a>
