@@ -9,25 +9,25 @@ export default function Contact() {
         <div className="w-full">
           <SectionHeader
             title="Get In Touch"
-            subtitle="Let's build something great together."
+            subtitle="Let&apos;s build something great together."
           />
 
           <div className="space-y-4">
-            <p className="text-sm sm:text-base font-light leading-relaxed text-foreground/55">
-              I think this is the beginning of something great, and I'd love to
+            <p className="text-body-lg text-foreground/55">
+              I think this is the beginning of something great, and I&apos;d love to
               hear from you. Whether you want to discuss a project, talk about
               frontend architecture, or just share a good joke — my inbox is
               always open.
             </p>
 
-            <p className="text-sm sm:text-base font-light leading-relaxed text-foreground/55">
+            <p className="text-body-lg text-foreground/55">
               You can also ask me about motorcycles, help me practice Spanish,
               or just say hello <span className="not-italic">👋</span>
             </p>
 
             {/* Divider */}
             <div className="pt-8">
-              <span className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/40 font-medium">
+              <span className="text-meta text-muted-foreground/40">
                 Stay in touch
               </span>
 

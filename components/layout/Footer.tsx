@@ -1,7 +1,5 @@
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="mt-24">
       <div className="mx-auto max-w-6xl px-6 flex flex-col items-center gap-4 text-sm text-muted">

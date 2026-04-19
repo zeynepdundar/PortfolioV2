@@ -19,10 +19,10 @@ export default function MainLayout({
       >
         <main className="min-h-screen bg-gradient-to-b from-[#0b0c10] via-[#11161f] to-[#0b0c10] text-white">
           <div className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-6 text-center">
-            <h1 className="text-4xl font-semibold leading-tight sm:text-6xl">
+            <h1 className="text-display sm:text-6xl font-semibold">
               Site Refresh in Progress
             </h1>
-            <p className="mt-4 text-base text-white/70 sm:text-lg">
+            <p className="mt-4 text-body-lg text-white/70">
               I&#39;m polishing the experience and updating work. Back online
               soon.
             </p>

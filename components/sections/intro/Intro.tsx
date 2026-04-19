@@ -42,22 +42,22 @@ export default function Intro() {
               </div>
 
               {/* Badge */}
-              <span className="text-xs sm:text-sm tracking-[0.22em] uppercase text-muted-foreground/60 font-medium">
+              <span className="text-meta sm:text-sm">
                 Software Engineer · Building Modern, User-Centered Web Systems
               </span>
             </header>
 
             {/* Body copy */}
             <div className="max-w-2xl space-y-4">
-              <p className="text-2xl sm:text-3xl font-light text-foreground/80 leading-snug tracking-tight">
+              <p className="text-heading text-foreground/80">
                 This is my little corner of the internet
               </p>
 
-              <p className="text-base sm:text-lg font-light leading-relaxed text-foreground/65">
+              <p className="text-body-lg text-foreground/65">
                 I design and develop digital products that feel simple, fast, and usable for everyone no matter the device, context, or constraints.
               </p>
 
-              <p className="text-base sm:text-lg font-light leading-relaxed text-foreground/65">
+              <p className="text-body-lg text-foreground/65">
                 I focus on long-term product quality, architecture, performance, and the subtle interactions that shape how users experience software.
               </p>
             </div>

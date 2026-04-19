@@ -1,15 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import { PageSection } from "@/components/ui/PageSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionContainer } from "@/components/ui/SectionContainer";
-import { projects } from "@/data/projects";
+import { projects, type ProjectMediaItem } from "@/data/projects";
 
+type MediaItem = ProjectMediaItem;
 
-
-type MediaItem = { type: string; src: string; alt: string };
+function usePrefersDark() {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      mq.addEventListener("change", onStoreChange);
+      return () => mq.removeEventListener("change", onStoreChange);
+    },
+    () => window.matchMedia("(prefers-color-scheme: dark)").matches,
+    () => false,
+  );
+}
 
 const scatteredStyles = `
   .sc-stack {
@@ -184,15 +194,6 @@ const fanGlows = [
 
 function FanMediaStack({ media }: { media: MediaItem[] }) {
   const items = media.slice(0, 2);
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
 
   return (
     <>
@@ -301,16 +302,6 @@ const overlapStyles = `
 `;
 
 function OverlapMediaStack({ media }: { media: MediaItem[] }) {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
   const big = media[0];
   const small = media[1];
 
@@ -351,15 +342,6 @@ function OverlapMediaStack({ media }: { media: MediaItem[] }) {
 
 function ScatteredMediaStack({ media }: { media: MediaItem[] }) {
   const items = media.slice(0, 3);
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
 
   return (
     <>
@@ -454,15 +436,7 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
 }
 
 export default function Projects() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  const isDark = usePrefersDark();
 
   return (
     <PageSection id="projects">
@@ -484,22 +458,22 @@ export default function Projects() {
             >
               <div className="grid gap-10 lg:grid-cols-[0.9fr_1.3fr] lg:items-center overflow-visible">
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-light tracking-tight text-foreground/80">
+                  <h3 className="text-heading text-foreground/80">
                     {project.title}
                   </h3>
-                  <div className="mt-4 space-y-3 text-base sm:text-lg font-light leading-relaxed text-foreground/55">
+                  <div className="mt-4 space-y-3 text-body-lg text-foreground/55">
                     {project.summary.map((text) => (
                       <p key={text}>{text}</p>
                     ))}
                   </div>
-                  <div className="mt-6 flex items-center gap-6 text-xs tracking-[0.2em] uppercase">
+                  <div className="mt-6 flex items-center gap-6">
                     {project.links.map((link) => (
                       <a
                         key={link.label}
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs tracking-[0.2em] uppercase text-muted-foreground/40 font-medium hover:text-foreground/70 transition"
+                        className="text-link text-muted-foreground/40 hover:text-foreground/70"
                       >
                         {link.label}
                       </a>
@@ -508,14 +482,15 @@ export default function Projects() {
                 </div>
 
                 <div style={{ marginRight: "-2.5rem", transform: "translateX(1.5rem)" }}>
-                  {(project).layout === "overlap"
-                    ? <OverlapMediaStack media={project.media} />
-                    : (project as any).layout === "fan"
-                      ? <FanMediaStack media={project.media} />
-                      : (project as any).layout === "single"
-                        ? <SingleMedia media={project.media} />
-                        : <ScatteredMediaStack media={project.media} />
-                  }
+                  {project.layout === "overlap" ? (
+                    <OverlapMediaStack media={project.media} />
+                  ) : project.layout === "fan" ? (
+                    <FanMediaStack media={project.media} />
+                  ) : project.layout === "single" ? (
+                    <SingleMedia media={project.media} />
+                  ) : (
+                    <ScatteredMediaStack media={project.media} />
+                  )}
                 </div>
               </div>
             </article>
