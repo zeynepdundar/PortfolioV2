@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { FolderKanban, Home, Mail, User } from "lucide-react";
 
 const NAV_ITEMS = [
-  { label: "Intro", href: "/", icon: Home },
+ // { label: "Intro", href: "/", icon: Home },
   { label: "Projects", href: "/projects", icon: FolderKanban },
   { label: "About", href: "/about", icon: User },
   { label: "Contact", href: "/contact", icon: Mail },
 ];
 
-export default function BottomNav() {
+export default function SideNav() {
   const pathname = usePathname();
   return (
     <nav

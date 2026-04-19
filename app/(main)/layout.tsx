@@ -1,5 +1,6 @@
+import Brand from "@/components/layout/Brand";
 import Footer from "@/components/layout/Footer";
-import BottomNav from "@/components/layout/BottomNav";
+import SideNav from "@/components/layout/SideNav";
 import UtilityRail from "@/components/layout/UtilityRail";
 
 
@@ -9,6 +10,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const showMaintenance = false;
+
 
   if (showMaintenance) {
     return (
@@ -53,8 +55,9 @@ export default function MainLayout({
           <Footer />
         </div>
       </main>
-      <UtilityRail/>
-      <BottomNav />
+      <Brand/>
+      <UtilityRail />
+      <SideNav />
     </div>
   );
 }
