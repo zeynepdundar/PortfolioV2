@@ -105,31 +105,39 @@ html::before {
   top: -20%;
   height: 45vh;
   z-index: 0;
+
   background: linear-gradient(
-      120deg,
-      rgba(255, 170, 196, 0.52),
-      rgba(170, 206, 255, 0.5),
-      rgba(255, 220, 160, 0.48),
-      rgba(168, 232, 206, 0.48),
-      rgba(198, 182, 255, 0.5)
-    );
-  background-size: 200% 200%;
-  filter: blur(36px);
-  animation: soft-rainbow 28s ease-in-out infinite;
+    120deg,
+    rgba(255, 104, 93, 0.55) 5%,
+    rgba(255, 100, 240, 0.45) 17%,
+    rgba(81, 85, 255, 0.45) 38%,
+    rgba(84, 237, 255, 0.45) 59%,
+    rgba(91, 255, 123, 0.40) 71%,
+    rgba(253, 255, 89, 0.38) 82%,
+    rgba(255, 202, 85, 0.42) 93%
+  );
+
+  background-size: 220% 220%;
+  filter: blur(55px) saturate(0.7) brightness(1.05);
+
+  animation: soft-rainbow 40s ease-in-out infinite;
+
   mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.85) 45%,
-    rgba(0, 0, 0, 0.45) 70%,
+    rgba(0, 0, 0, 0.8) 45%,
+    rgba(0, 0, 0, 0.35) 70%,
     rgba(0, 0, 0, 0) 100%
   );
+
   -webkit-mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.85) 45%,
-    rgba(0, 0, 0, 0.45) 70%,
+    rgba(0, 0, 0, 0.8) 45%,
+    rgba(0, 0, 0, 0.35) 70%,
     rgba(0, 0, 0, 0) 100%
   );
+
   pointer-events: none;
 }
 
