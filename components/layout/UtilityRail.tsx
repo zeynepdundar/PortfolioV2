@@ -16,7 +16,7 @@ const socials = [
     icon: Linkedin,
   },
   {
-    href: "/cv.pdf",
+    href: "/docs/cv.pdf",
     label: "Download CV",
     icon: FileText,
   },

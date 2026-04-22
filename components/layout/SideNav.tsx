@@ -1,14 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FolderKanban, Home, Mail, User } from "lucide-react";
+ 
+const projectIcon = "/icons/projectIcon.svg";
+
+const aboutIcon = "/icons/userIcon.svg";
+
+const contactIcon = "/icons/emailIcon.svg";
 
 const NAV_ITEMS = [
- // { label: "Intro", href: "/", icon: Home },
-  { label: "Projects", href: "/projects", icon: FolderKanban },
-  { label: "About", href: "/about", icon: User },
-  { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Projects", href: "/projects", icon: projectIcon },
+  { label: "About", href: "/about", icon: aboutIcon },
+  { label: "Contact", href: "/contact", icon: contactIcon },
 ];
 
 export default function SideNav() {
@@ -26,7 +31,7 @@ export default function SideNav() {
     >
       <span className="mb-2 h-16 w-px bg-foreground/10" />
 
-      {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+      {NAV_ITEMS.map(({ label, href, icon }) => {
         const isActive = pathname === href;
 
         return (
@@ -43,7 +48,7 @@ export default function SideNav() {
               ${isActive ? "text-foreground bg-gradient-to-br from-rose-200/40 via-sky-200/40 to-amber-200/40" : ""}
             `}
           >
-            <Icon className="h-5 w-5" />
+            <Image src={icon} alt="" width={20} height={20} aria-hidden="true" />
 
             {/* Tooltip */}
             <span
