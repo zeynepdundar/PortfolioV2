@@ -8,9 +8,9 @@ export const metadata = {
   title: "Zeynep Dündar",
   description: "Software developer portfolio",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.svg",
   },
 };
 
