@@ -2,15 +2,33 @@
 
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [animating, setAnimating] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  if (!resolvedTheme) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !resolvedTheme) {
+    return (
+      <button
+        aria-hidden
+        tabIndex={-1}
+        className="
+          relative rounded-xl p-3 text-foreground/70
+          opacity-0 pointer-events-none
+        "
+      >
+        <span className="block h-5 w-5" />
+      </button>
+    );
+  }
 
   const isDark = resolvedTheme === "dark";
 

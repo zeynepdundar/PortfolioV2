@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
  
 const projectIcon = "/icons/projectIcon.svg";
 
@@ -18,6 +19,11 @@ const NAV_ITEMS = [
 
 export default function SideNav() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
     <nav
       role="navigation"
@@ -32,7 +38,7 @@ export default function SideNav() {
       <span className="mb-2 h-16 w-px bg-foreground/10" />
 
       {NAV_ITEMS.map(({ label, href, icon }) => {
-        const isActive = pathname === href;
+        const isActive = mounted && pathname === href;
 
         return (
           <Link

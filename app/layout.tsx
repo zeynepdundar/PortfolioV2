@@ -1,7 +1,7 @@
 // app/layout.tsx
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
+import Providers from "@/components/Providers";
 
 
 export const metadata = {
@@ -49,9 +49,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <body className="font-sans antialiased">
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers>
             {children}
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
   );
