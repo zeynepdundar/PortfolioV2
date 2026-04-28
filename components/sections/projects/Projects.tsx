@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { PageSection } from "@/components/ui/PageSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionContainer } from "@/components/ui/SectionContainer";
@@ -443,7 +444,7 @@ export default function Projects() {
       <SectionContainer>
         <SectionHeader
           title="Selected Works"
-          subtitle="A non-chronological list of select projects covering front-end development and design work."
+          subtitle="A selection of projects covering front-end development, design work, and full-stack applications"
         />
 
         <div className="mt-16 flex flex-col gap-6">
@@ -466,7 +467,7 @@ export default function Projects() {
                       <p key={text}>{text}</p>
                     ))}
                   </div>
-                  <div className="mt-6 flex items-center gap-6">
+                  <div className="mt-6 flex flex-wrap items-center gap-6">
                     {project.links.map((link) => (
                       <a
                         key={link.label}
@@ -478,6 +479,14 @@ export default function Projects() {
                         {link.label}
                       </a>
                     ))}
+{!!project.slug && (
+  <Link
+    href={`/projects/${project.slug}`}
+    className="text-link font-medium text-foreground/70 hover:text-foreground"
+  >
+    View details →
+  </Link>
+)}
                   </div>
                 </div>
 

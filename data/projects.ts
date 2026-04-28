@@ -12,12 +12,20 @@ export type ProjectLink = {
 };
 
 export type Project = {
+  slug?: string;
   title: string;
   layout: Layout;
   media: ProjectMediaItem[];
   summary: string[];
   links: ProjectLink[];
+  details?: {
+    headline?: string;
+    overview?: string[];
+    highlights?: string[];
+    scope?: string[];
+  };
 };
+
 
 export const projects: Project[] = [
   {
@@ -38,6 +46,7 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "book-trading-platform",
     title: "Book Trading Platform",
     layout: "overlap",
     media: [
@@ -53,6 +62,25 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://gitlab.com/harmony-org/book-swap/-/tree/dev?ref_type=heads" },
       { label: "Watch Demo", href: "https://vimeo.com/1037563566?share=copy" },
     ],
+    details: {
+      headline: "A mobile-first platform for discovering, listing, and exchanging books with real-time chat.",
+      overview: [
+        "Book Trading Platform is a book exchange app designed around a simple flow: add books to your library, find people nearby who want what you have, and coordinate the swap in a chat that keeps the whole exchange in one place.",
+        "The product focus is on reducing friction during the “I have it / I want it” moment — barcode-based lookup for fast cataloging, clean inventory management, and messaging that’s tied directly to the books being discussed.",
+      ],
+      highlights: [
+        "Barcode scanning + ISBN search across a large catalog (28M+ titles)",
+        "Personal library and wishlist management",
+        "Real-time chat to coordinate swaps",
+        "Exchange flow that tracks what’s being offered and requested",
+      ],
+      scope: [
+        "Mobile UX for scanning, search, and book detail views",
+        "Library screens for ownership status (available, reserved, swapped)",
+        "Messaging UI with book context (what book is being discussed)",
+        "Deep links to demo and repository",
+      ],
+    }
   },
   {
     title: "Shelfie",
@@ -82,3 +110,8 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export function getProjectBySlug(slug: string) {
+  console.log("slug:", slug);
+  return projects.find((p) => p.slug === slug);
+}

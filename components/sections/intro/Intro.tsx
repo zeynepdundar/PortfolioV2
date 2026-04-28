@@ -1,8 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
-
 import { PageSection } from "../../ui/PageSection";
 import { SectionContainer } from "../../ui/SectionContainer";
+import { Button } from "@/components/ui/Button";
 
 export default function Intro() {
   return (
@@ -49,74 +48,43 @@ export default function Intro() {
 
             {/* Body copy */}
             <div className="max-w-2xl space-y-4">
+              {/*
               <p className="text-heading text-foreground/80">
                 This is my little corner of the internet
               </p>
+              */}
+              <p className="text-body-lg text-foreground/65">
+              I design and build fast, intuitive web products that scale             </p>
 
               <p className="text-body-lg text-foreground/65">
-                I design and develop digital products that feel simple, fast, and usable for everyone no matter the device, context, or constraints.
-              </p>
-
-              <p className="text-body-lg text-foreground/65">
-                I focus on long-term product quality, architecture, performance, and the subtle interactions that shape how users experience software.
+                I focus on long-term product quality, architecture, performance, and the interaction details that shape how software feels to use.
               </p>
             </div>
 
 
             <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
-              {/* Primary CTA */}
-              <Link
-                href="/about"
-                aria-label="Learn more about Zeynep Dündar"
-                className="group inline-flex items-center justify-center
-      rounded-full border border-[var(--primary)]
-      px-6 py-3
-      text-sm font-mono
-      text-[var(--primary)]
-      bg-transparent
-      transition-all duration-300 ease-in-out
-      hover:bg-[var(--primary)] hover:text-white
-      focus-visible:outline-none
-      focus-visible:ring-2
-      focus-visible:ring-[var(--primary-ring)]
-      focus-visible:ring-offset-2
-      focus-visible:ring-offset-background"
-              >
-                More about me
-                <span
-                  className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                  aria-hidden="true"
-                >
-                  →
-                </span>
-              </Link>
-
-              {/* Secondary CTA */}
-              <Link
+              <Button
                 href="/projects"
-                aria-label="View Zeynep Dündar's projects"
-                className="inline-flex items-center justify-center
-      rounded-full border border-border/40
-      px-6 py-3
-      text-sm font-medium
-      text-foreground/80
-      transition-all duration-300
-      hover:border-[var(--primary)]
-      hover:text-[var(--primary)]
-      hover:bg-[var(--primary-soft)]
-      focus-visible:outline-none
-      focus-visible:ring-2
-      focus-visible:ring-[var(--primary-ring)]
-      focus-visible:ring-offset-2
-      focus-visible:ring-offset-background"
+                ariaLabel="View Zeynep Dündar's projects"
+                variant="primary"
               >
                 View work
-              </Link>
+              </Button>
+              <Button
+                href="/about"
+                ariaLabel="Learn more about Zeynep Dündar"
+                variant="outline"
+                showArrow
+              >
+                More about me
+              </Button>
+
+
             </div>
 
           </div>
         </div>
       </SectionContainer>
-    </PageSection>
+    </PageSection >
   );
 }

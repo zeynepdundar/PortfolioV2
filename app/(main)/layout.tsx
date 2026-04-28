@@ -47,14 +47,14 @@ export default function MainLayout({
         pb-[calc(var(--bottom-nav-height)+1rem)]
       `}
     >
-      <main className="min-h-[100dvh] flex justify-center">
-        <div className="w-full max-w-6xl">
-          {children}
+<main className="min-h-[100dvh] flex justify-center">
+  <div className="w-full max-w-6xl flex flex-col">
+    {children}
 
-          <div aria-hidden className="h-[var(--bottom-nav-height)]" />
-          <Footer />
-        </div>
-      </main>
+    <div aria-hidden className="h-[var(--bottom-nav-height)]" />
+    <Footer />
+  </div>
+</main>
       <Brand/>
       <UtilityRail />
       <SideNav />
