@@ -7,10 +7,10 @@ export default function Intro() {
   return (
     <PageSection id="home">
       <SectionContainer>
-        <div className="w-full pt-8 sm:pt-10" >
+        <div className="w-full pt-8 sm:pt-10">
           <div className="space-y-6 sm:space-y-8">
 
-            <header className="space-y-3">
+            <header className="space-y-4">
               <h1 className="sr-only">Zeynep Dündar – Software Engineer</h1>
 
               <div className="flex items-center gap-4">
@@ -40,28 +40,24 @@ export default function Intro() {
                 />
               </div>
 
-              {/* Badge */}
-              <span className="text-meta sm:text-sm">
-                Software Engineer · Building Modern, User-Centered Web Systems
-              </span>
+<h2 className="text-base sm:text-lg font-medium text-foreground/90 tracking-tight block max-w-xl">
+  Software Engineer <span className="text-foreground/40 font-light mx-1">·</span> Engineering High-Performance Platforms &
+  <br className="hidden sm:inline" /> Refined User Experiences
+</h2>
             </header>
 
-            {/* Body copy */}
+            {/* Body copy - Paragraflar arası hiyerarşi netleştirildi */}
             <div className="max-w-2xl space-y-4">
-              {/*
-              <p className="text-heading text-foreground/80">
-                This is my little corner of the internet
+              <p className="text-body-lg font-medium text-foreground/80 leading-relaxed">
+                I design and build fast, responsive, and end-to-end web products that scale.
               </p>
-              */}
-              <p className="text-body-lg text-foreground/65">
-              I design and build fast, intuitive web products that scale             </p>
 
-              <p className="text-body-lg text-foreground/65">
-                I focus on long-term product quality, architecture, performance, and the interaction details that shape how software feels to use.
+              <p className="text-body-lg text-foreground/60 leading-relaxed">
+                My focus is on long-term architecture, robust performance, and the precise interaction details that define how modern software feels to use from the database layer to the user's screen.
               </p>
             </div>
 
-
+            {/* Action Buttons */}
             <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
               <Button
                 href="/projects"
@@ -78,13 +74,11 @@ export default function Intro() {
               >
                 More about me
               </Button>
-
-
             </div>
 
           </div>
         </div>
       </SectionContainer>
-    </PageSection >
+    </PageSection>
   );
 }

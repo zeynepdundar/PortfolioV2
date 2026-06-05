@@ -19,7 +19,7 @@ export default function About() {
           {/* About narrative */}
           <div className="mt-6 max-w-2xl space-y-4 text-body-lg text-foreground/55">
             <p>
-              I&apos;m a fullstack engineer who enjoys working where design meets code. I care about quality in a deeply human sense how interfaces feel, how intuitive they are, and how small details influence trust and ease. At the same time, I think beyond the interface, building systems that are reliable, maintainable, and thoughtfully structured end to end.
+              I&apos;m a frontend-focused engineer with experience across fullstack systems, building interfaces and scalable backend-integrated applications. I care about quality in a deeply human sense how interfaces feel, how intuitive they are, and how small details influence trust and ease. At the same time, I think beyond the interface, building systems that are reliable, maintainable, and thoughtfully structured end to end.
             </p>
             <p>
               I hold a degree in Computer Engineering from Istanbul Technical

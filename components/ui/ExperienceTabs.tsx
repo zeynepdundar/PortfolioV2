@@ -17,26 +17,25 @@ export function ExperienceTabs({ experiences }: Props) {
 
       {/* LEFT — Tabs */}
       <div className="flex md:flex-col border-l border-border/20">
-  {experiences.map((exp, index) => (
-    <button
-      key={`${exp.company}-${index}`}
-      onClick={() => setActiveIndex(index)}
-      className={`relative text-left pl-4 pr-3 py-2 text-sm transition
-        ${
-          index === activeIndex
-            ? "text-foreground"
-            : "text-muted hover:text-foreground/80"
-        }`}
-    >
-      {/* Active indicator */}
-      {index === activeIndex && (
-        <span className="absolute left-0 top-0 h-full w-[2px] bg-foreground/80" />
-      )}
+        {experiences.map((exp, index) => (
+          <button
+            key={`${exp.company}-${index}`}
+            onClick={() => setActiveIndex(index)}
+            className={`relative text-left pl-4 pr-3 py-2 text-sm transition
+        ${index === activeIndex
+                ? "text-foreground"
+                : "text-muted hover:text-foreground/80"
+              }`}
+          >
+            {/* Active indicator */}
+            {index === activeIndex && (
+              <span className="absolute left-0 top-0 h-full w-[2px] bg-foreground/80" />
+            )}
 
-      {exp.company}
-    </button>
-  ))}
-</div>
+            {exp.company}
+          </button>
+        ))}
+      </div>
 
       {/* RIGHT — Content */}
       <div
@@ -88,16 +87,18 @@ export function ExperienceTabs({ experiences }: Props) {
         )}
 
         {/* Stack */}
-        <ul className="flex flex-wrap gap-2 mt-2">
-          {active.stack.map((tech) => (
-            <li
-              key={tech}
-              className="text-xs px-2 py-1 border border-border/20 rounded-md text-muted"
-            >
-              {tech}
-            </li>
-          ))}
-        </ul>
+        {active.stack?.length ? (
+          <ul className="flex flex-wrap gap-2 mt-2">
+            {active.stack.map((tech) => (
+              <li
+                key={tech}
+                className="text-xs px-2 py-1 border border-border/20 rounded-md text-muted"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </div>
     </div>
   );

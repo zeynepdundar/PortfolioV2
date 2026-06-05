@@ -3,7 +3,7 @@ export type Experience = {
   company: string;
   period: string;
   description: string;
-  stack: string[];
+  stack?: string[];
   logo: string;
   companyUrl: string;
   link?: {
@@ -21,7 +21,7 @@ export const experiences: Experience[] = [
       "Built and maintained the back-office UI of a global, cloud-based restaurant operating system. Migrated a large-scale interface to Angular 14 within a 15+ engineer Agile team, working closely with product managers, designers, and engineers to deliver reliable, user-focused features at scale.",
     logo: "/logos/linga_logo.jpeg",
     companyUrl: "https://www.lingapos.com/",
-    stack: ["Angular", "TypeScript", "RxJS", "CSS"],
+    //stack: ["Angular", "TypeScript", "RxJS", "CSS"],
 
   },
   {
@@ -32,21 +32,21 @@ export const experiences: Experience[] = [
       "Contributed to enterprise client projects for Mercedes-Benz and Roche. Built and launched Mercedes-Benz's B2B e-commerce platform across 19+ countries. Designed accessible, reusable UI components and contributed to a shared component library.",
     logo: "/logos/accenture_logo.jpeg",
     companyUrl: "https://www.accenture.com/us-en",
-    stack: ["React", "Next.js", "Storybook", "Electron.js", "Webpack"],
+    //stack: ["React", "Next.js", "Storybook", "Electron.js", "Webpack"],
     link: {
       label: "View Project",
       href: "https://b2bconnect.mercedes-benz.com/de",
     },
   },
   {
-    role: "Full Stack Developer",
+    role: "Full Stack Engineer",
     company: "Renault Group",
     period: "2020 – 2021",
     description:
       "Co-developed an internal HR automation platform streamlining payroll, scheduling, and performance tracking, significantly reducing HR operational workload.",
     logo: "/logos/renault_logo.jpeg",
     companyUrl: "https://www.renaultgroup.com/en/",
-    stack: ["Java", "Spring Boot", "AngularJS", "PostgreSQL", "React"],
+   //stack: ["Java", "Spring Boot", "AngularJS", "PostgreSQL", "React"],
   },
   {
     role: "Software Development Assistance Specialist",
@@ -56,17 +56,16 @@ export const experiences: Experience[] = [
       "Implemented automated testing procedures, reducing manual testing effort and improving system reliability through increased test coverage.",
     logo: "/logos/softtech_logo.jpeg",
     companyUrl: "https://softtech.com.tr/",
-    stack: ["Java", "Selenium", "Cucumber"],
+    //stack: ["Java", "Selenium", "Cucumber"],
   },
   {
     role: "Software Developer",
     company: "Webbilir Consulting",
     period: "2018 – 2019",
-    description:
-      "Worked on consulting projects to design and launch websites and early-stage products, collaborating closely with designers and fellow developers.",
+    description: "Built and launched websites and early-stage products in consulting projects, translating customer requirements into functional solutions and collaborating closely with fellow developers.",
     logo: "/logos/webbilir_logo.jpeg",
     companyUrl: "https://webbilir.com/",
-    stack: ["Angular", "Firebase", "JavaScript", "C# & .NET", "MSSQL"],
+    //stack: ["Angular", "Firebase", "JavaScript", "C# & .NET", "MSSQL"],
     link: {
       label: "Florist website",
       href: "https://www.jardinerie.com.tr/",
