@@ -14,7 +14,6 @@ export default function Intro() {
               <h1 className="sr-only">Zeynep Dündar – Software Engineer</h1>
 
               <div className="flex items-center gap-4">
-                {/* Profile image */}
                 <div className="relative shrink-0 h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem]">
                   <div className="relative h-full w-full overflow-hidden rounded-xl border border-border/20 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.3)]">
                     <Image
@@ -28,7 +27,6 @@ export default function Intro() {
                   </div>
                 </div>
 
-                {/* Greeting SVG */}
                 <Image
                   src="/images/Hello2.svg"
                   alt=""
@@ -40,13 +38,12 @@ export default function Intro() {
                 />
               </div>
 
-<h2 className="text-base sm:text-lg font-medium text-foreground/90 tracking-tight block max-w-xl">
-  Software Engineer <span className="text-foreground/40 font-light mx-1">·</span> Engineering High-Performance Platforms &
-  <br className="hidden sm:inline" /> Refined User Experiences
-</h2>
+              <h2 className="text-base sm:text-lg font-medium text-foreground/90 tracking-tight block max-w-xl">
+                Software Engineer <span className="text-foreground/40 font-light mx-1">·</span> Engineering High-Performance Platforms &
+                <br className="hidden sm:inline" /> Refined User Experiences
+              </h2>
             </header>
 
-            {/* Body copy - Paragraflar arası hiyerarşi netleştirildi */}
             <div className="max-w-2xl space-y-4">
               <p className="text-body-lg font-medium text-foreground/80 leading-relaxed">
                 I design and build fast, responsive, and end-to-end web products that scale.
@@ -57,7 +54,6 @@ export default function Intro() {
               </p>
             </div>
 
-            {/* Action Buttons */}
             <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
               <Button
                 href="/projects"

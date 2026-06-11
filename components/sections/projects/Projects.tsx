@@ -173,19 +173,86 @@ const fanStyles = `
   }
 `;
 
-const sectionBgLight = [
-  "rgba(235,228,220,0.30)", // 1 — dusty peach
-  "rgba(214,226,228,0.30)", // 2 — soft teal mist
-  "rgba(228,222,235,0.30)", // 3 — lavender haze
-  "rgba(220,230,220,0.30)", // 4 — sage whisper
+// Soft band tints — each project sits on a full-width colored band,
+// separated from its neighbours by a wavy divider (see WaveDivider).
+const sectionBandLight = [
+  "#f5f1eb", // 1 — soft peach
+  "#ecf0f2", // 2 — soft teal
+  "#f1edf6", // 3 — soft lavender
+  "#eff2ef", // 4 — soft sage
 ];
 
-const sectionBgDark = [
-  "rgba(58,46,38,0.45)", // 1 — deep peach
-  "rgba(34,52,56,0.45)", // 2 — deep teal
-  "rgba(46,38,58,0.45)", // 3 — deep lavender
-  "rgba(36,50,38,0.45)", // 4 — deep sage
+const sectionBandDark = [
+  "#3f3930", // 1 — muted peach
+  "#27333a", // 2 — muted teal
+  "#322e3d", // 3 — muted lavender
+  "#2b3228", // 4 — muted sage
 ];
+
+// A wavy line separator.
+//
+// Default (divider) mode: `color` is painted in the strip above the wave (the
+// previous band's colour) so it appears to spill down into the band below it
+// along an organic, wavy edge.
+//
+// Edge mode: `color` (the band's own colour) rises upward in waves above the
+// band, giving the band a wavy top edge against the page background — without
+// any solid strip sitting inside the band.
+function WaveDivider({ color, edge = false }: { color: string; edge?: boolean }) {
+  if (edge) {
+    return (
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          bottom: "calc(100% - 1px)",
+          left: 0,
+          width: "100%",
+          lineHeight: 0,
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <svg
+          viewBox="0 0 1440 40"
+          preserveAspectRatio="none"
+          style={{ display: "block", width: "100%", height: 36 }}
+        >
+          <path
+            d="M0,40 L1440,40 L1440,18 C1230,-6 1080,-6 780,16 C520,34 300,34 0,14 Z"
+            style={{ fill: color }}
+          />
+        </svg>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      aria-hidden
+      style={{
+        position: "absolute",
+        top: -1,
+        left: 0,
+        width: "100%",
+        lineHeight: 0,
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
+    >
+      <svg
+        viewBox="0 0 1440 90"
+        preserveAspectRatio="none"
+        style={{ display: "block", width: "100%", height: 72 }}
+      >
+        <path
+          d="M0,0 L1440,0 L1440,40 C1230,78 1080,78 780,48 C520,22 300,22 0,52 Z"
+          style={{ fill: color }}
+        />
+      </svg>
+    </div>
+  );
+}
 
 
 const fanGlows = [
@@ -438,74 +505,93 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
 
 export default function Projects() {
   const isDark = usePrefersDark();
+  const bands = isDark ? sectionBandDark : sectionBandLight;
 
   return (
     <PageSection id="projects">
-      <SectionContainer>
-        <SectionHeader
-          title="Selected Works"
-          subtitle="A selection of projects covering front-end development, design work, and full-stack applications"
-        />
+      <div className="w-full overflow-hidden">
+        <SectionContainer>
+          <SectionHeader
+            title="Selected Works"
+            subtitle="A selection of projects covering front-end development, design work, and full-stack applications"
+          />
+        </SectionContainer>
 
-        <div className="mt-16 flex flex-col gap-6">
-          {projects.map((project, idx) => (
-            <article
-              key={project.title}
-              style={{
-                backgroundColor: isDark ? sectionBgDark[idx] : sectionBgLight[idx],
-                overflow: "visible",
-              }}
-              className="pl-8 pr-0 py-12 rounded-2xl overflow-visible"
-            >
-              <div className="grid gap-10 lg:grid-cols-[0.9fr_1.3fr] lg:items-center overflow-visible">
-                <div>
-                  <h3 className="text-heading text-foreground/80">
-                    {project.title}
-                  </h3>
-                  <div className="mt-4 space-y-3 text-body-lg text-foreground/55">
-                    {project.summary.map((text) => (
-                      <p key={text}>{text}</p>
-                    ))}
-                  </div>
-                  <div className="mt-6 flex flex-wrap items-center gap-6">
-                    {project.links.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-link text-muted-foreground/40 hover:text-foreground/70"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
-{!!project.slug && (
-  <Link
-    href={`/projects/${project.slug}`}
-    className="text-link font-medium text-foreground/70 hover:text-foreground"
-  >
-    View details →
-  </Link>
-)}
-                  </div>
-                </div>
+        <div className="mt-12">
+          {projects.map((project, idx) => {
+            const bg = bands[idx % bands.length];
+            // Colour spilling down from above: the page background for the
+            // first band, otherwise the previous band's colour.
+            const prev = idx === 0 ? "var(--background)" : bands[(idx - 1) % bands.length];
 
-                <div style={{ marginRight: "-2.5rem", transform: "translateX(1.5rem)" }}>
-                  {project.layout === "overlap" ? (
-                    <OverlapMediaStack media={project.media} />
-                  ) : project.layout === "fan" ? (
-                    <FanMediaStack media={project.media} />
-                  ) : project.layout === "single" ? (
-                    <SingleMedia media={project.media} />
-                  ) : (
-                    <ScatteredMediaStack media={project.media} />
-                  )}
-                </div>
+            return (
+              <div
+                key={project.title}
+                style={{ position: "relative", backgroundColor: bg }}
+                className="w-full mx-6"
+              >
+                {idx > 0 ? (
+                  <WaveDivider color={prev} />
+                ) : (
+                  <WaveDivider color={bg} edge />
+                )}
+                <SectionContainer>
+                  <div className="relative z-[1] grid gap-10 pb-8 pt-16 lg:grid-cols-[0.9fr_1.3fr] lg:items-center">
+                    <div>
+                      <h3 className="text-heading text-foreground/80">
+                        {project.title}
+                      </h3>
+                      <div className="mt-4 space-y-3 text-body-lg text-foreground/55">
+                        {project.summary.map((text) => (
+                          <p key={text}>{text}</p>
+                        ))}
+                      </div>
+                      <div className="mt-6 flex flex-wrap items-center gap-6">
+                        {project.links.map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-link text-muted-foreground/40 hover:text-foreground/70"
+                          >
+                            {link.label}
+                          </a>
+                        ))}
+                        {!!project.slug && (
+                          <Link
+                            href={`/projects/${project.slug}`}
+                            className="text-link font-medium text-foreground/70 hover:text-foreground"
+                          >
+                            View details →
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+
+                    <div style={{ marginRight: "-2.5rem", transform: "translateX(1.5rem)" }}>
+                      {project.layout === "overlap" ? (
+                        <OverlapMediaStack media={project.media} />
+                      ) : project.layout === "fan" ? (
+                        <FanMediaStack media={project.media} />
+                      ) : project.layout === "single" ? (
+                        <SingleMedia media={project.media} />
+                      ) : (
+                        <ScatteredMediaStack media={project.media} />
+                      )}
+                    </div>
+                  </div>
+                </SectionContainer>
               </div>
-            </article>
-          ))}
+            );
+          })}
+
+          {/* Closing wave — eases the last band back into the page. */}
+          <div style={{ position: "relative", height: 72 }} className="mx-6">
+            <WaveDivider color={bands[(projects.length - 1) % bands.length]} />
+          </div>
         </div>
-      </SectionContainer>
+      </div>
     </PageSection>
   );
 }

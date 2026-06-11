@@ -17,6 +17,7 @@ export type Project = {
   layout: Layout;
   media: ProjectMediaItem[];
   summary: string[];
+  statusNote?: string;
   links: ProjectLink[];
   details?: {
     headline?: string;
@@ -40,6 +41,7 @@ export const projects: Project[] = [
       "A racing simulation built for fun, driven by curiosity about modeling real-world randomness in the browser. The core challenge was designing a race engine using math-calculating speed variance and position updates each tick with no game library, just logic.",
       "Built with Vue.js and Vuex for centralized race state. All animations handled purely in CSS, keeping the bundle lean and the motion smooth.",
     ],
+    statusNote: "Currently in maintenance mode, with structural updates planned to scale the core trading engine beyond books.",
     links: [
       { label: "GitHub", href: "https://github.com/zeynepdndr/HorseRacingGame" },
       { label: "Live Preview", href: "https://horse-racing-game-steel.vercel.app/" },
