@@ -1,26 +1,23 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PageSection } from "@/components/ui/PageSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionContainer } from "@/components/ui/SectionContainer";
-import { projects, type ProjectMediaItem } from "@/data/projects";
+import {
+  projects,
+  projectCategories,
+  type ProjectCategory,
+  type ProjectMediaItem,
+} from "@/data/projects";
+
+type Filter = "All" | ProjectCategory;
+
+const filters: Filter[] = ["All", ...projectCategories];
 
 type MediaItem = ProjectMediaItem;
-
-function usePrefersDark() {
-  return useSyncExternalStore(
-    (onStoreChange) => {
-      const mq = window.matchMedia("(prefers-color-scheme: dark)");
-      mq.addEventListener("change", onStoreChange);
-      return () => mq.removeEventListener("change", onStoreChange);
-    },
-    () => window.matchMedia("(prefers-color-scheme: dark)").matches,
-    () => false,
-  );
-}
 
 const scatteredStyles = `
   .sc-stack {
@@ -46,35 +43,35 @@ const scatteredStyles = `
   }
 
   .sc-card-0 {
-    width: 62%;
+    width: 92%;
     aspect-ratio: 16 / 9;
     align-self: flex-start;
     margin-left: 0px;
-    margin-bottom: -52px;
-    border: 3px solid;
+    margin-bottom: -72px;
+    border: 1px solid;
     transform: rotate(-1deg) translateX(-8px);
     z-index: 1;
     box-shadow: 0 6px 24px -6px rgba(0,0,0,0.20);
   }
 
   .sc-card-1 {
-    width: 54%;
+    width: 80%;
     aspect-ratio: 16 / 9;
     align-self: flex-end;
     margin-right: 4px;
-    margin-bottom: -48px;
-    border: 3px solid;
-    transform: rotate(5deg) translateX(12px);
+    margin-bottom: -64px;
+    border: 1px solid;
+    transform: rotate(5deg) translateX(44px);
     z-index: 2;
     box-shadow: 0 8px 28px -4px rgba(100,116,139,0.22);
   }
 
   .sc-card-2 {
-    width: 48%;
+    width: 70%;
     aspect-ratio: 16 / 9;
     align-self: flex-start;
     margin-left: 28px;
-    border: 3px solid;
+    border: 1px solid;
     transform: rotate(-5.5deg) translateX(4px);
     z-index: 3;
     box-shadow: 0 6px 20px -4px rgba(100,116,139,0.20);
@@ -103,17 +100,20 @@ const scatteredStyles = `
   }
 `;
 
+// Neutral, translucent frames that sit cleanly on the gradient cards.
+const NEUTRAL_BORDER = "rgba(100,116,139,0.3)";
+
 const cardGlows = [
-  { border: "#a8a8aa", bg: "#a8a8aa", shadow: "0 4px 20px -2px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)" },
-  { border: "#a5a5a8", bg: "#a5a5a8", shadow: "0 4px 20px -2px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05)" },
-  { border: "#aaaaa8", bg: "#aaaaa8", shadow: "0 4px 20px -2px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)" },
+  { border: NEUTRAL_BORDER, bg: "transparent", shadow: "0 4px 20px -2px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)" },
+  { border: NEUTRAL_BORDER, bg: "transparent", shadow: "0 4px 20px -2px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05)" },
+  { border: NEUTRAL_BORDER, bg: "transparent", shadow: "0 4px 20px -2px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)" },
 ];
 
 const fanStyles = `
   .fan-stack {
     position: relative;
     width: 100%;
-    height: 280px;
+    height: 340px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,24 +122,24 @@ const fanStyles = `
 
   .fan-card {
     position: absolute;
-    width: 68%;
+    width: 80%;
     aspect-ratio: 16 / 9;
     border-radius: 12px;
-    border: 3px solid;
+    border: 1px solid;
     overflow: hidden;
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
   }
 
   /* Left card */
   .fan-card-0 {
-    transform: rotate(-3deg) translateX(-80px);
+    transform: rotate(-3deg) translateX(-92px);
     z-index: 1;
     box-shadow: 0 4px 16px -4px rgba(100,116,139,0.20);
   }
 
   /* Right card — slight overlap on left card's right edge */
   .fan-card-1 {
-    transform: rotate(2deg) translateX(80px);
+    transform: rotate(2deg) translateX(92px);
     z-index: 2;
     box-shadow: 0 8px 28px -4px rgba(100,116,139,0.28);
   }
@@ -173,91 +173,9 @@ const fanStyles = `
   }
 `;
 
-// Soft band tints — each project sits on a full-width colored band,
-// separated from its neighbours by a wavy divider (see WaveDivider).
-const sectionBandLight = [
-  "#f5f1eb", // 1 — soft peach
-  "#ecf0f2", // 2 — soft teal
-  "#f1edf6", // 3 — soft lavender
-  "#eff2ef", // 4 — soft sage
-];
-
-const sectionBandDark = [
-  "#3f3930", // 1 — muted peach
-  "#27333a", // 2 — muted teal
-  "#322e3d", // 3 — muted lavender
-  "#2b3228", // 4 — muted sage
-];
-
-// A wavy line separator.
-//
-// Default (divider) mode: `color` is painted in the strip above the wave (the
-// previous band's colour) so it appears to spill down into the band below it
-// along an organic, wavy edge.
-//
-// Edge mode: `color` (the band's own colour) rises upward in waves above the
-// band, giving the band a wavy top edge against the page background — without
-// any solid strip sitting inside the band.
-function WaveDivider({ color, edge = false }: { color: string; edge?: boolean }) {
-  if (edge) {
-    return (
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          bottom: "calc(100% - 1px)",
-          left: 0,
-          width: "100%",
-          lineHeight: 0,
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      >
-        <svg
-          viewBox="0 0 1440 40"
-          preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: 36 }}
-        >
-          <path
-            d="M0,40 L1440,40 L1440,18 C1230,-6 1080,-6 780,16 C520,34 300,34 0,14 Z"
-            style={{ fill: color }}
-          />
-        </svg>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      aria-hidden
-      style={{
-        position: "absolute",
-        top: -1,
-        left: 0,
-        width: "100%",
-        lineHeight: 0,
-        pointerEvents: "none",
-        zIndex: 0,
-      }}
-    >
-      <svg
-        viewBox="0 0 1440 90"
-        preserveAspectRatio="none"
-        style={{ display: "block", width: "100%", height: 72 }}
-      >
-        <path
-          d="M0,0 L1440,0 L1440,40 C1230,78 1080,78 780,48 C520,22 300,22 0,52 Z"
-          style={{ fill: color }}
-        />
-      </svg>
-    </div>
-  );
-}
-
-
 const fanGlows = [
-  { border: "#a8a8aa", bg: "#a8a8aa", shadow: "0 4px 20px -2px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)" },
-  { border: "#a5a5a8", bg: "#a5a5a8", shadow: "0 4px 20px -2px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05)" },
+  { border: NEUTRAL_BORDER, bg: "transparent", shadow: "0 4px 20px -2px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)" },
+  { border: NEUTRAL_BORDER, bg: "transparent", shadow: "0 4px 20px -2px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05)" },
 ];
 
 function FanMediaStack({ media }: { media: MediaItem[] }) {
@@ -299,21 +217,21 @@ const overlapStyles = `
   .ov-stack {
     position: relative;
     width: 100%;
-    height: 260px;
+    height: 340px;
   }
 
   /* Big card — fills most of the space, slight tilt left */
   .ov-big {
     position: absolute;
-    width: 82%;
+    width: 100%;
     aspect-ratio: 16 / 9;
     top: 0;
     left: 0;
     border-radius: 12px;
-    border: 3px solid;
+    border: 1px solid;
     overflow: hidden;
     z-index: 1;
-    transform: rotate(-1.5deg);
+    transform: rotate(1.5deg);
     box-shadow: 0 8px 28px -6px rgba(100,116,139,0.25);
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease;
   }
@@ -327,18 +245,31 @@ const overlapStyles = `
   /* Small card — iPhone 13 exact ratio 390x844, bottom-right */
   .ov-small {
     position: absolute;
-    width: 24%;
+    width: 34%;
     aspect-ratio: 390 / 844;
-    bottom: -10px;
-    right: 16px;
+    left: -65px;
+    width: 42%;
     border-radius: 20px;
-    border: 2px solid;
+    border: 1px solid;
     overflow: hidden;
     z-index: 3;
-    transform: rotate(3deg) translateX(6px);
+    transform: rotate(-3deg) translateX(6px);
     box-shadow: 0 8px 24px -4px rgba(100,116,139,0.35);
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease;
   }
+    .ov-big {
+  transform: perspective(1200px) rotateY(-6deg) rotate(2deg);
+  box-shadow:
+    0 30px 60px -20px rgba(15, 23, 42, 0.25),
+    0 12px 24px -8px rgba(15, 23, 42, 0.12);
+}
+
+.ov-small {
+  transform: perspective(1200px) rotateY(8deg) rotate(-6deg);
+  box-shadow:
+    0 24px 48px -16px rgba(15, 23, 42, 0.28),
+    0 10px 20px -8px rgba(15, 23, 42, 0.15);
+}
 
   .ov-small:hover {
     transform: rotate(0deg) scale(1.04) !important;
@@ -373,8 +304,8 @@ function OverlapMediaStack({ media }: { media: MediaItem[] }) {
   const big = media[0];
   const small = media[1];
 
-  const bigGlow = { border: "#a8a8aa", bg: "#a8a8aa", shadow: "0 4px 24px -4px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)" };
-  const smallGlow = { border: "#a5a5a8", bg: "#a5a5a8", shadow: "0 4px 20px -4px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.05)" };
+  const bigGlow = { border: NEUTRAL_BORDER, bg: "transparent", shadow: "0 4px 24px -4px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)" };
+  const smallGlow = { border: NEUTRAL_BORDER, bg: "transparent", shadow: "0 4px 20px -4px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.05)" };
 
   function renderMedia(item: MediaItem) {
     return item.type === "video" ? (
@@ -473,10 +404,10 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
   return (
     <div
       style={{
-        width: "72%",
+        width: "88%",
         borderRadius: "12px",
         overflow: "hidden",
-        border: "3px solid #a8a8aa",
+        border: "1px solid rgba(100,116,139,0.3)",
         boxShadow: "0 6px 24px -6px rgba(0,0,0,0.2)",
         position: "relative",
       }}
@@ -494,8 +425,9 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
         <Image
           src={item.src}
           alt={item.alt}
-          fill
-          style={{ objectFit: "cover", opacity: 0.93 }}
+          width={1602}
+          height={472}
+          style={{ width: "100%", height: "auto", display: "block", opacity: 0.93 }}
         />
       )}
     </div>
@@ -503,9 +435,96 @@ function SingleMedia({ media }: { media: MediaItem[] }) {
   );
 }
 
+function CircleMedia({ media }: { media: MediaItem[] }) {
+  const item = media[0];
+
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div
+        style={{
+          position: "relative",
+          width: "min(66%, 340px)",
+          aspectRatio: "1 / 1",
+          borderRadius: "9999px",
+          overflow: "hidden",
+          background:
+            "radial-gradient(120% 120% at 30% 25%, #2a2a2e 0%, #141416 45%, #050506 100%)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow:
+            "0 30px 60px -20px rgba(0,0,0,0.55), 0 12px 28px -12px rgba(0,0,0,0.45), inset 0 1px 1px rgba(255,255,255,0.06)",
+          transition:
+            "transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "16%",
+          }}
+        >
+          {item.type === "video" ? (
+            <video
+              src={item.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            />
+          ) : (
+            <Image
+              src={item.src}
+              alt={item.alt}
+              width={340}
+              height={340}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectMedia({ project }: { project: (typeof projects)[number] }) {
+  return project.layout === "overlap" ? (
+    <OverlapMediaStack media={project.media} />
+  ) : project.layout === "fan" ? (
+    <FanMediaStack media={project.media} />
+  ) : project.layout === "single" ? (
+    <SingleMedia media={project.media} />
+  ) : project.layout === "circle" ? (
+    <CircleMedia media={project.media} />
+  ) : (
+    <ScatteredMediaStack media={project.media} />
+  );
+}
+
+// Fancy, translucent gradient tints for each project card. Low opacity keeps
+// them adapting gracefully to both light and dark themes (they sit over the
+// page --background rather than painting a solid colour).
+const cardBackgrounds = [
+  "bg-gradient-to-br from-rose-400/15 via-orange-300/10 to-amber-200/15",
+  "bg-gradient-to-br from-sky-400/15 via-cyan-300/10 to-teal-200/15",
+  "bg-gradient-to-br from-violet-400/15 via-purple-300/10 to-fuchsia-200/15",
+  "bg-gradient-to-br from-emerald-400/15 via-green-300/10 to-lime-200/15",
+];
+
 export default function Projects() {
-  const isDark = usePrefersDark();
-  const bands = isDark ? sectionBandDark : sectionBandLight;
+  const [activeFilter, setActiveFilter] = useState<Filter>("All");
+
+  const visibleProjects =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((project) => project.category === activeFilter);
 
   return (
     <PageSection id="projects">
@@ -515,82 +534,92 @@ export default function Projects() {
             title="Selected Works"
             subtitle="A selection of projects covering front-end development, design work, and full-stack applications"
           />
-        </SectionContainer>
 
-        <div className="mt-12">
-          {projects.map((project, idx) => {
-            const bg = bands[idx % bands.length];
-            // Colour spilling down from above: the page background for the
-            // first band, otherwise the previous band's colour.
-            const prev = idx === 0 ? "var(--background)" : bands[(idx - 1) % bands.length];
+          {/* Category filter chips */}
+          <div className="mt-10 flex flex-wrap gap-3">
+            {filters.map((filter) => {
+              const isActive = filter === activeFilter;
+              return (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  aria-pressed={isActive}
+                  className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                    isActive
+                      ? "border-foreground/70 bg-foreground/85 text-background"
+                      : "border-border/50 text-muted-foreground/70 hover:border-foreground/40 hover:text-foreground/80"
+                  }`}
+                >
+                  {filter}
+                </button>
+              );
+            })}
+          </div>
 
-            return (
-              <div
-                key={project.title}
-                style={{ position: "relative", backgroundColor: bg }}
-                className="w-full mx-6"
-              >
-                {idx > 0 ? (
-                  <WaveDivider color={prev} />
-                ) : (
-                  <WaveDivider color={bg} edge />
-                )}
-                <SectionContainer>
-                  <div className="relative z-[1] grid gap-10 pb-8 pt-16 lg:grid-cols-[0.9fr_1.3fr] lg:items-center">
-                    <div>
-                      <h3 className="text-heading text-foreground/80">
-                        {project.title}
-                      </h3>
-                      <div className="mt-4 space-y-3 text-body-lg text-foreground/55">
-                        {project.summary.map((text) => (
-                          <p key={text}>{text}</p>
-                        ))}
-                      </div>
-                      <div className="mt-6 flex flex-wrap items-center gap-6">
-                        {project.links.map((link) => (
-                          <a
-                            key={link.label}
-                            href={link.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-link text-muted-foreground/40 hover:text-foreground/70"
-                          >
-                            {link.label}
-                          </a>
-                        ))}
-                        {!!project.slug && (
-                          <Link
-                            href={`/projects/${project.slug}`}
-                            className="text-link font-medium text-foreground/70 hover:text-foreground"
-                          >
-                            View details →
-                          </Link>
-                        )}
-                      </div>
+          {/* Each project sits in its own rounded card with a fancy gradient
+              tint and generous inner padding. Cards align to the content edges
+              (inside SectionContainer) and alternate media left/right. */}
+          <div className="mt-16 space-y-10">
+            {visibleProjects.map((project, idx) => {
+              const mediaRight = idx % 2 === 0;
+
+              return (
+                <article
+                  key={project.title}
+                  className={`grid items-center gap-x-12 gap-y-10 rounded-3xl border border-border/30 p-6 shadow-sm sm:p-10 lg:grid-cols-2 lg:p-12 ${cardBackgrounds[idx % cardBackgrounds.length]}`}
+                >
+                  <div className={mediaRight ? "lg:order-1" : "lg:order-2"}>
+                    {project.eyebrow && (
+                      <p className="mb-2 text-xs font-small uppercase tracking-widest text-muted-foreground/80">
+                        {project.eyebrow}
+                      </p>
+                    )}
+                    <h3 className="text-heading text-foreground/85">
+                      {project.title}
+                    </h3>
+                    <div className="mt-4 space-y-3 text-body-lg text-foreground/55">
+                      {project.summary.map((text) => (
+                        <p key={text}>{text}</p>
+                      ))}
                     </div>
-
-                    <div style={{ marginRight: "-2.5rem", transform: "translateX(1.5rem)" }}>
-                      {project.layout === "overlap" ? (
-                        <OverlapMediaStack media={project.media} />
-                      ) : project.layout === "fan" ? (
-                        <FanMediaStack media={project.media} />
-                      ) : project.layout === "single" ? (
-                        <SingleMedia media={project.media} />
-                      ) : (
-                        <ScatteredMediaStack media={project.media} />
+                    <div className="mt-6 flex flex-wrap items-center gap-6">
+                      {project.links.map((link) => (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-link text-muted-foreground/40 hover:text-foreground/70"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                      {!!project.slug && (
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          className="text-link font-medium text-foreground/70 hover:text-foreground"
+                        >
+                          View details →
+                        </Link>
                       )}
                     </div>
                   </div>
-                </SectionContainer>
-              </div>
-            );
-          })}
 
-          {/* Closing wave — eases the last band back into the page. */}
-          <div style={{ position: "relative", height: 72 }} className="mx-6">
-            <WaveDivider color={bands[(projects.length - 1) % bands.length]} />
+                  <div
+                    className={
+                      mediaRight
+                        ? "lg:order-2 lg:translate-x-8"
+                        : "lg:order-1 lg:-translate-x-8"
+                    }
+                  >
+                    <ProjectMedia project={project} />
+                  </div>
+                </article>
+              );
+            })}
           </div>
-        </div>
+        </SectionContainer>
       </div>
     </PageSection>
   );

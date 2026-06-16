@@ -1,4 +1,11 @@
-type Layout = "scattered" | "overlap" | "fan" | "single";
+type Layout = "scattered" | "overlap" | "fan" | "single" | "circle";
+
+export type ProjectCategory = "Product & Systems" | "Experiments";
+
+export const projectCategories: ProjectCategory[] = [
+  "Product & Systems",
+  "Experiments",
+];
 
 export type ProjectMediaItem = {
   type: "video" | "image";
@@ -13,7 +20,9 @@ export type ProjectLink = {
 
 export type Project = {
   slug?: string;
+  eyebrow?: string;
   title: string;
+  category: ProjectCategory;
   layout: Layout;
   media: ProjectMediaItem[];
   summary: string[];
@@ -25,31 +34,34 @@ export type Project = {
     highlights?: string[];
     scope?: string[];
   };
+  
 };
 
 
 export const projects: Project[] = [
   {
-    title: "At The Races",
-    layout: "scattered",
+    eyebrow: "2026",
+    title: "OraxAI",
+    category: "Product & Systems",
+    layout: "single",
     media: [
-      { type: "video", src: "/videos/horse-race.mp4", alt: "Horse race gameplay" },
-      { type: "image", src: "/images/horse-race-list.png", alt: "Race finish" },
-      { type: "image", src: "/images/horse-race-landing.png", alt: "At The Races – Landing screen" },
+      { type: "image", src: "/images/oraxai.png", alt: "OraxAI platform" },
     ],
     summary: [
-      "A racing simulation built for fun, driven by curiosity about modeling real-world randomness in the browser. The core challenge was designing a race engine using math-calculating speed variance and position updates each tick with no game library, just logic.",
-      "Built with Vue.js and Vuex for centralized race state. All animations handled purely in CSS, keeping the bundle lean and the motion smooth.",
+      "AI-powered enterprise operations platform connecting warehouse, transport, learning, traceability, and quality systems in a unified ecosystem.",
+      "Built full-stack with secure auth, real-time data pipelines, API integrations, and scalable cloud architecture.",
     ],
-    statusNote: "Currently in maintenance mode, with structural updates planned to scale the core trading engine beyond books.",
+    statusNote:
+      "Actively evolving with new AI capabilities, workflow automation features, and ongoing infrastructure improvements.",
     links: [
-      { label: "GitHub", href: "https://github.com/zeynepdndr/HorseRacingGame" },
-      { label: "Live Preview", href: "https://horse-racing-game-steel.vercel.app/" },
+      { label: "Live Platform", href: "https://oraxai.com" },
     ],
   },
-  {
+    {
     slug: "book-trading-platform",
+    eyebrow: "Side Project",
     title: "Book Trading Platform",
+    category: "Product & Systems",
     layout: "overlap",
     media: [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap home" },
@@ -57,11 +69,10 @@ export const projects: Project[] = [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap detail" },
     ],
     summary: [
-      "A mobile app for book exchanges. Users can scan barcodes to search from 28M+ titles, add books to their collection, chat in real time, and manage seamless book exchanges.",
-      "Originally built in 2022 as a passion project, the app continues to grow as a community-driven platform with a long-term vision of expanding beyond books.",
+      "A mobile app for book exchanges, supporting search and trading across a catalog of more than 28 million books.",
+      "Built as a passion project in 2022 and currently being prepared for its next release.",
     ],
     links: [
-      { label: "GitHub", href: "https://gitlab.com/harmony-org/book-swap/-/tree/dev?ref_type=heads" },
       { label: "Watch Demo", href: "https://vimeo.com/1037563566?share=copy" },
     ],
     details: {
@@ -85,29 +96,70 @@ export const projects: Project[] = [
     }
   },
   {
+    eyebrow: "2021",
+    title: "Mercedes-Benz B2B Commerce",
+    category: "Product & Systems",
+    layout: "circle",
+    media: [
+      { type: "image", src: "/images/mercedes.png", alt: "Mercedes-Benz B2B commerce platform" },
+    ],
+    summary: [
+      "Contributed to Mercedes-Benz’s global B2B commerce platform as part of Accenture’s digital commerce team, supporting rollout across 19+ markets.",
+      "Focused on frontend architecture, reusable UI systems, and Storybook-based design components.",
+    ],
+    statusNote:
+      "Contributed to the platform's international rollout while helping establish a scalable component architecture for future market expansion.",
+    links: [
+      { label: "Mercedes-Benz", href: "https://www.mercedes-benz.com/" },
+    ],
+  },
+  {
+    eyebrow: "Side Project",
+    title: "At The Races",
+    category: "Experiments",
+    layout: "scattered",
+    media: [
+      { type: "video", src: "/videos/horse-race.mp4", alt: "Horse race gameplay" },
+      { type: "image", src: "/images/horse-race-list.png", alt: "Race finish" },
+      { type: "image", src: "/images/horse-race-landing.png", alt: "At The Races – Landing screen" },
+    ],
+    summary: [
+      "A browser-based horse racing simulation exploring randomness, probability, and competitive systems through code.",
+      "The project focused on turning simple mathematical rules into a dynamic and unpredictable racing experience.",
+    ],
+    statusNote: "Currently in maintenance mode, with structural updates planned to scale the core trading engine beyond books.",
+    links: [
+      { label: "Live Preview", href: "https://horse-racing-game-steel.vercel.app/" },
+    ],
+  },
+
+  {
+    eyebrow: "Side Project",
     title: "Shelfie",
+    category: "Experiments",
     layout: "fan",
     media: [
       { type: "image", src: "/images/shelfie.png", alt: "Shelfie app" },
       { type: "video", src: "/videos/shelfie.mp4", alt: "Shelfie demo" },
     ],
     summary: [
-      "A personal reading tracker built with React. Started as a spreadsheet replacement and evolved into a proper app — a good exercise in deciding when a side tool deserves real product thinking.",
+      "A personal reading tracker built with React.",
+      "Started as a spreadsheet replacement and gradually evolved into a more thoughtful product experience."
     ],
     links: [
       { label: "GitHub", href: "https://github.com/zeynepdndr/shelfie" },
-      { label: "View Project", href: "https://github.com/zeynepdndr/shelfie" },
     ],
   },
   {
+    eyebrow: "Side Project",
     title: "Pokédex",
+    category: "Experiments",
     layout: "single",
     media: [{ type: "video", src: "/videos/pokedex.mp4", alt: "Pokédex demo" }],
     summary: [
-      "A React weekend project consuming the PokéAPI. Focused on clean data fetching patterns and fast UI iteration — useful as a low-stakes sandbox for experimenting with new approaches.",
+      "A React weekend project consuming the PokéAPI. Focused on clean data fetching patterns and fast UI iteration.",
     ],
     links: [
-      { label: "GitHub", href: "https://github.com/zeynepdndr/pokedex" },
       { label: "View Project", href: "https://github.com/zeynepdndr/pokedex" },
     ],
   },
