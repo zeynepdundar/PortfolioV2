@@ -15,7 +15,7 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     role: "Frontend Engineer",
-    company: "Linga rOS",
+    company: "LINGA",
     period: "2023 – Present",
     description:
       "Built and maintained the back-office UI of a global, cloud-based restaurant operating system. Migrated a large-scale interface to Angular 14 within a 15+ engineer Agile team, working closely with product managers, designers, and engineers to deliver reliable, user-focused features at scale.",

@@ -70,7 +70,7 @@ export default function About() {
                 rel="noopener noreferrer"
                 className="text-foreground/75 underline-offset-4 hover:underline"
               >
-                Linga rOS
+                Linga
               </a>
               , developing a comprehensive technology ecosystem for the food
               service industry. Alongside engineering, I enjoy crafting

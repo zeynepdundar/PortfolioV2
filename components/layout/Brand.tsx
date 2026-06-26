@@ -2,40 +2,22 @@
 
 import Link from "next/link";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
-import { Playfair_Display } from "next/font/google";
-
-const playfair = Playfair_Display({
-    subsets: ["latin"],
-    weight: ["500"],
-});
 
 export default function Brand() {
-    const show = useScrollDirection();
+  const show = useScrollDirection();
 
-    return (
-<div className="fixed top-6 left-0 right-0 z-50">
-  <div className="mx-auto w-full max-w-6xl px-4">
-    <Link
-      href="/"
-      className={`
-        group inline-flex items-center
-        transition-all duration-300 ease-in-out
+  return (
+<div className="px-3 py-1.5 rounded-2xl flex items-center bg-white/5 dark:bg-black/20 backdrop-blur-2xl border border-white/10">      <Link
+        href="/"
+        className="flex items-center transition hover:opacity-80"
+      >
+        <img
+          src="/images/logo-zd2.svg"
+          alt="ZD Logo"
+          className="h-5 w-auto"
+        />
+      </Link>
+    </div>
 
-        ${show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}
-      `}
-    >
-      <img
-        src="/images/logo-zd2.svg"
-        alt="ZD Logo"
-        className="
-          h-6 w-auto
-          transition-all duration-300 ease-in-out
-          group-hover:opacity-80
-          group-hover:scale-[1.05]
-        "
-      />
-    </Link>
-  </div>
-</div>
-    );
+  );
 }
