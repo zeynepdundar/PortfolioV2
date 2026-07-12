@@ -34,7 +34,7 @@ export type Project = {
     highlights?: string[];
     scope?: string[];
   };
-  
+
 };
 
 
@@ -57,7 +57,7 @@ export const projects: Project[] = [
       { label: "Live Platform", href: "https://oraxai.com" },
     ],
   },
-    {
+  {
     slug: "book-trading-platform",
     eyebrow: "Side Project",
     title: "Book Trading Platform",
@@ -69,11 +69,10 @@ export const projects: Project[] = [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap detail" },
     ],
     summary: [
-      "A mobile app for book exchanges, supporting search and trading across a catalog of more than 28 million books.",
-      "Built as a passion project in 2022 and currently being prepared for its next release.",
-    ],
+      "A book exchange platform that helps readers discover, offer, and exchange books with each other, powered by a catalog of 28M+ books.",
+      "Built independently from concept to product, including mobile experience, frontend architecture, and supporting web presence."],
     links: [
-      { label: "Watch Demo", href: "https://vimeo.com/1037563566?share=copy" },
+      { label: "Live Website", href: "https://vimeo.com/1037563566?share=copy" },
     ],
     details: {
       headline: "A mobile-first platform for discovering, listing, and exchanging books with real-time chat.",
