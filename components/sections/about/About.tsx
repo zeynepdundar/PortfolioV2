@@ -7,6 +7,16 @@ import { ExperienceTabs } from "@/components/ui/ExperienceTabs";
 import { experiences } from "@/data/experiences";
 
 export default function About() {
+  const coreTechnologies = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "React Native",
+  "Node.js",
+  "PostgreSQL",
+  "AWS",
+  "Docker",
+];
   return (
     <PageSection id="about">
       <SectionContainer>
@@ -19,45 +29,25 @@ export default function About() {
           {/* About narrative */}
           <div className="mt-6 max-w-2xl space-y-4 text-body-lg text-foreground/55">
             <p>
-              I&apos;m a frontend-focused engineer with experience across fullstack systems, building interfaces and scalable backend-integrated applications. I care about quality in a deeply human sense how interfaces feel, how intuitive they are, and how small details influence trust and ease. At the same time, I think beyond the interface, building systems that are reliable, maintainable, and thoughtfully structured end to end.
+              I'm a frontend-focused engineer with experience building full-stack applications and scalable, backend-integrated systems. I enjoy turning complex workflows into intuitive user experiences while building codebases that are reliable, maintainable, and easy to evolve.
             </p>
             <p>
-              I hold a degree in Computer Engineering from Istanbul Technical
-              University and have been working as a developer since 2018. My
-              background naturally draws me toward UI consistency, accessibility,
-              and maintainable systems the unglamorous details that make
-              products feel solid, reliable, and trustworthy.
+              I hold a degree in Computer Engineering from Istanbul Technical University and have been building software since 2018. My work is driven by attention to UI consistency, accessibility, and the engineering details that make products dependable.
             </p>
             <p>
-              Outside of work, I reset by riding my motorcycle, training at the
-              gym, playing guitar, and practicing capoeira. I love exploring new
-              places and experiences; they often find their way back into my
-              work in unexpected ways.
+              Outside of work, I enjoy riding my motorcycle, training at the gym, playing guitar, and practicing capoeira. Exploring new places and experiences often inspires how I approach design and problem-solving.
             </p>
-            <p> Here are a few technologies I’ve been working with recently:</p>
-            <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-foreground/65">
-              {[
-                "React",
-                "Next.js",
-                "TypeScript",
-                "React Native",
-                "Tailwind CSS",
-                "Node.js",
-                "Firebase",
-                "AWS",
-              ].map((tech) => (
-                <li key={tech} className="flex items-center gap-2">
-                  <span
-                    className="text-[var(--primary)] text-sm"
-                    aria-hidden="true"
-                  >
-                    ▹
-                  </span>
-                  {tech}
-                </li>
-              ))}
-            </ul>
+                      <div className="space-y-3">
+  <h3 className="text-sm font-medium text-foreground">
+    Core Technologies
+  </h3>
+
+  <p className="text-foreground/65 leading-relaxed">
+    {coreTechnologies.join(" • ")}
+  </p>
+</div>
           </div>
+
           {/* Work subsection */}
           <div className="mt-24 border-t border-border/20 pt-16">
             <span className="text-meta text-muted-foreground/40">Work</span>

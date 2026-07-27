@@ -74,7 +74,7 @@ export default function UtilityRail() {
         ))}
 
         {/* Theme toggle (slightly separated but still subtle) */}
-        <div className="pt-2 mt-1 border-t border-white/5">
+        <div className="pt-2 mt-1 border-t border-foreground/15">
           <ThemeToggle />
         </div>
       </div>

@@ -21,42 +21,57 @@ export function Button({
     className = "",
 }: ButtonProps) {
     const base =
-        "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+        "group inline-flex items-center justify-center gap-2 text-xs font-medium uppercase tracking-[0.15em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-[var(--primary-ring)]";
 
-    const variants: Record<ButtonVariant, string> = {
-        primary: `
-      bg-[var(--primary)]
-      text-white
-      border border-[var(--primary)]
-      hover:opacity-90
-      focus-visible:ring-[var(--primary-ring)]
-    `,
-        outline: `
-  bg-transparent
-  text-[var(--primary)]
-  border border-[var(--primary)]
-  hover:bg-[var(--primary)]/10
-  hover:border-[var(--primary)]
-  hover:text-[var(--primary)]
-    `,
-    };
+    // Solid, refined black pill.
+    if (variant === "primary") {
+        return (
+            <Link
+                href={href}
+                aria-label={ariaLabel}
+                style={{
+                    backgroundColor: "var(--foreground)",
+                    boxShadow:
+                        "inset 0 1px 0 rgba(255,255,255,0.18), 0 12px 30px -12px rgba(0,0,0,0.5)",
+                }}
+                className={`${base} rounded-full px-6 py-3 text-background hover:-translate-y-[1px] ${className}`}
+            >
+                {children}
+                {showArrow && (
+                    <span
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                        aria-hidden="true"
+                    >
+                        →
+                    </span>
+                )}
+            </Link>
+        );
+    }
 
+    // Ghost text action — whole label turns pink on hover, with a pink
+    // left-to-right underline as the shared accent.
     return (
         <Link
             href={href}
             aria-label={ariaLabel}
-            className={`${base} ${variants[variant]} ${className}`}
+            className={`${base} relative gap-1.5 rounded-full px-2 py-3 text-foreground/70 hover:text-[var(--primary)] ${className}`}
         >
             {children}
-
             {showArrow && (
                 <span
-                    className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                    className="transition-transform duration-300 group-hover:translate-x-1"
                     aria-hidden="true"
                 >
                     →
                 </span>
             )}
+            {/* Underline sits at the button's bottom edge so it lines up with
+                the primary button's bottom border */}
+            <span
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-0 left-2 right-2 h-[2px] origin-left scale-x-0 bg-[var(--primary)] transition-transform duration-300 ease-out group-hover:scale-x-100"
+            />
         </Link>
     );
 }

@@ -13,7 +13,7 @@ export default function SideNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center gap-1">
+    <nav className="flex items-center gap-2">
       {NAV_ITEMS.map(({ label, href }) => {
         const isActive = pathname === href;
 
@@ -21,18 +21,21 @@ export default function SideNav() {
           <Link
             key={href}
             href={href}
-  className={`
-    relative px-3 py-1.5 text-sm font-medium
-    rounded-full transition-all duration-300
-
-    text-foreground/70 hover:text-foreground
-    hover:bg-white/10 hover:-translate-y-[1px]
-    hover:shadow-[0_6px_18px_-10px_rgba(0,0,0,0.25)]
-
-    ${isActive ? "bg-white/15 text-foreground shadow-sm" : ""}
-  `}
+            aria-current={isActive ? "page" : undefined}
+            className={`group relative px-3 py-1.5 text-sm font-medium transition-colors duration-300 ${
+              isActive
+                ? "text-foreground"
+                : "text-foreground/60 hover:text-foreground"
+            }`}
           >
             {label}
+            {/* Pink underline — persistent when active, slides in on hover */}
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none absolute -bottom-0.5 left-3 right-3 h-[2px] origin-left rounded-full bg-[var(--primary)] transition-transform duration-300 ease-out ${
+                isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              }`}
+            />
           </Link>
         );
       })}

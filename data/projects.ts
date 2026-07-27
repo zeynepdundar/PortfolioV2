@@ -18,14 +18,39 @@ export type ProjectLink = {
   href: string;
 };
 
+export type ProjectMetric = {
+  value: string;
+  label: string;
+};
+
 export type Project = {
   slug?: string;
   eyebrow?: string;
   title: string;
   category: ProjectCategory;
+  /** Short role / contribution line, e.g. "Full-Stack Engineer". */
+  role?: string;
+  /** How the featured card presents media. "brand" shows a logo/wordmark
+   *  panel instead of a product screenshot — for confidential / NDA work. */
+  display?: "window" | "brand";
+  brand?: {
+    /** Optional logo image path (e.g. "/images/logos/oraxai.svg"). Takes
+     *  priority over `mark` and `wordmark` when set. */
+    logo?: string;
+    /** Key for a built-in inline SVG mark (theme-aware). e.g. "mercedes". */
+    mark?: string;
+    /** Text shown when no logo/mark is provided. Defaults to project title. */
+    wordmark?: string;
+    /** Optional CSS background override for the brand panel. */
+    accent?: string;
+  };
   layout: Layout;
   media: ProjectMediaItem[];
   summary: string[];
+  /** Headline metrics rendered as stat badges on featured cards. */
+  metrics?: ProjectMetric[];
+  /** Technology stack rendered as chips. */
+  tech?: string[];
   statusNote?: string;
   links: ProjectLink[];
   details?: {
@@ -34,34 +59,38 @@ export type Project = {
     highlights?: string[];
     scope?: string[];
   };
-
 };
-
 
 export const projects: Project[] = [
   {
     eyebrow: "2026",
     title: "OraxAI",
     category: "Product & Systems",
+    role: "Full-Stack Engineer",
+    display: "brand",
+    brand: { mark: "oraxai", wordmark: "OraxAI" },
     layout: "single",
     media: [
       { type: "image", src: "/images/oraxai.png", alt: "OraxAI platform" },
     ],
     summary: [
-      "AI-powered enterprise operations platform connecting warehouse, transport, learning, traceability, and quality systems in a unified ecosystem.",
-      "Built full-stack with secure auth, real-time data pipelines, API integrations, and scalable cloud architecture.",
+      "AI-powered enterprise operations platform for warehouse, transport, quality, and traceability.",
     ],
+    metrics: [
+      { value: "5+", label: "Systems unified" },
+      { value: "Real-time", label: "Data pipelines" },
+      { value: "Full-stack", label: "Architecture & delivery" },
+    ],
+    tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
     statusNote:
-      "Actively evolving with new AI capabilities, workflow automation features, and ongoing infrastructure improvements.",
-    links: [
-      { label: "Live Platform", href: "https://oraxai.com" },
-    ],
+      "Actively evolving with new AI capabilities, workflow automation, and ongoing infrastructure improvements.",
+    links: [{ label: "Company Website", href: "https://oraxai.com" }],
   },
   {
     slug: "book-trading-platform",
-    eyebrow: "Side Project",
     title: "Book Trading Platform",
     category: "Product & Systems",
+    role: "Lead Frontend & Mobile Engineer",
     layout: "overlap",
     media: [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap home" },
@@ -69,13 +98,20 @@ export const projects: Project[] = [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap detail" },
     ],
     summary: [
-      "A book exchange platform that helps readers discover, offer, and exchange books with each other, powered by a catalog of 28M+ books.",
-      "Built independently from concept to product, including mobile experience, frontend architecture, and supporting web presence."],
+      "Mobile-first marketplace for discovering, listing, and exchanging books. Designed and built from concept to App Store release.",
+    ],
+    metrics: [
+      { value: "28M+", label: "Book catalog" },
+      { value: "iOS & Android", label: "Mobile release" },
+      { value: "Real-time", label: "In-app chat" },
+    ],
+    tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase", "PostgreSQL"],
     links: [
-      { label: "Live Website", href: "https://vimeo.com/1037563566?share=copy" },
+      { label: "Live Demo", href: "https://vimeo.com/1037563566?share=copy" },
     ],
     details: {
-      headline: "A mobile-first platform for discovering, listing, and exchanging books with real-time chat.",
+      headline:
+        "A mobile-first platform for discovering, listing, and exchanging books with real-time chat.",
       overview: [
         "Book Trading Platform is a book exchange app designed around a simple flow: add books to your library, find people nearby who want what you have, and coordinate the swap in a chat that keeps the whole exchange in one place.",
         "The product focus is on reducing friction during the “I have it / I want it” moment — barcode-based lookup for fast cataloging, clean inventory management, and messaging that’s tied directly to the books being discussed.",
@@ -92,79 +128,97 @@ export const projects: Project[] = [
         "Messaging UI with book context (what book is being discussed)",
         "Deep links to demo and repository",
       ],
-    }
+    },
   },
   {
     eyebrow: "2021",
     title: "Mercedes-Benz B2B Commerce",
     category: "Product & Systems",
+    role: "Frontend Engineer · Accenture",
+    display: "brand",
+    brand: { mark: "mercedes", wordmark: "Mercedes-Benz" },
     layout: "circle",
     media: [
-      { type: "image", src: "/images/mercedes.png", alt: "Mercedes-Benz B2B commerce platform" },
+      {
+        type: "image",
+        src: "/images/mercedes.png",
+        alt: "Mercedes-Benz B2B commerce platform",
+      },
     ],
     summary: [
-      "Contributed to Mercedes-Benz’s global B2B commerce platform as part of Accenture’s digital commerce team, supporting rollout across 19+ markets.",
-      "Focused on frontend architecture, reusable UI systems, and Storybook-based design components.",
+      "Global B2B commerce platform for Mercedes-Benz, built with Accenture.",
     ],
+    metrics: [
+      { value: "19+", label: "Global markets" },
+      { value: "10+", label: "Shared UI components" },
+      { value: "Storybook", label: "Design system" },
+    ],
+    tech: ["React", "Next.js", "Redux", "Storybook", "Umbraco CMS"],
     statusNote:
-      "Contributed to the platform's international rollout while helping establish a scalable component architecture for future market expansion.",
-    links: [
-      { label: "Mercedes-Benz", href: "https://www.mercedes-benz.com/" },
-    ],
+      "Helped establish a scalable component architecture supporting the platform’s international rollout and future market expansion.",
+    links: [{ label: "B2B Connect", href: "https://b2bconnect.mercedes-benz.com/de" }],
   },
   {
-    eyebrow: "Side Project",
+    eyebrow: "Experiment",
     title: "At The Races",
     category: "Experiments",
+    role: "Solo build",
     layout: "scattered",
     media: [
       { type: "video", src: "/videos/horse-race.mp4", alt: "Horse race gameplay" },
       { type: "image", src: "/images/horse-race-list.png", alt: "Race finish" },
-      { type: "image", src: "/images/horse-race-landing.png", alt: "At The Races – Landing screen" },
+      {
+        type: "image",
+        src: "/images/horse-race-landing.png",
+        alt: "At The Races – Landing screen",
+      },
     ],
     summary: [
-      "A browser-based horse racing simulation exploring randomness, probability, and competitive systems through code.",
-      "The project focused on turning simple mathematical rules into a dynamic and unpredictable racing experience.",
+      "A browser-based horse racing simulation exploring randomness, probability, and competitive systems in code — turning simple mathematical rules into a dynamic, unpredictable race.",
     ],
-    statusNote: "Currently in maintenance mode, with structural updates planned to scale the core trading engine beyond books.",
+    tech: ["React", "TypeScript", "Vercel"],
     links: [
-      { label: "Live Preview", href: "https://horse-racing-game-steel.vercel.app/" },
+      {
+        label: "Live Preview",
+        href: "https://horse-racing-game-steel.vercel.app/",
+      },
     ],
   },
-
   {
-    eyebrow: "Side Project",
+    eyebrow: "Experiment",
     title: "Shelfie",
     category: "Experiments",
+    role: "Solo build",
     layout: "fan",
     media: [
       { type: "image", src: "/images/shelfie.png", alt: "Shelfie app" },
       { type: "video", src: "/videos/shelfie.mp4", alt: "Shelfie demo" },
     ],
     summary: [
-      "A personal reading tracker built with React.",
-      "Started as a spreadsheet replacement and gradually evolved into a more thoughtful product experience."
+      "A personal reading tracker that grew from a spreadsheet replacement into a thoughtful product experience, with a focus on clean state management and UI polish.",
     ],
+    tech: ["React", "TypeScript"],
     links: [
-      { label: "GitHub", href: "https://github.com/zeynepdndr/shelfie" },
+      { label: "GitHub", href: "https://github.com/zeynepdundar/shelfie" },
     ],
   },
   {
-    eyebrow: "Side Project",
+    eyebrow: "Experiment",
     title: "Pokédex",
     category: "Experiments",
+    role: "Weekend build",
     layout: "single",
     media: [{ type: "video", src: "/videos/pokedex.mp4", alt: "Pokédex demo" }],
     summary: [
-      "A React weekend project consuming the PokéAPI. Focused on clean data fetching patterns and fast UI iteration.",
+      "A React project consuming the PokéAPI, focused on clean data-fetching patterns, caching, and fast UI iteration.",
     ],
+    tech: ["React", "TypeScript", "PokéAPI"],
     links: [
-      { label: "View Project", href: "https://github.com/zeynepdndr/pokedex" },
+      { label: "View Project", href: "https://github.com/zeynepdundar/pokedex" },
     ],
   },
 ];
 
 export function getProjectBySlug(slug: string) {
-  console.log("slug:", slug);
   return projects.find((p) => p.slug === slug);
 }

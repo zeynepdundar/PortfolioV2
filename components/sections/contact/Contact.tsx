@@ -51,7 +51,7 @@ export default function Contact() {
                 {/* GitHub */}
                 <li>
                   <a
-                    href="https://github.com/zeynepdndr"
+                    href="https://github.com/zeynepdundar"
                     target="_blank"
                     aria-label="GitHub"
                     className="text-muted-foreground/40 transition hover:text-foreground/75"
@@ -82,7 +82,7 @@ export default function Contact() {
                 {/* Resume */}
                 <li>
                   <a
-                    href="https://www.dropbox.com/scl/fi/an645if7qygouha4cxkai/Zeynep-Dundar-Resume.pdf?rlkey=btctrp1s9pu99kqxb3p3rb0is&dl=0"
+                    href="/docs/cv.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Resume"
