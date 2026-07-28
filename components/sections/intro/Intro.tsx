@@ -25,17 +25,17 @@ export default function Intro() {
           </div>
 
           {/* Name / role eyebrow */}
-          <p className="mt-6 text-meta text-muted-foreground/60">
+          <p className="mt-6 text-meta">
             Zeynep Dündar · Software Engineer
           </p>
 
           {/* Headline */}
           <h2 className="mt-4 text-3xl font-semibold leading-[1.12] tracking-tight text-foreground sm:text-4xl">
-            Building enterprise software and independent products.
+            Building scalable enterprise applications and modern web products.
           </h2>
 
           {/* Subhead — leads with the enterprise + independent-product story */}
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/55 sm:text-lg">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/70 sm:text-lg">
             Currently at OraxAI. Previously Accenture, LINGA, Renault Group.          </p>
 
           {/* CTAs */}

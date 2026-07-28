@@ -25,6 +25,12 @@
 
   /* Layout */
   --bottom-nav-height: 72px;
+
+  /* Editorial display font for section headings. Falls back to a serif
+     until the Perfectly Nineties font files are added (via @font-face or
+     next/font with variable --font-perfectly-nineties). */
+  --font-perfectly-nineties: "perfectlyNineties", "perfectlyNineties Fallback",
+    Georgia, "Times New Roman", serif;
 }
 
 @layer utilities {
@@ -45,7 +51,7 @@
   }
 
   .text-meta {
-    @apply text-xs tracking-[0.2em] uppercase font-medium text-muted-foreground/60;
+    @apply text-xs tracking-[0.2em] uppercase font-medium text-muted-foreground;
   }
 
   .text-link {

@@ -51,6 +51,8 @@ export type Project = {
   metrics?: ProjectMetric[];
   /** Technology stack rendered as chips. */
   tech?: string[];
+  /** Portrait app screenshots for the case study walkthrough. */
+  screens?: { src: string; caption: string }[];
   statusNote?: string;
   links: ProjectLink[];
   details?: {
@@ -68,13 +70,13 @@ export const projects: Project[] = [
     category: "Product & Systems",
     role: "Full-Stack Engineer",
     display: "brand",
-    brand: { mark: "oraxai", wordmark: "OraxAI" },
+    brand: { logo: "/images/orax-ai.png", mark: "oraxai", wordmark: "OraxAI" },
     layout: "single",
     media: [
-      { type: "image", src: "/images/oraxai.png", alt: "OraxAI platform" },
+      { type: "image", src: "/images/orax-ai.png", alt: "OraxAI platform" },
     ],
     summary: [
-      "AI-powered enterprise operations platform for warehouse, transport, quality, and traceability.",
+      "AI-powered platform for warehouse, transport, quality management, and traceability.",
     ],
     metrics: [
       { value: "5+", label: "Systems unified" },
@@ -87,8 +89,32 @@ export const projects: Project[] = [
     links: [{ label: "Company Website", href: "https://oraxai.com" }],
   },
   {
-    slug: "book-trading-platform",
-    title: "Book Trading Platform",
+    eyebrow: "2023",
+    title: "LINGA BackOffice",
+    category: "Product & Systems",
+    role: "Frontend Engineer",
+    layout: "single",
+    media: [
+      { type: "image", src: "/images/linga.png", alt: "Linga platform" },
+    ],
+    summary: [
+      "Back-office platform for restaurant operations, contributing to the migration of legacy Angular applications to a modern frontend architecture.",
+    ],
+    metrics: [
+      { value: "Legacy → Modern", label: "Migration" },
+      { value: "Angular", label: "Frontend stack" },
+      { value: "Enterprise", label: "Restaurant platform" },
+    ],
+
+    tech: ["Angular", "TypeScript", "RxJS", "NgRx", "SCSS"],
+    statusNote:
+      "Actively evolving with new AI capabilities, workflow automation, and ongoing infrastructure improvements.",
+    links: [{ label: "Company Website", href: "https://www.lingapos.com/" }],
+  },
+  {
+    eyebrow: "Independent Product",
+    slug: "bookswap",
+    title: "BookSwap",
     category: "Product & Systems",
     role: "Lead Frontend & Mobile Engineer",
     layout: "overlap",
@@ -106,43 +132,53 @@ export const projects: Project[] = [
       { value: "Real-time", label: "In-app chat" },
     ],
     tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase", "PostgreSQL"],
+    screens: [
+      { src: "/images/bookswap/onboarding.png", caption: "Onboarding — build your infinite library" },
+      { src: "/images/bookswap/home.png", caption: "Home — recently added & most popular" },
+      { src: "/images/bookswap/discover.png", caption: "Discover — search 28M+ titles" },
+      { src: "/images/bookswap/scanner.png", caption: "Barcode scan — add a book by ISBN" },
+      { src: "/images/bookswap/add-book.png", caption: "Add to your library or wishlist" },
+      { src: "/images/bookswap/swap-proposal.png", caption: "Swap proposal — offer a trade" },
+      { src: "/images/bookswap/swaps-received.png", caption: "Incoming swaps — accept or decline" },
+      { src: "/images/bookswap/chat.png", caption: "Chat tied to each swap" },
+      { src: "/images/bookswap/profile.png", caption: "Profile — library, wishlist & settings" },
+    ],
     links: [
-      { label: "Live Demo", href: "https://vimeo.com/1037563566?share=copy" },
+      { label: "Marketing Website", href: "https://www.bookswapapp.com/" },
     ],
     details: {
       headline:
-        "A mobile-first platform for discovering, listing, and exchanging books with real-time chat.",
+        "A mobile-first app for discovering, listing, and exchanging books — with barcode scanning, swaps, and chat.",
       overview: [
-        "Book Trading Platform is a book exchange app designed around a simple flow: add books to your library, find people nearby who want what you have, and coordinate the swap in a chat that keeps the whole exchange in one place.",
-        "The product focus is on reducing friction during the “I have it / I want it” moment — barcode-based lookup for fast cataloging, clean inventory management, and messaging that’s tied directly to the books being discussed.",
+        "BookSwap turns the books you've finished into the ones you want next. Scan a barcode to add a book, browse a catalog of 28M+ titles, and propose a trade with a reader nearby.",
+        "I designed and built the product end to end — the React Native app, the swap and chat flows, and the App Store release.",
       ],
       highlights: [
-        "Barcode scanning + ISBN search across a large catalog (28M+ titles)",
+        "Barcode scanning + ISBN search across 28M+ titles",
         "Personal library and wishlist management",
-        "Real-time chat to coordinate swaps",
-        "Exchange flow that tracks what’s being offered and requested",
+        "Swap proposals with accept / decline / take-back states",
+        "Real-time chat tied to each exchange",
       ],
       scope: [
-        "Mobile UX for scanning, search, and book detail views",
-        "Library screens for ownership status (available, reserved, swapped)",
-        "Messaging UI with book context (what book is being discussed)",
-        "Deep links to demo and repository",
+        "End-to-end mobile UX, from onboarding to swap completion",
+        "Frontend architecture and state management (Redux Toolkit)",
+        "Barcode/ISBN lookup and catalog integration",
+        "App Store release and marketing site",
       ],
     },
   },
   {
     eyebrow: "2021",
-    title: "Mercedes-Benz B2B Commerce",
+    title: "Mercedes-Benz B2B Connect",
     category: "Product & Systems",
     role: "Frontend Engineer · Accenture",
-    display: "brand",
     brand: { mark: "mercedes", wordmark: "Mercedes-Benz" },
     layout: "circle",
     media: [
       {
         type: "image",
-        src: "/images/mercedes.png",
-        alt: "Mercedes-Benz B2B commerce platform",
+        src: "/images/b2bconnect.png",
+        alt: "Mercedes-Benz B2B Connect platform",
       },
     ],
     summary: [
@@ -174,7 +210,7 @@ export const projects: Project[] = [
       },
     ],
     summary: [
-      "A browser-based horse racing simulation exploring randomness, probability, and competitive systems in code — turning simple mathematical rules into a dynamic, unpredictable race.",
+      "Browser-based horse racing simulation exploring probability and emergent gameplay.",
     ],
     tech: ["React", "TypeScript", "Vercel"],
     links: [
@@ -195,7 +231,7 @@ export const projects: Project[] = [
       { type: "video", src: "/videos/shelfie.mp4", alt: "Shelfie demo" },
     ],
     summary: [
-      "A personal reading tracker that grew from a spreadsheet replacement into a thoughtful product experience, with a focus on clean state management and UI polish.",
+      "A personal reading tracker that grew from a spreadsheet replacement into a thoughtful product experience.",
     ],
     tech: ["React", "TypeScript"],
     links: [
@@ -210,7 +246,7 @@ export const projects: Project[] = [
     layout: "single",
     media: [{ type: "video", src: "/videos/pokedex.mp4", alt: "Pokédex demo" }],
     summary: [
-      "A React project consuming the PokéAPI, focused on clean data-fetching patterns, caching, and fast UI iteration.",
+      "React application exploring API integration, caching, and reusable UI components.",
     ],
     tech: ["React", "TypeScript", "PokéAPI"],
     links: [

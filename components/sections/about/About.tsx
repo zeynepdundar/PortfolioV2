@@ -27,9 +27,9 @@ export default function About() {
             subtitle="A bit about me and my experience"
           />
           {/* About narrative */}
-          <div className="mt-6 max-w-2xl space-y-4 text-body-lg text-foreground/55">
+          <div className="mt-6 max-w-2xl space-y-4 text-body-lg text-foreground/70">
             <p>
-              I'm a frontend-focused engineer with experience building full-stack applications and scalable, backend-integrated systems. I enjoy turning complex workflows into intuitive user experiences while building codebases that are reliable, maintainable, and easy to evolve.
+              I&apos;m a frontend-focused engineer with experience building full-stack applications and scalable, backend-integrated systems. I enjoy turning complex workflows into intuitive user experiences while building codebases that are reliable, maintainable, and easy to evolve.
             </p>
             <p>
               I hold a degree in Computer Engineering from Istanbul Technical University and have been building software since 2018. My work is driven by attention to UI consistency, accessibility, and the engineering details that make products dependable.
@@ -42,7 +42,7 @@ export default function About() {
     Core Technologies
   </h3>
 
-  <p className="text-foreground/65 leading-relaxed">
+  <p className="text-foreground/70 leading-relaxed">
     {coreTechnologies.join(" • ")}
   </p>
 </div>
@@ -50,8 +50,8 @@ export default function About() {
 
           {/* Work subsection */}
           <div className="mt-24 border-t border-border/20 pt-16">
-            <span className="text-meta text-muted-foreground/40">Work</span>
-            <p className="mt-4 max-w-2xl text-body-lg text-foreground/55">
+            <span className="text-meta">Work</span>
+            <p className="mt-4 max-w-2xl text-body-lg text-foreground/70">
               Currently, I&apos;m helping build the world&apos;s first complete restaurant
               operating system at{" "}
               <a

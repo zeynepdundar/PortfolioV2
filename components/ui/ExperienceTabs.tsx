@@ -61,11 +61,11 @@ export function ExperienceTabs({ experiences }: Props) {
           </div>
         </div>
 
-        <span className="text-xs text-muted/70">
+        <span className="text-xs text-muted">
           {active.period}
         </span>
 
-        <p className="text-foreground/60 text-body-lg max-w-xl">
+        <p className="text-foreground/70 text-body-lg max-w-xl">
           {active.description}
         </p>
 

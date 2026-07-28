@@ -67,6 +67,10 @@ function ProjectVisual({
   if (project.display === "brand") {
     const brand = project.brand;
     const mark = brand?.mark ? BRAND_MARKS[brand.mark] : null;
+    const markSize =
+      brand?.mark === "oraxai"
+        ? "h-8 w-8 sm:h-10 sm:w-10"
+        : "h-20 w-20 sm:h-24 sm:w-24";
     return (
       <div
         className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-foreground/[0.05] via-foreground/[0.02] to-foreground/[0.06]"
@@ -81,7 +85,7 @@ function ProjectVisual({
             <Image src={brand.logo} alt={project.title} fill priority={priority} className="object-contain" />
           </div>
         ) : mark ? (
-          <div className="h-20 w-20 text-foreground/85 sm:h-24 sm:w-24">{mark}</div>
+          <div className={`text-foreground/85 ${markSize}`}>{mark}</div>
         ) : (
           <span className="text-3xl font-light tracking-tight text-foreground/90 sm:text-4xl">
             {brand?.wordmark ?? project.title}
@@ -120,13 +124,11 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
       </div>
 
       <div className={mediaLeft ? "lg:order-2" : "lg:order-1"}>
-        {period && (
-          <p className="text-meta text-muted-foreground/50">{period}</p>
-        )}
+        {period && <p className="text-meta">{period}</p>}
         <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground/90 sm:text-3xl">
           {project.title}
         </h3>
-        <p className="mt-4 max-w-md text-base leading-relaxed text-foreground/55">
+        <p className="mt-4 max-w-md text-base leading-relaxed text-foreground/70">
           {project.summary[0]}
         </p>
 
@@ -147,7 +149,7 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
               href={primaryLink.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground/60 hover:text-foreground"
+              className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-foreground"
             >
               {primaryLink.label}
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -182,7 +184,7 @@ function ExperimentItem({ project }: { project: Project }) {
       <h4 className="mt-4 text-base font-medium tracking-tight text-foreground/90 group-hover:text-foreground">
         {project.title}
       </h4>
-      <p className="mt-1 text-sm leading-relaxed text-muted-foreground/60">
+      <p className="mt-1 text-sm leading-relaxed text-foreground/70">
         {project.summary[0]}
       </p>
     </a>
@@ -202,8 +204,8 @@ export default function Projects() {
       <div className="w-full overflow-hidden">
         <SectionContainer>
           <SectionHeader
-            title="Selected Work"
-            subtitle="Enterprise platforms and independent products, and a few things I built to explore ideas."
+            title="Featured Work"
+            subtitle="Enterprise platforms, independent products, and experiments I've built along the way."
           />
 
           <div className="mt-16 space-y-24 sm:space-y-32">
@@ -215,9 +217,7 @@ export default function Projects() {
           {experiments.length > 0 && (
             <div className="mt-32">
               <div className="mb-10 flex items-center gap-4">
-                <span className="text-meta text-muted-foreground/40">
-                  Experiments
-                </span>
+                <span className="text-meta">Experiments</span>
                 <span className="h-px flex-1 bg-border/50" />
               </div>
               <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
