@@ -29,7 +29,7 @@ export default function About() {
           {/* About narrative */}
           <div className="mt-6 max-w-2xl space-y-4 text-body-lg text-foreground/70">
             <p>
-              I&apos;m a frontend-focused engineer with experience building full-stack applications and scalable, backend-integrated systems. I enjoy turning complex workflows into intuitive user experiences while building codebases that are reliable, maintainable, and easy to evolve.
+              I&apos;m a frontend-focused engineer with experience building full-stack applications and scalable, backend-integrated systems. I enjoy working on products where engineering decisions directly shape user experience from enterprise systems used by large organizations to products built from zero.
             </p>
             <p>
               I hold a degree in Computer Engineering from Istanbul Technical University and have been building software since 2018. My work is driven by attention to UI consistency, accessibility, and the engineering details that make products dependable.

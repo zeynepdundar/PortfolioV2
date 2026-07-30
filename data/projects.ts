@@ -53,6 +53,8 @@ export type Project = {
   tech?: string[];
   /** Portrait app screenshots for the case study walkthrough. */
   screens?: { src: string; caption: string }[];
+  /** Portrait screen-recording shown as a phone demo on the case study. */
+  demoVideo?: string;
   statusNote?: string;
   links: ProjectLink[];
   details?: {
@@ -76,7 +78,7 @@ export const projects: Project[] = [
       { type: "image", src: "/images/orax-ai.png", alt: "OraxAI platform" },
     ],
     summary: [
-      "AI-powered platform for warehouse, transport, quality management, and traceability.",
+      "AI-powered operations platform for pharmaceutical logistics, warehouse, transport, quality management, and traceability.",
     ],
     metrics: [
       { value: "5+", label: "Systems unified" },
@@ -89,7 +91,7 @@ export const projects: Project[] = [
     links: [{ label: "Company Website", href: "https://oraxai.com" }],
   },
   {
-    eyebrow: "2023",
+    eyebrow: "2023 -2026",
     title: "LINGA BackOffice",
     category: "Product & Systems",
     role: "Frontend Engineer",
@@ -98,7 +100,7 @@ export const projects: Project[] = [
       { type: "image", src: "/images/linga.png", alt: "Linga platform" },
     ],
     summary: [
-      "Back-office platform for restaurant operations, contributing to the migration of legacy Angular applications to a modern frontend architecture.",
+      "Restaurant operations platform where I contributed to migrating legacy Angular applications to a modern frontend architecture.",
     ],
     metrics: [
       { value: "Legacy → Modern", label: "Migration" },
@@ -132,6 +134,7 @@ export const projects: Project[] = [
       { value: "Real-time", label: "In-app chat" },
     ],
     tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase", "PostgreSQL"],
+    demoVideo: "/videos/book-swap.mp4",
     screens: [
       { src: "/images/bookswap/onboarding.png", caption: "Onboarding — build your infinite library" },
       { src: "/images/bookswap/home.png", caption: "Home — recently added & most popular" },
@@ -182,7 +185,7 @@ export const projects: Project[] = [
       },
     ],
     summary: [
-      "Global B2B commerce platform for Mercedes-Benz, built with Accenture.",
+      "Global B2B platform helping Mercedes-Benz partners manage vehicle information, parts, and service workflows.",
     ],
     metrics: [
       { value: "19+", label: "Global markets" },

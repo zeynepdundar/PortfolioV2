@@ -90,6 +90,25 @@ export default async function ProjectDetailsPage({
             </div>
           </header>
 
+          {/* Demo video (portrait phone recording) */}
+          {project.demoVideo && (
+            <div className="mt-16 flex flex-col items-center">
+              <div className="w-full max-w-[300px] overflow-hidden rounded-[2rem] border border-border/40 bg-foreground/[0.03] p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.55)]">
+                <div className="relative aspect-[484/1036] w-full overflow-hidden rounded-[1.6rem]">
+                  <video
+                    src={project.demoVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+              <p className="mt-4 text-xs text-muted-foreground">App demo</p>
+            </div>
+          )}
+
           {/* Screenshot walkthrough */}
           {project.screens?.length ? (
             <div className="mt-16">
