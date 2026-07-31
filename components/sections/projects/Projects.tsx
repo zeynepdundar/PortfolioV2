@@ -109,7 +109,6 @@ function ProjectVisual({
 function FeaturedRow({ project, index }: { project: Project; index: number }) {
   const mediaLeft = index % 2 === 1;
   const period = project.eyebrow;
-  const primaryLink = project.links[0];
 
   return (
     <motion.article
@@ -128,36 +127,57 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
         <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground/90 sm:text-3xl">
           {project.title}
         </h3>
+
+        {/* Subtitle / Dipnot */}
+        {project.subtitle && (
+          <p className="mt-1.5 text-sm font-medium text-foreground/50">
+            {project.subtitle}
+          </p>
+        )}
+
         <p className="mt-4 max-w-md text-base leading-relaxed text-foreground/70">
           {project.summary[0]}
         </p>
 
-        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-          {project.slug ? (
-            <Link
-              href={`/projects/${project.slug}`}
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground"
-            >
-              Case study
-              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                →
-              </span>
-            </Link>
-          ) : null}
-          {primaryLink && (
-            <a
-              href={primaryLink.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-foreground"
-            >
-              {primaryLink.label}
-              <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                ↗
-              </span>
-            </a>
-          )}
-        </div>
+        {/* Dynamic Project Links */}
+        {project.links?.length ? (
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+            {project.links.map((link) => {
+              const cleanLabel = link.label.replace(/[→↗]/g, "").trim();
+              const isInternal = link.href.startsWith("/");
+
+              if (isInternal) {
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground"
+                  >
+                    {cleanLabel}
+                    <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                      →
+                    </span>
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-foreground"
+                >
+                  {cleanLabel}
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                    ↗
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
     </motion.article>
   );

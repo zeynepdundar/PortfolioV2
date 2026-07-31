@@ -1,4 +1,4 @@
-type Layout = "scattered" | "overlap" | "fan" | "single" | "circle";
+export type Layout = "scattered" | "overlap" | "fan" | "single" | "circle";
 
 export type ProjectCategory = "Product & Systems" | "Experiments";
 
@@ -27,6 +27,7 @@ export type Project = {
   slug?: string;
   eyebrow?: string;
   title: string;
+  subtitle?: string;
   category: ProjectCategory;
   /** Short role / contribution line, e.g. "Full-Stack Engineer". */
   role?: string;
@@ -34,26 +35,17 @@ export type Project = {
    *  panel instead of a product screenshot — for confidential / NDA work. */
   display?: "window" | "brand";
   brand?: {
-    /** Optional logo image path (e.g. "/images/logos/oraxai.svg"). Takes
-     *  priority over `mark` and `wordmark` when set. */
     logo?: string;
-    /** Key for a built-in inline SVG mark (theme-aware). e.g. "mercedes". */
     mark?: string;
-    /** Text shown when no logo/mark is provided. Defaults to project title. */
     wordmark?: string;
-    /** Optional CSS background override for the brand panel. */
     accent?: string;
   };
   layout: Layout;
   media: ProjectMediaItem[];
   summary: string[];
-  /** Headline metrics rendered as stat badges on featured cards. */
   metrics?: ProjectMetric[];
-  /** Technology stack rendered as chips. */
   tech?: string[];
-  /** Portrait app screenshots for the case study walkthrough. */
   screens?: { src: string; caption: string }[];
-  /** Portrait screen-recording shown as a phone demo on the case study. */
   demoVideo?: string;
   statusNote?: string;
   links: ProjectLink[];
@@ -67,10 +59,11 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    eyebrow: "2026",
+    eyebrow: "2026 — Present",
     title: "OraxAI",
+    subtitle: "AI-powered logistics platform: live in pharmaceutical operations",
     category: "Product & Systems",
-    role: "Full-Stack Engineer",
+    role: "Software Engineer",
     display: "brand",
     brand: { logo: "/images/orax-ai.png", mark: "oraxai", wordmark: "OraxAI" },
     layout: "single",
@@ -78,20 +71,20 @@ export const projects: Project[] = [
       { type: "image", src: "/images/orax-ai.png", alt: "OraxAI platform" },
     ],
     summary: [
-      "AI-powered operations platform for pharmaceutical logistics, warehouse, transport, quality management, and traceability.",
+      "Developed a full-stack Quality Management System (QMS) application and built the customer portal for an AI-powered enterprise platform.",
     ],
     metrics: [
-      { value: "5+", label: "Systems unified" },
-      { value: "Real-time", label: "Data pipelines" },
-      { value: "Full-stack", label: "Architecture & delivery" },
+      { value: "Full-stack", label: "QMS Application" },
+      { value: "Portal", label: "Customer Experience" },
+      { value: "Enterprise", label: "Operations Platform" },
     ],
     tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
     statusNote:
-      "Actively evolving with new AI capabilities, workflow automation, and ongoing infrastructure improvements.",
+      "Engineered full-stack features for QMS workflows and customer portal capabilities used in real warehouse operations.",
     links: [{ label: "Company Website", href: "https://oraxai.com" }],
   },
   {
-    eyebrow: "2023 -2026",
+    eyebrow: "2023 — 2026",
     title: "LINGA BackOffice",
     category: "Product & Systems",
     role: "Frontend Engineer",
@@ -100,17 +93,15 @@ export const projects: Project[] = [
       { type: "image", src: "/images/linga.png", alt: "Linga platform" },
     ],
     summary: [
-      "Restaurant operations platform where I contributed to migrating legacy Angular applications to a modern frontend architecture.",
-    ],
+      "Migrated legacy Angular modules to a modern, state-driven frontend architecture, improving platform maintainability and performance across core restaurant operations."],
     metrics: [
       { value: "Legacy → Modern", label: "Migration" },
-      { value: "Angular", label: "Frontend stack" },
+      { value: "RxJS / NgRx", label: "State management" },
       { value: "Enterprise", label: "Restaurant platform" },
     ],
-
     tech: ["Angular", "TypeScript", "RxJS", "NgRx", "SCSS"],
     statusNote:
-      "Actively evolving with new AI capabilities, workflow automation, and ongoing infrastructure improvements.",
+      "Improved performance and maintainability across core back-office modules, supporting high-frequency POS and administrative workflows.",
     links: [{ label: "Company Website", href: "https://www.lingapos.com/" }],
   },
   {
@@ -118,7 +109,7 @@ export const projects: Project[] = [
     slug: "bookswap",
     title: "BookSwap",
     category: "Product & Systems",
-    role: "Lead Frontend & Mobile Engineer",
+    role: "Co-Founder & Lead Engineer",
     layout: "overlap",
     media: [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap home" },
@@ -126,14 +117,14 @@ export const projects: Project[] = [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap detail" },
     ],
     summary: [
-      "Mobile-first marketplace for discovering, listing, and exchanging books. Designed and built from concept to App Store release.",
+      "Mobile-first P2P marketplace for discovering and exchanging books. Architected and built 0-to-1 from product strategy to App Store release.",
     ],
     metrics: [
       { value: "28M+", label: "Book catalog" },
       { value: "iOS & Android", label: "Mobile release" },
       { value: "Real-time", label: "In-app chat" },
     ],
-    tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase", "PostgreSQL"],
+    tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase", "PostgreSQL", "Next.js"],
     demoVideo: "/videos/book-swap.mp4",
     screens: [
       { src: "/images/bookswap/onboarding.png", caption: "Onboarding — build your infinite library" },
@@ -147,31 +138,32 @@ export const projects: Project[] = [
       { src: "/images/bookswap/profile.png", caption: "Profile — library, wishlist & settings" },
     ],
     links: [
+      { label: "Case Study", href: "/projects/bookswap" },
       { label: "Marketing Website", href: "https://www.bookswapapp.com/" },
     ],
     details: {
       headline:
-        "A mobile-first app for discovering, listing, and exchanging books — with barcode scanning, swaps, and chat.",
+        "A mobile-first marketplace app for physical book exchange — featuring ISBN scanning, state-driven swap workflows, and real-time messaging.",
       overview: [
-        "BookSwap turns the books you've finished into the ones you want next. Scan a barcode to add a book, browse a catalog of 28M+ titles, and propose a trade with a reader nearby.",
-        "I designed and built the product end to end — the React Native app, the swap and chat flows, and the App Store release.",
+        "BookSwap turns read books into new discoveries. Users scan barcodes to build digital shelves, browse a 28M+ title database, and initiate local trade proposals seamlessly.",
+        "I led the product development end-to-end: designing the UX, engineering the React Native cross-platform architecture, integrating dynamic state machines for swap flows, and launching on the App Store.",
       ],
       highlights: [
-        "Barcode scanning + ISBN search across 28M+ titles",
-        "Personal library and wishlist management",
-        "Swap proposals with accept / decline / take-back states",
-        "Real-time chat tied to each exchange",
+        "High-performance barcode scanning & instant ISBN lookup (28M+ database)",
+        "Stateful swap engine supporting multi-step exchange negotiation",
+        "Real-time messaging architecture tied directly to swap contexts",
+        "Dedicated Next.js marketing web app optimized for SEO and conversion",
       ],
       scope: [
-        "End-to-end mobile UX, from onboarding to swap completion",
-        "Frontend architecture and state management (Redux Toolkit)",
-        "Barcode/ISBN lookup and catalog integration",
-        "App Store release and marketing site",
+        "Product vision, UX design, and component hierarchy",
+        "React Native & Expo cross-platform mobile architecture",
+        "Global state design (Redux Toolkit) & backend integration",
+        "App Store deployment, marketing landing page, and analytics tracking",
       ],
     },
   },
   {
-    eyebrow: "2021",
+    eyebrow: "2021 — 2022",
     title: "Mercedes-Benz B2B Connect",
     category: "Product & Systems",
     role: "Frontend Engineer · Accenture",
@@ -185,7 +177,7 @@ export const projects: Project[] = [
       },
     ],
     summary: [
-      "Global B2B platform helping Mercedes-Benz partners manage vehicle information, parts, and service workflows.",
+      "Engineered shared design system components and complex UI modules for a global B2B platform serving Mercedes-Benz partners worldwide.",
     ],
     metrics: [
       { value: "19+", label: "Global markets" },
@@ -194,14 +186,14 @@ export const projects: Project[] = [
     ],
     tech: ["React", "Next.js", "Redux", "Storybook", "Umbraco CMS"],
     statusNote:
-      "Helped establish a scalable component architecture supporting the platform’s international rollout and future market expansion.",
+      "Built resilient, accessible, and highly reusable React UI components integrated into a multi-market global portal.",
     links: [{ label: "B2B Connect", href: "https://b2bconnect.mercedes-benz.com/de" }],
   },
   {
     eyebrow: "Experiment",
     title: "At The Races",
     category: "Experiments",
-    role: "Solo build",
+    role: "Solo Build",
     layout: "scattered",
     media: [
       { type: "video", src: "/videos/horse-race.mp4", alt: "Horse race gameplay" },
@@ -213,7 +205,7 @@ export const projects: Project[] = [
       },
     ],
     summary: [
-      "Browser-based horse racing simulation exploring probability and emergent gameplay.",
+      "Browser-based horse racing simulation built to explore dynamic probability models, race telemetry, and emergent gameplay loop mechanics.",
     ],
     tech: ["React", "TypeScript", "Vercel"],
     links: [
@@ -227,14 +219,14 @@ export const projects: Project[] = [
     eyebrow: "Experiment",
     title: "Shelfie",
     category: "Experiments",
-    role: "Solo build",
+    role: "Solo Build",
     layout: "fan",
     media: [
       { type: "image", src: "/images/shelfie.png", alt: "Shelfie app" },
       { type: "video", src: "/videos/shelfie.mp4", alt: "Shelfie demo" },
     ],
     summary: [
-      "A personal reading tracker that grew from a spreadsheet replacement into a thoughtful product experience.",
+      "Minimalist reading tracker exploring local data persistence, clean client-side state, and distraction-free UI design.",
     ],
     tech: ["React", "TypeScript"],
     links: [
@@ -245,11 +237,11 @@ export const projects: Project[] = [
     eyebrow: "Experiment",
     title: "Pokédex",
     category: "Experiments",
-    role: "Weekend build",
+    role: "Weekend Build",
     layout: "single",
     media: [{ type: "video", src: "/videos/pokedex.mp4", alt: "Pokédex demo" }],
     summary: [
-      "React application exploring API integration, caching, and reusable UI components.",
+      "Exploration of advanced REST API caching strategies, virtualized UI lists, and fluid component state management in React.",
     ],
     tech: ["React", "TypeScript", "PokéAPI"],
     links: [

@@ -8,67 +8,83 @@ export type Experience = {
   companyUrl: string;
   link?: {
     label: string;
-    href?: string;
+    href: string;
   };
 };
 
 export const experiences: Experience[] = [
   {
+    role: "Software Engineer",
+    company: "OraxAI",
+    period: "Apr 2026 – Present",
+    description:
+      "Architecting and delivering full-stack enterprise solutions for AI-powered logistics platform workflows. Building Quality Management Systems (QMS) and scalable customer portals using React, TypeScript, and modern frontend design systems.",
+    logo: "/logos/orax.png",
+    companyUrl: "https://oraxai.com",
+    stack: ["React", "TypeScript", "Node.js", "Tailwind CSS", "Figma"],
+  },
+  {
     role: "Frontend Engineer",
     company: "LINGA",
-    period: "2023 – Present",
+    period: "Feb 2023 – Mar 2026",
     description:
-      "Built and maintained the back-office UI of a global, cloud-based restaurant operating system. Migrated a large-scale interface to Angular 14 within a 15+ engineer Agile team, working closely with product managers, designers, and engineers to deliver reliable, user-focused features at scale.",
+      "Built and maintained the back-office UI of a global, cloud-based restaurant operating system. Migrated large-scale legacy interfaces to Angular within a 15+ engineer Agile team, collaborating closely with product managers and designers to deliver high-reliability features at scale.",
     logo: "/logos/linga_logo.jpeg",
     companyUrl: "https://www.lingapos.com/",
-    //stack: ["Angular", "TypeScript", "RxJS", "CSS"],
-
+    stack: ["Angular", "TypeScript", "RxJS", "Sass"],
   },
   {
     role: "Frontend Engineer",
     company: "Accenture",
-    period: "2021 – 2022",
+    period: "Mar 2021 – Apr 2022",
     description:
-      "Contributed to enterprise client projects for Mercedes-Benz and Roche. Built and launched Mercedes-Benz's B2B e-commerce platform across 19+ countries. Designed accessible, reusable UI components and contributed to a shared component library.",
+      "Contributed to enterprise client projects for Mercedes-Benz and Roche. Built and launched Mercedes-Benz's B2B e-commerce platform across 19+ countries. Designed accessible, reusable UI components and contributed to shared design system libraries.",
     logo: "/logos/accenture_logo.jpeg",
     companyUrl: "https://www.accenture.com/us-en",
-    //stack: ["React", "Next.js", "Storybook", "Electron.js", "Webpack"],
+    stack: ["React", "Next.js", "TypeScript", "Storybook", "Electron"],
     link: {
-      label: "View Project",
+      label: "Mercedes-Benz B2B Connect",
       href: "https://b2bconnect.mercedes-benz.com/de",
     },
   },
   {
-    role: "Full Stack Engineer",
-    company: "Renault Group",
-    period: "2020 – 2021",
+    role: "Software Engineer (Part-Time)",
+    company: "Groupe Renault",
+    period: "Sep 2020 – Jan 2021",
     description:
-      "Co-developed an internal HR automation platform streamlining payroll, scheduling, and performance tracking, significantly reducing HR operational workload.",
+      "Co-developed an internal HR automation platform streamlining payroll, scheduling, and performance tracking, significantly reducing operational workload across departments.",
     logo: "/logos/renault_logo.jpeg",
     companyUrl: "https://www.renaultgroup.com/en/",
-   //stack: ["Java", "Spring Boot", "AngularJS", "PostgreSQL", "React"],
+    stack: ["React", "Java", "Spring Boot", "PostgreSQL"],
   },
   {
-    role: "Software Development Assistance Specialist",
-    company: "Softtech",
-    period: "2019",
+    role: "Software Engineer (Part-Time)",
+    company: "VakıfBank",
+    period: "Nov 2019 – Sep 2020",
     description:
-      "Implemented automated testing procedures, reducing manual testing effort and improving system reliability through increased test coverage.",
+      "Worked on core banking software solutions, assisting in backend integration and user interface components for internal enterprise systems.",
+    logo: "/logos/vakifbank.png",
+    companyUrl: "https://www.vakifbank.com.tr/",
+    stack: ["C#", ".NET", "JavaScript", "MSSQL"],
+  },
+  {
+    role: "Software Development Specialist (Part-Time)",
+    company: "Softtech",
+    period: "Jun 2019 – Nov 2019",
+    description:
+      "Implemented automated testing frameworks and procedures, increasing test coverage and improving core system reliability across enterprise modules.",
     logo: "/logos/softtech_logo.jpeg",
     companyUrl: "https://softtech.com.tr/",
-    //stack: ["Java", "Selenium", "Cucumber"],
+    stack: ["Java", "Selenium", "Cucumber"],
   },
   {
-    role: "Software Developer",
+    role: "Full Stack Developer (Part-Time)",
     company: "Webbilir Consulting",
-    period: "2018 – 2019",
-    description: "Built and launched websites and early-stage products in consulting projects, translating customer requirements into functional solutions and collaborating closely with fellow developers.",
+    period: "Jul 2018 – Jun 2019",
+    description:
+      "Built and launched web applications and custom software solutions for client consulting projects, translating business requirements directly into functional code.",
     logo: "/logos/webbilir_logo.jpeg",
     companyUrl: "https://webbilir.com/",
-    //stack: ["Angular", "Firebase", "JavaScript", "C# & .NET", "MSSQL"],
-    link: {
-      label: "Florist website",
-      href: "https://www.jardinerie.com.tr/",
-    },
+    stack: ["Angular", "JavaScript", "C#", ".NET", "Firebase"],
   },
 ];
