@@ -123,19 +123,27 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
       </div>
 
       <div className={mediaLeft ? "lg:order-2" : "lg:order-1"}>
-        {period && <p className="text-meta">{period}</p>}
-        <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground/90 sm:text-3xl">
-          {project.title}
-        </h3>
+        <header className="flex flex-col gap-4">
+          {period && (
+            <p className="text-sm font-normal leading-5 text-foreground/60">
+              {period}
+            </p>
+          )}
 
-        {/* Subtitle / Dipnot */}
-        {project.subtitle && (
-          <p className="mt-1.5 text-sm font-medium text-foreground/50">
-            {project.subtitle}
-          </p>
-        )}
+          <div className="space-y-1">
+            <h3 className="text-xl font-normal leading-tight tracking-tight text-foreground sm:text-2xl">
+              {project.title}
+            </h3>
 
-        <p className="mt-4 max-w-md text-base leading-relaxed text-foreground/70">
+            {project.subtitle && (
+              <p className="text-sm font-normal leading-6 text-foreground/65">
+                {project.subtitle}
+              </p>
+            )}
+          </div>
+        </header>
+
+        <p className="mt-6 max-w-md text-base font-normal leading-7 text-foreground/75">
           {project.summary[0]}
         </p>
 
@@ -201,7 +209,7 @@ function ExperimentItem({ project }: { project: Project }) {
           {renderMedia(project.media[0])}
         </div>
       </div>
-      <h4 className="mt-4 text-base font-medium tracking-tight text-foreground/90 group-hover:text-foreground">
+      <h4 className="mt-4 text-base font-normal tracking-tight text-foreground/90 group-hover:text-foreground">
         {project.title}
       </h4>
       <p className="mt-1 text-sm leading-relaxed text-foreground/70">
