@@ -170,8 +170,9 @@ export const projects: Project[] = [
     role: "Founder & Solo Engineer",
     layout: "fan",
     media: [
-      { type: "image", src: "/images/shelfie.png", alt: "MyShelfie landing page" },
-      { type: "video", src: "/videos/shelfie.mp4", alt: "MyShelfie demo" },
+      { type: "image", src: "/images/myshelfie/landing.webp", alt: "MyShelfie landing page" },
+      { type: "image", src: "/images/myshelfie/library.webp", alt: "MyShelfie library" },
+      { type: "image", src: "/images/myshelfie/statistics.webp", alt: "MyShelfie reading statistics" },
     ],
     summary: [
       "Reading tracker for logging books, saving favorite quotes, and seeing reading stats over time. Designed, built, and shipped solo, from data model to public launch.",
@@ -182,6 +183,12 @@ export const projects: Project[] = [
       { value: "Monorepo", label: "Web · API · Mobile" },
     ],
     tech: ["Next.js", "React", "TypeScript", "Firebase", "next-intl", "Recharts", "Tailwind CSS"],
+    screens: [
+      { src: "/images/myshelfie/landing.webp", caption: "Landing — start a bookshelf, no sign-up needed" },
+      { src: "/images/myshelfie/library.webp", caption: "Library — want to read, in progress & finished" },
+      { src: "/images/myshelfie/add-book-search.webp", caption: "Add a book — search Google Books or add by hand" },
+      { src: "/images/myshelfie/statistics.webp", caption: "Statistics — books and pages read across the year" },
+    ],
     statusNote:
       "Google Books search, reading statistics, favorites & quotes, CSV export, guest-to-account sign-in, and self-serve account deletion.",
     links: [
