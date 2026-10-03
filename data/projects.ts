@@ -163,6 +163,33 @@ export const projects: Project[] = [
     },
   },
   {
+    eyebrow: "Independent Product",
+    title: "MyShelfie",
+    subtitle: "Personal reading tracker: live on the web in English & Turkish",
+    category: "Product & Systems",
+    role: "Founder & Solo Engineer",
+    layout: "fan",
+    media: [
+      { type: "image", src: "/images/shelfie.png", alt: "MyShelfie landing page" },
+      { type: "video", src: "/videos/shelfie.mp4", alt: "MyShelfie demo" },
+    ],
+    summary: [
+      "Reading tracker for logging books, saving favorite quotes, and seeing reading stats over time. Designed, built, and shipped solo, from data model to public launch.",
+    ],
+    metrics: [
+      { value: "Live", label: "Public web app" },
+      { value: "EN / TR", label: "Fully localized" },
+      { value: "Monorepo", label: "Web · API · Mobile" },
+    ],
+    tech: ["Next.js", "React", "TypeScript", "Firebase", "next-intl", "Recharts", "Tailwind CSS"],
+    statusNote:
+      "Google Books search, reading statistics, favorites & quotes, CSV export, guest-to-account sign-in, and self-serve account deletion.",
+    links: [
+      { label: "Live App", href: "https://myshelfie.space" },
+      { label: "GitHub", href: "https://github.com/zeynepdundar/MyShelfie" },
+    ],
+  },
+  {
     eyebrow: "2021 — 2022",
     title: "Mercedes-Benz B2B Connect",
     category: "Product & Systems",
@@ -213,24 +240,6 @@ export const projects: Project[] = [
         label: "Live Preview",
         href: "https://horse-racing-game-steel.vercel.app/",
       },
-    ],
-  },
-  {
-    eyebrow: "Experiment",
-    title: "Shelfie",
-    category: "Experiments",
-    role: "Solo Build",
-    layout: "fan",
-    media: [
-      { type: "image", src: "/images/shelfie.png", alt: "Shelfie app" },
-      { type: "video", src: "/videos/shelfie.mp4", alt: "Shelfie demo" },
-    ],
-    summary: [
-      "Minimalist reading tracker exploring local data persistence, clean client-side state, and distraction-free UI design.",
-    ],
-    tech: ["React", "TypeScript"],
-    links: [
-      { label: "GitHub", href: "https://github.com/zeynepdundar/shelfie" },
     ],
   },
   {
