@@ -12,10 +12,7 @@ export default function Footer() {
             href="https://nextjs.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className="  text-foreground/70
-  hover:text-foreground
-  transition
-  hover:translate-x-0.5"
+            className="text-foreground/70 transition-colors duration-300 hover:text-foreground"
           >
             Next.js
           </a>{" "}
@@ -24,10 +21,7 @@ export default function Footer() {
             href="https://vercel.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="  text-foreground/70
-  hover:text-foreground
-  transition
-  hover:translate-x-0.5"
+            className="text-foreground/70 transition-colors duration-300 hover:text-foreground"
           >
             Vercel
           </a>
@@ -36,7 +30,7 @@ export default function Footer() {
             href="https://github.com/zeynepdundar/PortfolioV2"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground/70 hover:text-foreground transition"
+            className="text-foreground/70 transition-colors duration-300 hover:text-foreground"
           >
             GitHub
           </a>.

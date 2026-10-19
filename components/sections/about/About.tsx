@@ -59,7 +59,7 @@ export default function About() {
                 href="https://oraxai.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/80 font-medium underline-offset-4 hover:underline hover:text-foreground"
+                className="text-foreground/80 font-medium underline-offset-4 transition-colors duration-300 hover:underline hover:text-foreground"
               >
                 OraxAI
               </a>

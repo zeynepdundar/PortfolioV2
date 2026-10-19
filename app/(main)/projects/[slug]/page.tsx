@@ -44,9 +44,9 @@ export default async function ProjectDetailsPage({
           {/* Back */}
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-foreground/70 transition-colors duration-300 hover:text-foreground"
           >
-            <span className="transition-transform group-hover:-translate-x-1">
+            <span className="transition-transform duration-300 group-hover:-translate-x-0.5">
               ←
             </span>{" "}
             Back to work
@@ -83,7 +83,7 @@ export default async function ProjectDetailsPage({
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 rounded-full border border-border/50 px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:border-foreground/40 hover:text-foreground"
+                    className="group inline-flex items-center gap-2 rounded-full border border-border/50 px-4 py-2 text-sm font-medium text-foreground/70 transition-colors duration-300 hover:border-foreground/40 hover:text-foreground"
                   >
                     {link.icon && <ProjectLinkIcon name={link.icon} />}
                     {link.label}

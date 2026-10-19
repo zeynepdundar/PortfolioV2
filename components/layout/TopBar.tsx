@@ -20,12 +20,12 @@ export default function TopBar() {
             : "pointer-events-none -translate-y-6 opacity-0"
         }`}
       >
-        <div className={`${glass} rounded-2xl px-3 py-1.5`}>
+        <div className={`${glass} shrink-0 rounded-2xl px-3 py-1.5`}>
           <Brand />
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className={`${glass} rounded-full px-4 py-2`}>
+        <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
+          <div className={`${glass} rounded-full px-1.5 py-2 sm:px-4`}>
             <SideNav />
           </div>
 

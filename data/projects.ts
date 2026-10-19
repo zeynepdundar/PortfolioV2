@@ -238,7 +238,7 @@ export const projects: Project[] = [
       },
     ],
     summary: [
-      "Developed reusable design system components and complex UI modules for a global B2B platform supporting Mercedes-Benz partners.",
+      "Collaborated on the development of a global B2B platform for Mercedes-Benz partners, building reusable design system components and complex frontend modules.",
     ],
     metrics: [
       { value: "19+", label: "Global markets" },
@@ -249,7 +249,7 @@ export const projects: Project[] = [
     tags: ["Frontend Engineering", "Design Systems", "Enterprise UI"],
     statusNote:
       "Built resilient, accessible, and highly reusable React UI components integrated into a multi-market global portal.",
-    links: [{ label: "B2B Connect", href: "https://b2bconnect.mercedes-benz.com/de" }],
+    links: [{ label: "View Live Platform", href: "https://b2bconnect.mercedes-benz.com/de" }],
   },
   {
     eyebrow: "Experiment",
@@ -267,7 +267,7 @@ export const projects: Project[] = [
       },
     ],
     summary: [
-      "Browser-based horse racing simulation built to explore dynamic probability models, race telemetry, and emergent gameplay loop mechanics.",
+      "Browser-based horse racing simulation exploring probability-driven gameplay and real-time race dynamics.",
     ],
     tech: ["React", "TypeScript", "Vercel"],
     links: [
@@ -285,7 +285,7 @@ export const projects: Project[] = [
     layout: "single",
     media: [{ type: "video", src: "/videos/pokedex.mp4", alt: "Pokédex demo" }],
     summary: [
-      "Exploration of advanced REST API caching strategies, virtualized UI lists, and fluid component state management in React.",
+      "React application exploring API caching, virtualized lists, and component state management.",
     ],
     tech: ["React", "TypeScript", "PokéAPI"],
     links: [

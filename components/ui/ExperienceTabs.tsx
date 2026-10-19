@@ -90,7 +90,7 @@ export function ExperienceTabs({ experiences }: Props) {
               href={active.link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+              className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/70 transition-colors duration-300 hover:text-foreground"
             >
               <span>{active.link.label}</span>
               <span className="transition-transform duration-300 group-hover:translate-x-0.5 text-foreground/60">

@@ -14,8 +14,9 @@ export default function Intro() {
   return (
     <PageSection id="home">
       <SectionContainer>
-        <div className="grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:py-20">
-          <div className="text-left">
+        {/* Mobile order: heading → photo → copy & actions. Desktop: text left, photo right. */}
+        <div className="grid items-center gap-10 py-6 sm:py-8 lg:grid-cols-[1.1fr_1fr] lg:gap-x-16 lg:gap-y-0 lg:py-10">
+          <div className="order-1 text-left lg:col-start-1 lg:row-start-1 lg:self-end">
             <p className="text-xs font-semibold uppercase leading-relaxed tracking-[0.18em] text-foreground/60">
               Zeynep Dündar · Software Engineer
             </p>
@@ -54,20 +55,22 @@ export default function Intro() {
               <br />
               every day.
             </h1>
+          </div>
 
-            <p className="mt-8 max-w-lg text-base font-normal leading-relaxed text-foreground/70 sm:text-lg">
+          <div className="order-3 text-left lg:order-none lg:col-start-1 lg:row-start-2 lg:self-start">
+            <p className="max-w-lg lg:mt-8 text-base font-normal leading-relaxed text-foreground/70 sm:text-lg">
               From complex enterprise systems to independently shipped web and
-              mobile products. I design, engineer, and deliver end to end.
+              mobile products, I bring ideas from architecture to launch.
             </p>
 
             <p className="mt-4 max-w-lg text-sm leading-7 text-foreground/60">
               Frontend Architecture · Full-Stack Engineering · Product Engineering
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href="/projects"
-                className="group inline-flex min-h-12 items-center justify-center rounded-full bg-foreground px-7 py-3 text-sm font-normal text-background transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                className="group inline-flex min-h-12 w-full items-center sm:w-auto justify-center rounded-full bg-foreground px-7 py-3 text-sm font-normal text-background transition-opacity duration-300 hover:opacity-80"
               >
                 View work
                 <ArrowRight aria-hidden className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={1.75} />
@@ -75,14 +78,14 @@ export default function Intro() {
 
               <Link
                 href="/contact"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-foreground/20 px-7 py-3 text-sm font-normal text-foreground transition-colors hover:border-foreground/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                className="inline-flex min-h-12 w-full items-center sm:w-auto justify-center rounded-full border border-foreground/20 px-7 py-3 text-sm font-normal text-foreground transition-colors duration-300 hover:border-foreground/50"
               >
                 <Mail aria-hidden className="mr-2 h-4 w-4" strokeWidth={1.75} />
                 Get in touch
               </Link>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-foreground/10 pt-5">
+            <div className="mt-10 flex flex-col gap-2 border-t border-foreground/10 pt-5 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-3 sm:gap-y-1">
               <span className="text-xs font-normal uppercase tracking-[0.18em] text-foreground/50">
                 Experience
               </span>
@@ -92,7 +95,7 @@ export default function Intro() {
             </div>
           </div>
 
-          <div className="relative isolate aspect-[4/5] w-full max-w-[200px] justify-self-center lg:max-w-[240px]">
+          <div className="relative isolate order-2 aspect-[4/5] w-full max-w-[200px] justify-self-center lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-[240px]">
             {/* ---- Background drawings (behind the photo) ---- */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
               {/* soft lavender blob, top-left */}
@@ -143,6 +146,13 @@ export default function Intro() {
                 </svg>
               ))}
             </div>
+
+            {/* Mobile: small handwritten caption under the photo (side note shows from sm up) */}
+            <p
+              className={`${handwriting.className} absolute -bottom-8 right-0 whitespace-nowrap text-lg text-foreground/70 sm:hidden`}
+            >
+              Hi, I&apos;m Zeynep ✧
+            </p>
 
             <div
               className={`${handwriting.className} pointer-events-none absolute left-[calc(100%+14px)] top-[24%] hidden -rotate-[10deg] whitespace-nowrap text-[1.35rem] leading-[1.15] text-foreground/75 sm:block`}

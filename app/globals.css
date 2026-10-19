@@ -162,3 +162,15 @@ body {
   mask-composite: exclude;
   pointer-events: none;
 }
+
+/* Consistent keyboard focus for every interactive element. Mouse clicks don't
+   trigger it (focus-visible). Zero-specificity :where() so component
+   utilities such as rounded-full still shape the ring. */
+@layer base {
+  :where(a, button, [role="button"], summary, input, select, textarea):focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+

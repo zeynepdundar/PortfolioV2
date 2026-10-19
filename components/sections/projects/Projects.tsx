@@ -126,13 +126,13 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
       <div className={mediaLeft ? "lg:order-2" : "lg:order-1"}>
         <header className="flex flex-col gap-4">
           {period && (
-            <p className="text-sm font-normal leading-5 text-foreground/60">
+            <p className="text-[13px] font-normal leading-5 text-foreground/60 sm:text-sm">
               {period}
             </p>
           )}
 
           <div className="space-y-1">
-            <h3 className="text-xl font-normal leading-tight tracking-tight text-foreground sm:text-2xl">
+            <h3 className="text-2xl font-normal leading-tight tracking-tight text-foreground sm:text-[32px]">
               {project.title}
             </h3>
 
@@ -144,12 +144,12 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
           </div>
         </header>
 
-        <p className="mt-6 max-w-md text-base font-normal leading-7 text-foreground/75">
+        <p className="mt-5 max-w-md text-base font-normal leading-7 text-foreground/75 sm:text-[17px] sm:leading-[1.65]">
           {project.summary[0]}
         </p>
 
         {project.tags?.length ? (
-          <p className="mt-4 text-sm font-normal text-foreground/50">
+          <p className="mt-4 text-[13px] font-normal text-foreground/50 sm:text-sm">
             {project.tags.join(" · ")}
           </p>
         ) : null}
@@ -169,7 +169,7 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground"
+                      className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-foreground/70 transition-colors duration-300 hover:text-foreground sm:text-base"
                     >
                       {cleanLabel}
                       <span className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -188,7 +188,7 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
                       rel="noopener noreferrer"
                       aria-label={cleanLabel}
                       title={cleanLabel}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/50 text-foreground/70 transition-colors hover:border-foreground/40 hover:text-foreground"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/50 text-foreground/70 transition-colors duration-300 hover:border-foreground/40 hover:text-foreground"
                     >
                       <ProjectLinkIcon name={link.icon} className="h-[18px] w-[18px]" />
                     </a>
@@ -201,7 +201,7 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-foreground"
+                    className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-foreground/70 transition-colors duration-300 hover:text-foreground sm:text-base"
                   >
                     {cleanLabel}
                     <span className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -263,18 +263,21 @@ export default function Projects() {
             subtitle="Selected work across enterprise platforms, product engineering, and independent ventures."
           />
 
-          <div className="mt-16 space-y-24 sm:space-y-32">
+          <div className="mt-14 space-y-16 sm:space-y-20">
             {featured.map((project, idx) => (
               <FeaturedRow key={project.title} project={project} index={idx} />
             ))}
           </div>
 
           {experiments.length > 0 && (
-            <div className="mt-32">
-              <div className="mb-10 flex items-center gap-4">
-                <span className="text-meta">Experiments</span>
-                <span className="h-px flex-1 bg-border/50" />
+            <div className="mt-28 sm:mt-32">
+              <div className="flex items-center gap-4">
+                <span className="text-meta text-foreground/70">Experiments</span>
+                <span className="h-px flex-1 bg-foreground/15" />
               </div>
+              <p className="mb-10 mt-3 max-w-md text-sm leading-6 text-foreground/60">
+                Smaller builds for exploring ideas, APIs, and interaction patterns.
+              </p>
               <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                 {experiments.map((project) => (
                   <ExperimentItem key={project.title} project={project} />
