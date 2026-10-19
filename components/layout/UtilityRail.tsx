@@ -34,7 +34,7 @@ export default function UtilityRail() {
       "
     >
       {/* Rail background (subtle glass, optional but cleaner) */}
-<div className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/10 dark:bg-black/20 backdrop-blur-2xl px-2 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)]">        {socials.map(({ href, label, icon: Icon }) => (
+<div className="flex flex-col items-center gap-3 rounded-2xl border border-white/50 bg-white/35 dark:border-white/10 dark:bg-black/30 backdrop-blur-2xl px-2 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)]">        {socials.map(({ href, label, icon: Icon }) => (
           <Link
             key={label}
             href={href}
@@ -45,7 +45,7 @@ export default function UtilityRail() {
               group relative
               p-2
               rounded-lg
-              text-foreground/60
+              text-foreground/80
               hover:text-foreground
               hover:bg-foreground/5
               transition

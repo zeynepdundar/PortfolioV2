@@ -25,7 +25,7 @@ export default function SideNav() {
             className={`group relative px-3 py-1.5 text-sm font-medium transition-colors duration-300 ${
               isActive
                 ? "text-foreground"
-                : "text-foreground/60 hover:text-foreground"
+                : "text-foreground/80 hover:text-foreground"
             }`}
           >
             {label}

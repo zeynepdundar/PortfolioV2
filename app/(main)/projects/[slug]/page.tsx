@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { PageSection } from "@/components/ui/PageSection";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { getProjectBySlug, projects } from "@/data/projects";
+import { ProjectLinkIcon } from "@/components/ui/ProjectLinkIcon";
 
 export function generateStaticParams() {
   return projects
@@ -54,7 +55,7 @@ export default async function ProjectDetailsPage({
           {/* Header */}
           <header className="mt-8 max-w-3xl">
             {project.eyebrow && (
-              <p className="text-meta">{project.eyebrow}</p>
+              <p className="text-meta normal-case">{project.eyebrow}</p>
             )}
             <h1
               className="mt-3 text-4xl tracking-tight text-foreground/90 sm:text-5xl"
@@ -72,21 +73,25 @@ export default async function ProjectDetailsPage({
                 {project.tech.join("  ·  ")}
               </p>
             ) : null}
-            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-              {project.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground"
-                >
-                  {link.label}
-                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                    ↗
-                  </span>
-                </a>
-              ))}
+            {/* Product links — card-only links (e.g. the case study itself) are skipped */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {project.links
+                .filter((link) => link.placement !== "card" && !link.href.startsWith("/"))
+                .map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 rounded-full border border-border/50 px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:border-foreground/40 hover:text-foreground"
+                  >
+                    {link.icon && <ProjectLinkIcon name={link.icon} />}
+                    {link.label}
+                    <span className="text-foreground/50 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-foreground">
+                      ↗
+                    </span>
+                  </a>
+                ))}
             </div>
           </header>
 

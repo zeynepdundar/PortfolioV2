@@ -6,7 +6,7 @@ import { ThemeToggle } from "../ui/ThemeToggle";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 const glass =
-  "relative inline-flex items-center border border-white/10 bg-white/5 dark:bg-black/20 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.14)] transition-colors duration-300 hover:bg-white/10";
+  "relative inline-flex items-center border border-white/50 bg-white/35 dark:border-white/10 dark:bg-black/30 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.14)] transition-colors duration-300 hover:bg-white/45 dark:hover:bg-black/40";
 
 export default function TopBar() {
   const show = useScrollDirection();

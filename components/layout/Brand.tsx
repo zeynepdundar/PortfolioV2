@@ -10,7 +10,7 @@ export default function Brand() {
       <img
         src="/images/logo-zd2.svg"
         alt="Zeynep Dündar"
-        className="h-5 w-auto dark:invert"
+        className="h-6 w-auto dark:invert"
       />
     </Link>
   );

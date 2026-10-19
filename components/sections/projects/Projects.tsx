@@ -7,6 +7,7 @@ import { PageSection } from "@/components/ui/PageSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { projects, type Project, type ProjectMediaItem } from "@/data/projects";
+import { ProjectLinkIcon } from "@/components/ui/ProjectLinkIcon";
 
 /* ------------------------------------------------------------------ */
 /* Media                                                              */
@@ -82,7 +83,7 @@ function ProjectVisual({
         />
         {brand?.logo ? (
           <div className="relative h-16 w-52">
-            <Image src={brand.logo} alt={project.title} fill priority={priority} className="object-contain" />
+            <Image src={brand.logo} alt={brand.wordmark ?? project.title} fill priority={priority} className="object-contain" />
           </div>
         ) : mark ? (
           <div className={`text-foreground/85 ${markSize}`}>{mark}</div>
@@ -147,45 +148,71 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
           {project.summary[0]}
         </p>
 
-        {/* Dynamic Project Links */}
-        {project.links?.length ? (
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-            {project.links.map((link) => {
-              const cleanLabel = link.label.replace(/[→↗]/g, "").trim();
-              const isInternal = link.href.startsWith("/");
+        {project.tags?.length ? (
+          <p className="mt-4 text-sm font-normal text-foreground/50">
+            {project.tags.join(" · ")}
+          </p>
+        ) : null}
 
-              if (isInternal) {
+        {/* Dynamic Project Links (detail-only links are hidden on the card) */}
+        {(() => {
+          const cardLinks = project.links.filter((l) => l.placement !== "detail");
+          if (!cardLinks.length) return null;
+          return (
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+              {cardLinks.map((link) => {
+                const cleanLabel = link.label.replace(/[→↗]/g, "").trim();
+                const isInternal = link.href.startsWith("/");
+
+                if (isInternal) {
+                  return (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground"
+                    >
+                      {cleanLabel}
+                      <span className="transition-transform duration-300 group-hover:translate-x-0.5">
+                        →
+                      </span>
+                    </Link>
+                  );
+                }
+
+                if (link.icon) {
+                  return (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={cleanLabel}
+                      title={cleanLabel}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/50 text-foreground/70 transition-colors hover:border-foreground/40 hover:text-foreground"
+                    >
+                      <ProjectLinkIcon name={link.icon} className="h-[18px] w-[18px]" />
+                    </a>
+                  );
+                }
+
                 return (
-                  <Link
+                  <a
                     key={link.label}
                     href={link.href}
-                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-foreground"
                   >
                     {cleanLabel}
                     <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                      →
+                      ↗
                     </span>
-                  </Link>
+                  </a>
                 );
-              }
-
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 hover:text-foreground"
-                >
-                  {cleanLabel}
-                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                    ↗
-                  </span>
-                </a>
-              );
-            })}
-          </div>
-        ) : null}
+              })}
+            </div>
+          );
+        })()}
       </div>
     </motion.article>
   );
@@ -233,7 +260,7 @@ export default function Projects() {
         <SectionContainer>
           <SectionHeader
             title="Featured Work"
-            subtitle="Enterprise platforms, independent products, and experiments I've built along the way."
+            subtitle="Selected work across enterprise platforms, product engineering, and independent ventures."
           />
 
           <div className="mt-16 space-y-24 sm:space-y-32">
