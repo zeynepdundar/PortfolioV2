@@ -30,7 +30,7 @@ export default function About() {
           />
 
           {/* About narrative */}
-          <div className="max-w-2xl space-y-4 text-body-lg text-foreground/70">
+          <div className="mt-10 max-w-2xl space-y-4 text-body-lg text-foreground/70">
             <p>
               I&apos;m a software engineer with extensive experience in frontend architecture, full-stack application development, and cross-platform mobile solutions. I enjoy working on products where engineering decisions directly shape user experience from complex enterprise logistics systems to products built from zero.
             </p>

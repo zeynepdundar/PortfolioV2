@@ -100,7 +100,7 @@ function StackedScreens({
   priority?: boolean;
 }) {
   return (
-    <div className="group relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-primary/[0.10] via-foreground/[0.03] to-foreground/[0.07]">
+    <div className="group relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-primary/[0.10] via-foreground/[0.03] to-foreground/[0.07]">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-1/4 -top-1/3 h-2/3 w-2/3 rounded-full bg-primary/15 blur-3xl"
@@ -131,6 +131,84 @@ function StackedScreens({
   );
 }
 
+/** Company app-icon marks used by the "showcase" visual. */
+const SHOWCASE_MARKS: Record<string, React.ReactNode> = {
+  // OraxAI — three stacked layers
+  orax: (
+    <svg viewBox="0 0 100 100" className="h-full w-full" aria-hidden>
+      {/* white layers on the brand-blue tile; the stroke matches the tile to cut the gaps */}
+      <g fill="#fff" stroke="#3F7FC0" strokeWidth="5" strokeLinejoin="round">
+        <path d="M50 40 L92 61 L50 82 L8 61 Z" />
+        <path d="M50 27 L92 48 L50 69 L8 48 Z" />
+        <path d="M50 10 L92 31 L50 52 L8 31 Z" />
+      </g>
+    </svg>
+  ),
+};
+
+/** Sketch-style hero: tilted product windows behind a large app-icon tile.
+ *  The tile sits over the busiest part of the screens, so the visual reads as
+ *  "real product" without exposing customer data. */
+function ShowcaseVisual({
+  items,
+  mark,
+  label,
+  priority = false,
+}: {
+  items: ProjectMediaItem[];
+  mark?: string;
+  label: string;
+  priority?: boolean;
+}) {
+  const [front, back] = items;
+  const icon = mark ? SHOWCASE_MARKS[mark] : null;
+
+  return (
+    <div className="group relative aspect-[16/10] w-full">
+      {/* back window */}
+      {back && (
+        <div className="absolute right-0 top-0 w-[74%] -rotate-[6deg] overflow-hidden rounded-xl border border-black/[0.06] bg-white shadow-[0_16px_36px_-18px_rgba(15,35,60,0.22)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-[4deg]">
+          <WindowChrome />
+          <div className="relative aspect-[2000/1092] w-full">
+            <Image src={back.src} alt="" fill sizes="(max-width: 1024px) 70vw, 440px" className="origin-top-left scale-[1.08] object-cover object-left-top" />
+          </div>
+        </div>
+      )}
+
+      {/* front window */}
+      {front && (
+        <div className="absolute left-0 top-[34%] w-[66%] -rotate-[6deg] overflow-hidden rounded-xl border border-black/[0.06] bg-white shadow-[0_18px_40px_-20px_rgba(15,35,60,0.26)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-[7deg] group-hover:translate-y-1">
+          <WindowChrome />
+          <div className="relative aspect-[2000/1092] w-full">
+            <Image src={front.src} alt="" fill priority={priority} sizes="(max-width: 1024px) 70vw, 480px" className="object-cover object-left-top" />
+          </div>
+        </div>
+      )}
+
+      {/* app-icon tile with the company mark */}
+      <div className="absolute left-[56%] top-[47%] w-[22%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-[54%] group-hover:scale-[1.03]">
+        <div
+          role="img"
+          aria-label={label}
+          className="relative aspect-square w-full rounded-[26%] bg-gradient-to-b from-[#5B9BD9] to-[#3F7FC0] p-[20%] shadow-[0_18px_40px_-14px_rgba(30,70,120,0.45),inset_0_1px_0_rgba(255,255,255,0.35)] ring-1 ring-white/40"
+        >
+          {icon}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WindowChrome() {
+  return (
+    <div className="flex items-center gap-1 border-b border-black/[0.06] bg-[#f6f8fb] px-2 py-1.5">
+      <span className="h-1.5 w-1.5 rounded-full bg-[#ff5f57]" />
+      <span className="h-1.5 w-1.5 rounded-full bg-[#febc2e]" />
+      <span className="h-1.5 w-1.5 rounded-full bg-[#28c840]" />
+    </div>
+  );
+}
+
 function ProjectVisual({
   project,
   priority = false,
@@ -147,7 +225,7 @@ function ProjectVisual({
         : "h-20 w-20 sm:h-24 sm:w-24";
     return (
       <div
-        className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-foreground/[0.05] via-foreground/[0.02] to-foreground/[0.06]"
+        className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-foreground/[0.05] via-foreground/[0.02] to-foreground/[0.06]"
         style={brand?.accent ? { background: brand.accent } : undefined}
       >
         <div
@@ -169,12 +247,26 @@ function ProjectVisual({
     );
   }
 
+  if (project.display === "showcase") {
+    return (
+      <ShowcaseVisual
+        items={project.media.slice(0, 2)}
+        mark={project.brand?.mark}
+        label={`${project.brand?.wordmark ?? project.title} product screens`}
+        priority={priority}
+      />
+    );
+  }
+
   if (project.display === "stack") {
     return <StackedScreens items={project.media.slice(0, 3)} priority={priority} />;
   }
 
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/40 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.5)]">
+    <div
+      className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl shadow-[0_24px_60px_-28px_rgba(0,0,0,0.5)]"
+      style={project.mediaAspect ? { aspectRatio: project.mediaAspect } : undefined}
+    >
       {renderMedia(project.media[0], priority)}
     </div>
   );
@@ -222,13 +314,13 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
       <div className={mediaLeft ? "lg:order-2" : "lg:order-1"}>
         <header>
           {project.eyebrow && (
-            <p className="text-meta normal-case!">
+            <p className="text-xs font-normal tracking-[0.1em] text-foreground/45">
               {project.eyebrow}
             </p>
           )}
 
           <h3
-            className="text-title mt-3 text-foreground"
+            className="mt-2 text-[1.75rem] leading-[1.15] tracking-tight text-foreground sm:text-[2rem]"
             style={{ fontFamily: "var(--font-perfectly-nineties)" }}
           >
             {project.title}
@@ -236,7 +328,7 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
 
           {project.subtitle && (
             <p
-              className="text-body-lg mt-1 text-accent"
+              className="text-body-lg mt-2 text-accent"
               style={{ fontFamily: "var(--font-perfectly-nineties)" }}
             >
               {project.subtitle}
@@ -244,12 +336,14 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
           )}
         </header>
 
-        <p className="text-body-lg mt-5 max-w-lg text-foreground/70">
-          {project.summary[0]}
-        </p>
+        <div className="text-body-lg mt-5 max-w-lg space-y-4 text-foreground/70">
+          {project.summary.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
 
         {project.features?.length ? (
-          <ul className="mt-6 space-y-3">
+          <ul className="mt-5 space-y-3">
             {project.features.map((feature) => {
               const Icon = FEATURE_ICONS[feature.icon];
               return (
@@ -265,59 +359,64 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
         ) : null}
 
         {project.tags?.length ? (
-          <p className="text-body mt-6 text-foreground/50">
+          <p className="mt-5 text-[13px] leading-6 text-foreground/50 sm:text-sm">
             {project.tags.join(" · ")}
           </p>
         ) : null}
 
-        {(canExplore || textLinks.length > 0 || iconLinks.length > 0) && (
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+        {(canExplore || textLinks.length > 0) && (
+          <div className="mt-3 flex flex-col items-start">
             {caseStudy ? (
-              <Button href={caseStudy.href}>
-                Explore project
-                <ArrowRight aria-hidden strokeWidth={1.75} className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              <Button href={caseStudy.href} variant="link">
+                {caseStudy.label}
+                <ArrowRight aria-hidden strokeWidth={2} className="h-[1.1em] w-[1.1em] transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             ) : project.screens?.length ? (
-              <Button onClick={() => setGalleryOpen(true)}>
+              <Button onClick={() => setGalleryOpen(true)} variant="link">
                 Explore project
-                <ArrowRight aria-hidden strokeWidth={1.75} className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                <ArrowRight aria-hidden strokeWidth={2} className="h-[1.1em] w-[1.1em] transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             ) : null}
 
             {textLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-link group"
-              >
+              <Button key={link.label} href={link.href} external variant="link">
                 {link.label.replace(/[→↗]/g, "").trim()}
-                <ArrowUpRight aria-hidden strokeWidth={1.75} className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
+                <ArrowRight aria-hidden strokeWidth={2} className="h-[1.1em] w-[1.1em] transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
             ))}
-
-            {iconLinks.length > 0 && (
-              <div className="flex items-center gap-2">
-                {iconLinks.map((link) => {
-                  const cleanLabel = link.label.replace(/[→↗]/g, "").trim();
-                  return (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={cleanLabel}
-                      title={cleanLabel}
-                      className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 text-foreground/70 transition-colors duration-300 hover:border-foreground/40 hover:text-foreground"
-                    >
-                      <ProjectLinkIcon name={link.icon!} className="h-[18px] w-[18px]" />
-                    </a>
-                  );
-                })}
-              </div>
-            )}
           </div>
+        )}
+
+        {/* Secondary links on their own line: App Store ↗ · Google Play ↗ · Website ↗ */}
+        {iconLinks.length > 0 && (
+          <ul
+            className={`flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-0 ${
+              canExplore || textLinks.length > 0 ? "mt-1" : "mt-4"
+            }`}
+          >
+            {iconLinks.map((link, i) => {
+              const cleanLabel = link.label.replace(/[→↗]/g, "").trim();
+              return (
+                <li key={link.label} className="flex items-center">
+                  {i > 0 && (
+                    <span aria-hidden className="mx-3 hidden text-foreground/30 sm:inline">
+                      ·
+                    </span>
+                  )}
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-link group"
+                  >
+                    <ProjectLinkIcon name={link.icon!} className="h-4 w-4" />
+                    {cleanLabel}
+                    <ArrowUpRight aria-hidden strokeWidth={1.75} className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         )}
       </div>
 
@@ -378,7 +477,7 @@ export default function Projects() {
             subtitle="Selected work across enterprise platforms, product engineering, and independent ventures."
           />
 
-          <div className="space-y-24">
+          <div className="space-y-18">
             {featured.map((project, idx) => (
               <FeaturedRow key={project.title} project={project} index={idx} />
             ))}

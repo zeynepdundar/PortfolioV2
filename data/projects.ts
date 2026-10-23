@@ -57,8 +57,10 @@ export type Project = {
   role?: string;
   /** How the featured card presents media. "brand" shows a logo/wordmark
    *  panel instead of a product screenshot — for confidential / NDA work.
-   *  "stack" layers the first three `media` images as overlapping app windows. */
-  display?: "window" | "brand" | "stack";
+   *  "stack" layers the first three `media` images as overlapping app windows.
+   *  "showcase" tilts one or two `media` screens behind a large app-icon tile
+   *  carrying the company mark (brand.mark), so the data stays unreadable. */
+  display?: "window" | "brand" | "stack" | "showcase";
   brand?: {
     logo?: string;
     mark?: string;
@@ -67,6 +69,9 @@ export type Project = {
   };
   layout: Layout;
   media: ProjectMediaItem[];
+  /** Card image aspect ratio as "width / height" (e.g. "1032 / 776"). Defaults to 16 / 10;
+   *  set it to the image's own ratio to show the whole screenshot instead of cropping it. */
+  mediaAspect?: string;
   summary: string[];
   metrics?: ProjectMetric[];
   tech?: string[];
@@ -88,20 +93,21 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    eyebrow: "ORAXAI · SOFTWARE ENGINEER · 2026–PRESENT",
+    eyebrow: "ORAXAI",
     title: "Quality Management System",
-    subtitle: "Sole developer · Full-stack ownership",
     category: "Product & Systems",
     role: "Senior Software Engineer · Sole Developer",
-    display: "stack",
+    display: "showcase",
+    brand: { mark: "orax" },
     layout: "single",
     media: [
       { type: "image", src: "/images/qms/document-overview.webp", alt: "ORAXAI QMS — Document Management overview" },
-      { type: "image", src: "/images/qms/training-matrix.webp", alt: "ORAXAI QMS — Training Matrix" },
+      { type: "image", src: "/images/qms/annual-training-plan.webp", alt: "ORAXAI QMS — Annual Training Plan" },
       { type: "image", src: "/images/qms/capa-list.webp", alt: "ORAXAI QMS — CAPA records" },
     ],
     summary: [
-      "Designed and built a QMS from the ground up, translating quality workflows into a maintainable full-stack platform.",
+      "A quality management platform for regulated workflows, covering documents, deviations, CAPAs, and training.",
+      "As the sole engineer, I took it from requirements analysis with QA to the domain model, API, and UI, including a three-level permission model.",
     ],
     metrics: [
       { value: "Full-stack", label: "QMS Application" },
@@ -109,26 +115,14 @@ export const projects: Project[] = [
       { value: "Enterprise", label: "Operations Platform" },
     ],
     tech: ["Angular", "Nx", "TypeScript", "Node.js", "PostgreSQL", "Playwright"],
-    tags: ["Angular", "Node.js", "PostgreSQL", "AWS"],
-    features: [
-      { icon: "document", text: "Document revisions & multi-stage approvals" },
-      { icon: "users", text: "Role-based access & end-to-end testing" },
-    ],
-    screens: [
-      { src: "/images/qms/document-overview.webp", caption: "Document Management — status pipeline, daily transitions & review schedule" },
-      { src: "/images/qms/training-matrix.webp", caption: "Training Matrix — role-based requirements and compliance" },
-      { src: "/images/qms/capa-list.webp", caption: "CAPA records — multi-stage workflow linked to deviations, audits and complaints" },
-      { src: "/images/qms/create-capa.webp", caption: "Create CAPA — short intake; root cause and plan follow on the record" },
-      { src: "/images/qms/annual-training-plan.webp", caption: "Annual Training Plan — planned vs. unplanned sessions with live status" },
-    ],
+    tags: ["Angular", "Nx", "TypeScript", "Node.js", "PostgreSQL", "Playwright"],
     statusNote:
       "Engineered full-stack features for QMS workflows and customer portal capabilities used in real warehouse operations.",
-    links: [{ label: "Company website", href: "https://oraxai.com" }],
+    links: [{ label: "Visit our landing page", href: "https://oraxai.com" }],
   },
   {
-    eyebrow: "LINGA · FRONTEND ENGINEER · 2023–2026",
+    eyebrow: "LINGA · 2023–2026",
     title: "LINGA BackOffice",
-    subtitle: "Enterprise back-office · Angular modernization",
     category: "Product & Systems",
     role: "Frontend Engineer",
     layout: "single",
@@ -136,27 +130,24 @@ export const projects: Project[] = [
       { type: "image", src: "/images/linga.png", alt: "Linga platform" },
     ],
     summary: [
-      "Modernized legacy Angular modules for an enterprise restaurant management platform, focusing on frontend architecture, predictable state management, and maintainability."],
+      "The back office of an enterprise restaurant platform, used for daily restaurant operations and administration.",
+      "I migrated its core modules from AngularJS to modern Angular with predictable RxJS/NgRx state, improving performance and making high-traffic screens easier to extend with lower regression risk.",
+    ],
     metrics: [
       { value: "Legacy → Modern", label: "Migration" },
       { value: "RxJS / NgRx", label: "State management" },
       { value: "Enterprise", label: "Restaurant platform" },
     ],
     tech: ["Angular", "TypeScript", "RxJS", "NgRx", "SCSS"],
-    tags: ["Angular", "TypeScript", "Frontend Architecture"],
-    features: [
-      { icon: "refresh", text: "Legacy modules migrated to modern Angular" },
-      { icon: "layers", text: "Predictable state with RxJS & NgRx" },
-    ],
+    tags: ["Angular", "TypeScript", "RxJS", "NgRx"],
     statusNote:
       "Improved performance and maintainability across core back-office modules, supporting high-frequency POS and administrative workflows.",
     links: [{ label: "Company website", href: "https://www.lingapos.com/" }],
   },
   {
-    eyebrow: "INDEPENDENT PRODUCT · CO-FOUNDER · iOS & ANDROID",
+    eyebrow: "INDEPENDENT PRODUCT · CO-FOUNDER · MOBILE LEAD",
     slug: "bookswap",
     title: "BookSwap",
-    subtitle: "End-to-end product · Concept to App Store",
     category: "Product & Systems",
     role: "Co-Founder & Lead Engineer",
     layout: "overlap",
@@ -166,7 +157,8 @@ export const projects: Project[] = [
       { type: "image", src: "/images/book-swap.png", alt: "Book swap detail" },
     ],
     summary: [
-      "Built a location-based P2P book exchange app for iOS and Android, spanning product design, system architecture, and core exchange workflows from concept to production.",
+      "A peer-to-peer book exchange app, live on the App Store and Google Play.",
+      "Co-founded and launched with a backend engineer. I own the mobile architecture, development, releases, and production monitoring, including ISBN scanning against a 28M+ title catalog and swap workflows with integrated real-time chat.",
     ],
     metrics: [
       { value: "28M+", label: "Book catalog" },
@@ -174,11 +166,7 @@ export const projects: Project[] = [
       { value: "Real-time", label: "In-app chat" },
     ],
     tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase", "PostgreSQL", "Next.js"],
-    tags: ["React Native", "Mobile Engineering", "Product Development"],
-    features: [
-      { icon: "scan", text: "ISBN scanning across a 28M+ title catalog" },
-      { icon: "chat", text: "Stateful swap flows with real-time chat" },
-    ],
+    tags: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase"],
     demoVideo: "/videos/book-swap.mp4",
     screens: [
       { src: "/images/bookswap/onboarding.png", caption: "Onboarding — build your infinite library" },
@@ -192,7 +180,7 @@ export const projects: Project[] = [
       { src: "/images/bookswap/profile.png", caption: "Profile — library, wishlist & settings" },
     ],
     links: [
-      { label: "View Case Study", href: "/projects/bookswap", placement: "card" },
+      { label: "Read the case study", href: "/projects/bookswap", placement: "card" },
       {
         label: "App Store",
         href: "https://apps.apple.com/app/book-swaps/id6476162048",
@@ -204,10 +192,9 @@ export const projects: Project[] = [
         icon: "googlePlay",
       },
       {
-        label: "Marketing Website",
+        label: "Website",
         href: "https://www.bookswapapp.com/",
         icon: "website",
-        placement: "detail",
       },
       // TODO: add the GitHub repo URL
       // { label: "GitHub", href: "https://github.com/<owner>/<repo>", icon: "github", placement: "detail" },
@@ -236,7 +223,6 @@ export const projects: Project[] = [
   {
     eyebrow: "INDEPENDENT PRODUCT · FOUNDER · WEB",
     title: "MyShelfie",
-    subtitle: "Solo build · Live web app",
     category: "Product & Systems",
     role: "Founder & Solo Engineer",
     layout: "fan",
@@ -246,7 +232,8 @@ export const projects: Project[] = [
       { type: "image", src: "/images/myshelfie/statistics.webp", alt: "MyShelfie reading statistics" },
     ],
     summary: [
-      "Designed, built, and launched a bilingual reading tracker for logging books, saving quotes, and exploring reading statistics.",
+      "A bilingual reading tracker for logging books, saving quotes, and exploring reading stats, with no sign-up needed to start.",
+      "I designed, built, and launched it solo, owning the Next.js frontend, Node.js API, and PostgreSQL data model. Guests can create an account without losing their reading data.",
     ],
     metrics: [
       { value: "Live", label: "Public web app" },
@@ -254,11 +241,7 @@ export const projects: Project[] = [
       { value: "Monorepo", label: "Web · API · Mobile" },
     ],
     tech: ["Next.js", "React", "TypeScript", "Firebase", "next-intl", "Recharts", "Tailwind CSS"],
-    tags: ["Next.js", "React", "TypeScript"],
-    features: [
-      { icon: "chart", text: "Reading statistics, quotes & CSV export" },
-      { icon: "languages", text: "Fully localized in English & Turkish" },
-    ],
+    tags: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Firebase Auth"],
     screens: [
       { src: "/images/myshelfie/landing.webp", caption: "Landing — start a bookshelf, no sign-up needed" },
       { src: "/images/myshelfie/library.webp", caption: "Library — want to read, in progress & finished" },
@@ -269,16 +252,15 @@ export const projects: Project[] = [
       "Google Books search, reading statistics, favorites & quotes, CSV export, guest-to-account sign-in, and self-serve account deletion.",
     links: [
       { label: "Live app", href: "https://myshelfie.space" },
-      { label: "GitHub", href: "https://github.com/zeynepdundar/MyShelfie" },
     ],
   },
   {
     eyebrow: "ACCENTURE · FRONTEND ENGINEER · 2021–2022",
     title: "Mercedes-Benz B2B Connect",
-    subtitle: "Global B2B portal · 19+ markets",
     category: "Product & Systems",
     role: "Frontend Engineer · Accenture",
     brand: { mark: "mercedes", wordmark: "Mercedes-Benz" },
+    mediaAspect: "1032 / 776",
     layout: "circle",
     media: [
       {
@@ -288,7 +270,8 @@ export const projects: Project[] = [
       },
     ],
     summary: [
-      "Collaborated on the development of a global B2B platform for Mercedes-Benz partners, building reusable design system components and complex frontend modules.",
+      "Mercedes-Benz's global B2B portal for partners, live in 19+ markets.",
+      "At Accenture, I built frontend modules and shared design-system components, developing and documenting them in Storybook so teams across markets could reuse them to ship consistent, CMS-driven pages on the live platform.",
     ],
     metrics: [
       { value: "19+", label: "Global markets" },
@@ -296,11 +279,7 @@ export const projects: Project[] = [
       { value: "Storybook", label: "Design system" },
     ],
     tech: ["React", "Next.js", "Redux", "Storybook", "Umbraco CMS"],
-    tags: ["Frontend Engineering", "Design Systems", "Enterprise UI"],
-    features: [
-      { icon: "component", text: "Reusable design-system components in Storybook" },
-      { icon: "globe", text: "Multi-market modules for a global partner portal" },
-    ],
+    tags: ["React", "Next.js", "Redux", "Storybook", "Umbraco CMS"],
     statusNote:
       "Built resilient, accessible, and highly reusable React UI components integrated into a multi-market global portal.",
     links: [{ label: "Live platform", href: "https://b2bconnect.mercedes-benz.com/de" }],
