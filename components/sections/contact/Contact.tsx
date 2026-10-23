@@ -12,7 +12,7 @@ export default function Contact() {
             subtitle="Let&apos;s build something great together."
           />
 
-          <div className="space-y-4">
+          <div className="max-w-2xl space-y-4">
             <p className="text-body-lg text-foreground/70">
               I think this is the beginning of something great, and I&apos;d love to
               hear from you. Whether you want to discuss a project, talk about
@@ -25,7 +25,6 @@ export default function Contact() {
               or just say hello <span className="not-italic">👋</span>
             </p>
 
-            {/* Divider */}
             <div className="pt-8">
               <span className="text-meta">Stay in touch</span>
 

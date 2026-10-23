@@ -1,6 +1,7 @@
 import { PageSection } from "@/components/ui/PageSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionContainer } from "@/components/ui/SectionContainer";
+import { Subsection } from "@/components/ui/Subsection";
 import PhotoGallery from "@/components/ui/PhotoGallery";
 import { personalPhotos } from "@/data/photoGallery";
 import { ExperienceTabs } from "@/components/ui/ExperienceTabs";
@@ -29,7 +30,7 @@ export default function About() {
           />
 
           {/* About narrative */}
-          <div className="mt-6 max-w-2xl space-y-4 text-body-lg text-foreground/70">
+          <div className="max-w-2xl space-y-4 text-body-lg text-foreground/70">
             <p>
               I&apos;m a software engineer with extensive experience in frontend architecture, full-stack application development, and cross-platform mobile solutions. I enjoy working on products where engineering decisions directly shape user experience from complex enterprise logistics systems to products built from zero.
             </p>
@@ -40,34 +41,34 @@ export default function About() {
               Outside of work, I enjoy riding my motorcycle, training at the gym, playing guitar, and practicing capoeira. Exploring new places and experiences often inspires how I approach design and problem-solving.
             </p>
 
-            <div className="pt-2 space-y-3">
-              <h3 className="text-sm font-medium text-foreground">
-                Core Technologies
-              </h3>
-              <p className="text-foreground/70 leading-relaxed">
+            <div className="space-y-2 pt-6">
+              <h3 className="text-meta">Core Technologies</h3>
+              <p className="text-body text-foreground/70">
                 {coreTechnologies.join(" • ")}
               </p>
             </div>
           </div>
 
           {/* Work subsection */}
-          <div className="mt-24 border-t border-border/20 pt-16">
-            <span className="text-meta">Work</span>
-            <p className="mt-4 max-w-2xl text-body-lg text-foreground/70">
+          <Subsection
+            label="Work"
+            description={
+              <p>
               Currently, I&apos;m working as a Software Engineer at{" "}
               <a
                 href="https://oraxai.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/80 font-medium underline-offset-4 transition-colors duration-300 hover:underline hover:text-foreground"
+                className="text-foreground/80 font-medium underline-offset-4 transition-colors duration-300 hover:underline hover:text-accent"
               >
                 OraxAI
               </a>
               , building full-stack applications and customer portals for an AI-powered enterprise logistics platform. Alongside frontend and mobile architecture, I frequently craft thoughtful UI/UX designs in Figma, bringing ideas cleanly from concept to code.
-            </p>
-          </div>
-
-          <ExperienceTabs experiences={experiences} />
+              </p>
+            }
+          >
+            <ExperienceTabs experiences={experiences} />
+          </Subsection>
         </div>
       </SectionContainer>
     </PageSection>

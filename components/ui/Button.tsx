@@ -1,77 +1,54 @@
-// components/ui/Button.tsx
 import Link from "next/link";
 
 type ButtonVariant = "primary" | "outline";
 
-interface ButtonProps {
-    href: string;
-    children: React.ReactNode;
-    ariaLabel?: string;
-    variant?: ButtonVariant;
-    showArrow?: boolean;
-    className?: string;
-}
+type ButtonProps = {
+  children: React.ReactNode;
+  variant?: ButtonVariant;
+  className?: string;
+  ariaLabel?: string;
+} & (
+  | { href: string; external?: boolean; onClick?: never }
+  | { href?: never; external?: never; onClick: () => void }
+);
 
+const base =
+  "group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-normal transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+const variants: Record<ButtonVariant, string> = {
+  primary: "bg-foreground text-background hover:opacity-80",
+  outline: "border border-foreground/20 text-foreground hover:border-foreground/50",
+};
+
+/** The site-wide pill button (hero CTAs, project actions). */
 export function Button({
-    href,
-    children,
-    ariaLabel,
-    variant = "primary",
-    showArrow = false,
-    className = "",
+  children,
+  variant = "primary",
+  className = "",
+  ariaLabel,
+  ...rest
 }: ButtonProps) {
-    const base =
-        "group inline-flex items-center justify-center gap-2 text-xs font-medium uppercase tracking-[0.15em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-[var(--primary-ring)]";
+  const cls = `${base} ${variants[variant]} ${className}`.trim();
 
-    // Solid, refined black pill.
-    if (variant === "primary") {
-        return (
-            <Link
-                href={href}
-                aria-label={ariaLabel}
-                style={{
-                    backgroundColor: "var(--foreground)",
-                    boxShadow:
-                        "inset 0 1px 0 rgba(255,255,255,0.18), 0 12px 30px -12px rgba(0,0,0,0.5)",
-                }}
-                className={`${base} rounded-full px-6 py-3 text-background hover:-translate-y-[1px] ${className}`}
-            >
-                {children}
-                {showArrow && (
-                    <span
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                        aria-hidden="true"
-                    >
-                        →
-                    </span>
-                )}
-            </Link>
-        );
-    }
-
-    // Ghost text action — whole label turns pink on hover, with a pink
-    // left-to-right underline as the shared accent.
+  if (rest.onClick) {
     return (
-        <Link
-            href={href}
-            aria-label={ariaLabel}
-            className={`${base} relative gap-1.5 rounded-full px-2 py-3 text-foreground/70 hover:text-[var(--primary)] ${className}`}
-        >
-            {children}
-            {showArrow && (
-                <span
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                    aria-hidden="true"
-                >
-                    →
-                </span>
-            )}
-            {/* Underline sits at the button's bottom edge so it lines up with
-                the primary button's bottom border */}
-            <span
-                aria-hidden="true"
-                className="pointer-events-none absolute bottom-0 left-2 right-2 h-[2px] origin-left scale-x-0 bg-[var(--primary)] transition-transform duration-300 ease-out group-hover:scale-x-100"
-            />
-        </Link>
+      <button type="button" onClick={rest.onClick} aria-label={ariaLabel} className={cls}>
+        {children}
+      </button>
     );
+  }
+
+  if (rest.external) {
+    return (
+      <a href={rest.href} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel} className={cls}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={rest.href!} aria-label={ariaLabel} className={cls}>
+      {children}
+    </Link>
+  );
 }

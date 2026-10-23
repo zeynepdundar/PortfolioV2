@@ -20,6 +20,8 @@
   --primary-hover: #b55693;
   --primary-soft: #f6e3ef;
   --primary-ring: rgba(202, 101, 165, 0.35);
+  /* Dusty rose — the shared accent: nav active line, link hovers, project subtitles */
+  --accent: #955568;
   --border-radius: 9999px;
   --transition: all 0.25s ease-in-out;
 
@@ -38,8 +40,14 @@
     @apply text-3xl sm:text-4xl font-light tracking-tight leading-tight;
   }
 
+  /* Section titles (h2) */
   .text-heading {
     @apply text-2xl sm:text-3xl font-light tracking-tight leading-snug;
+  }
+
+  /* Card / item titles (h3) */
+  .text-title {
+    @apply text-xl sm:text-2xl font-normal tracking-tight leading-snug;
   }
 
   .text-body-lg {
@@ -54,8 +62,9 @@
     @apply text-xs tracking-[0.2em] uppercase font-medium text-muted-foreground;
   }
 
+  /* Inline text links (Company website ↗, Live app ↗ …) */
   .text-link {
-    @apply text-xs tracking-[0.2em] uppercase font-medium transition-colors;
+    @apply inline-flex items-center gap-1.5 text-sm font-medium text-foreground/70 transition-colors duration-300 hover:text-accent;
   }
 }
 
@@ -74,6 +83,8 @@
   --primary: #d67aa3;
   --primary-hover: #c25f8f;
   --primary-soft: #2a0f1c;
+  /* Lighter dusty rose so it stays readable on the dark background */
+  --accent: #c98da0;
 }
 
 /* Semantic tokens for Tailwind */
@@ -87,6 +98,7 @@
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
 }
 
 @media (max-width: 640px) {

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import { PageSection } from "../../ui/PageSection";
 import { SectionContainer } from "../../ui/SectionContainer";
 import { Caveat } from "next/font/google";
 import { ArrowRight, Mail } from "lucide-react";
+import { Button } from "../../ui/Button";
 
 const handwriting = Caveat({ subsets: ["latin"], weight: ["400"] });
 
@@ -17,7 +17,7 @@ export default function Intro() {
         {/* Mobile order: heading → photo → copy & actions. Desktop: text left, photo right. */}
         <div className="grid items-center gap-10 py-6 sm:py-8 lg:grid-cols-[1.1fr_1fr] lg:gap-x-16 lg:gap-y-0 lg:py-10">
           <div className="order-1 text-left lg:col-start-1 lg:row-start-1 lg:self-end">
-            <p className="text-xs font-semibold uppercase leading-relaxed tracking-[0.18em] text-foreground/60">
+            <p className="text-meta">
               Zeynep Dündar · Software Engineer
             </p>
 
@@ -58,38 +58,32 @@ export default function Intro() {
           </div>
 
           <div className="order-3 text-left lg:order-none lg:col-start-1 lg:row-start-2 lg:self-start">
-            <p className="max-w-lg lg:mt-8 text-base font-normal leading-relaxed text-foreground/70 sm:text-lg">
+            <p className="text-body-lg max-w-lg text-foreground/70 lg:mt-8">
               From complex enterprise systems to independently shipped web and
               mobile products, I bring ideas from architecture to launch.
             </p>
 
-            <p className="mt-4 max-w-lg text-sm leading-7 text-foreground/60">
+            <p className="mt-4 max-w-lg text-[13px] font-medium leading-6 tracking-[0.01em] text-foreground/60 sm:text-sm">
               Frontend Architecture · Full-Stack Engineering · Product Engineering
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link
-                href="/projects"
-                className="group inline-flex min-h-12 w-full items-center sm:w-auto justify-center rounded-full bg-foreground px-7 py-3 text-sm font-normal text-background transition-opacity duration-300 hover:opacity-80"
-              >
+              <Button href="/projects" className="w-full sm:w-auto">
                 View work
-                <ArrowRight aria-hidden className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={1.75} />
-              </Link>
+                <ArrowRight aria-hidden className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={1.75} />
+              </Button>
 
-              <Link
-                href="/contact"
-                className="inline-flex min-h-12 w-full items-center sm:w-auto justify-center rounded-full border border-foreground/20 px-7 py-3 text-sm font-normal text-foreground transition-colors duration-300 hover:border-foreground/50"
-              >
-                <Mail aria-hidden className="mr-2 h-4 w-4" strokeWidth={1.75} />
+              <Button href="/contact" variant="outline" className="w-full sm:w-auto">
+                <Mail aria-hidden className="h-4 w-4" strokeWidth={1.75} />
                 Get in touch
-              </Link>
+              </Button>
             </div>
 
             <div className="mt-10 flex flex-col gap-2 border-t border-foreground/10 pt-5 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-3 sm:gap-y-1">
-              <span className="text-xs font-normal uppercase tracking-[0.18em] text-foreground/50">
+              <span className="text-meta">
                 Experience
               </span>
-              <span className="text-[15px] text-foreground/75">
+              <span className="text-body text-foreground/75">
                 OraxAI · LINGA · Accenture · Renault Group
               </span>
             </div>
@@ -153,6 +147,21 @@ export default function Intro() {
             >
               Hi, I&apos;m Zeynep ✧
             </p>
+
+            {/* Faint hand-drawn arc from the photo up to the "Hi, I'm Zeynep" note (sm+) */}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 60 64"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="pointer-events-none absolute left-[calc(100%-6px)] top-[47%] z-10 hidden h-16 w-[3.75rem] text-foreground/35 sm:block"
+            >
+              <path d="M3 58 C 22 64, 48 52, 44 12" />
+              <path d="M38.5 18.5 L44 11.5 L49 19" />
+            </svg>
 
             <div
               className={`${handwriting.className} pointer-events-none absolute left-[calc(100%+14px)] top-[24%] hidden -rotate-[10deg] whitespace-nowrap text-[1.35rem] leading-[1.15] text-foreground/75 sm:block`}

@@ -24,6 +24,24 @@ export type ProjectLink = {
   placement?: "card" | "detail";
 };
 
+export type ProjectFeatureIcon =
+  | "document"
+  | "users"
+  | "refresh"
+  | "layers"
+  | "scan"
+  | "chat"
+  | "chart"
+  | "languages"
+  | "component"
+  | "globe";
+
+/** Short, icon-led capability line shown on the home card. */
+export type ProjectFeature = {
+  icon: ProjectFeatureIcon;
+  text: string;
+};
+
 export type ProjectMetric = {
   value: string;
   label: string;
@@ -38,8 +56,9 @@ export type Project = {
   /** Short role / contribution line, e.g. "Full-Stack Engineer". */
   role?: string;
   /** How the featured card presents media. "brand" shows a logo/wordmark
-   *  panel instead of a product screenshot — for confidential / NDA work. */
-  display?: "window" | "brand";
+   *  panel instead of a product screenshot — for confidential / NDA work.
+   *  "stack" layers the first three `media` images as overlapping app windows. */
+  display?: "window" | "brand" | "stack";
   brand?: {
     logo?: string;
     mark?: string;
@@ -53,6 +72,8 @@ export type Project = {
   tech?: string[];
   /** Short line shown under the summary on the home card. Falls back to nothing. */
   tags?: string[];
+  /** Two short capability lines with icons, shown on the home card. */
+  features?: ProjectFeature[];
   screens?: { src: string; caption: string }[];
   demoVideo?: string;
   statusNote?: string;
@@ -67,33 +88,47 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    eyebrow: "ORAXAI · 2026–PRESENT",
+    eyebrow: "ORAXAI · SOFTWARE ENGINEER · 2026–PRESENT",
     title: "Quality Management System",
+    subtitle: "Sole developer · Full-stack ownership",
     category: "Product & Systems",
-    role: "Software Engineer",
-    display: "brand",
-    brand: { logo: "/images/orax-ai.png", mark: "oraxai", wordmark: "OraxAI" },
+    role: "Senior Software Engineer · Sole Developer",
+    display: "stack",
     layout: "single",
     media: [
-      { type: "image", src: "/images/orax-ai.png", alt: "OraxAI platform" },
+      { type: "image", src: "/images/qms/document-overview.webp", alt: "ORAXAI QMS — Document Management overview" },
+      { type: "image", src: "/images/qms/training-matrix.webp", alt: "ORAXAI QMS — Training Matrix" },
+      { type: "image", src: "/images/qms/capa-list.webp", alt: "ORAXAI QMS — CAPA records" },
     ],
     summary: [
-      "Architected and developed a full-stack QMS from the ground up, owning system design, domain modeling, access control, and regulated document workflows.",
+      "Designed and built a QMS from the ground up, translating quality workflows into a maintainable full-stack platform.",
     ],
     metrics: [
       { value: "Full-stack", label: "QMS Application" },
       { value: "Portal", label: "Customer Experience" },
       { value: "Enterprise", label: "Operations Platform" },
     ],
-    tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
-    tags: ["Angular", "Node.js", "Nx", "PostgreSQL"],
+    tech: ["Angular", "Nx", "TypeScript", "Node.js", "PostgreSQL", "Playwright"],
+    tags: ["Angular", "Node.js", "PostgreSQL", "AWS"],
+    features: [
+      { icon: "document", text: "Document revisions & multi-stage approvals" },
+      { icon: "users", text: "Role-based access & end-to-end testing" },
+    ],
+    screens: [
+      { src: "/images/qms/document-overview.webp", caption: "Document Management — status pipeline, daily transitions & review schedule" },
+      { src: "/images/qms/training-matrix.webp", caption: "Training Matrix — role-based requirements and compliance" },
+      { src: "/images/qms/capa-list.webp", caption: "CAPA records — multi-stage workflow linked to deviations, audits and complaints" },
+      { src: "/images/qms/create-capa.webp", caption: "Create CAPA — short intake; root cause and plan follow on the record" },
+      { src: "/images/qms/annual-training-plan.webp", caption: "Annual Training Plan — planned vs. unplanned sessions with live status" },
+    ],
     statusNote:
       "Engineered full-stack features for QMS workflows and customer portal capabilities used in real warehouse operations.",
-    links: [{ label: "Company Website", href: "https://oraxai.com" }],
+    links: [{ label: "Company website", href: "https://oraxai.com" }],
   },
   {
-    eyebrow: "LINGA · 2023–2026",
+    eyebrow: "LINGA · FRONTEND ENGINEER · 2023–2026",
     title: "LINGA BackOffice",
+    subtitle: "Enterprise back-office · Angular modernization",
     category: "Product & Systems",
     role: "Frontend Engineer",
     layout: "single",
@@ -109,14 +144,19 @@ export const projects: Project[] = [
     ],
     tech: ["Angular", "TypeScript", "RxJS", "NgRx", "SCSS"],
     tags: ["Angular", "TypeScript", "Frontend Architecture"],
+    features: [
+      { icon: "refresh", text: "Legacy modules migrated to modern Angular" },
+      { icon: "layers", text: "Predictable state with RxJS & NgRx" },
+    ],
     statusNote:
       "Improved performance and maintainability across core back-office modules, supporting high-frequency POS and administrative workflows.",
-    links: [{ label: "Company Website", href: "https://www.lingapos.com/" }],
+    links: [{ label: "Company website", href: "https://www.lingapos.com/" }],
   },
   {
-    eyebrow: "INDEPENDENT PRODUCT · iOS & ANDROID",
+    eyebrow: "INDEPENDENT PRODUCT · CO-FOUNDER · iOS & ANDROID",
     slug: "bookswap",
     title: "BookSwap",
+    subtitle: "End-to-end product · Concept to App Store",
     category: "Product & Systems",
     role: "Co-Founder & Lead Engineer",
     layout: "overlap",
@@ -135,6 +175,10 @@ export const projects: Project[] = [
     ],
     tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Firebase", "PostgreSQL", "Next.js"],
     tags: ["React Native", "Mobile Engineering", "Product Development"],
+    features: [
+      { icon: "scan", text: "ISBN scanning across a 28M+ title catalog" },
+      { icon: "chat", text: "Stateful swap flows with real-time chat" },
+    ],
     demoVideo: "/videos/book-swap.mp4",
     screens: [
       { src: "/images/bookswap/onboarding.png", caption: "Onboarding — build your infinite library" },
@@ -190,8 +234,9 @@ export const projects: Project[] = [
     },
   },
   {
-    eyebrow: "INDEPENDENT PRODUCT · WEB",
+    eyebrow: "INDEPENDENT PRODUCT · FOUNDER · WEB",
     title: "MyShelfie",
+    subtitle: "Solo build · Live web app",
     category: "Product & Systems",
     role: "Founder & Solo Engineer",
     layout: "fan",
@@ -210,6 +255,10 @@ export const projects: Project[] = [
     ],
     tech: ["Next.js", "React", "TypeScript", "Firebase", "next-intl", "Recharts", "Tailwind CSS"],
     tags: ["Next.js", "React", "TypeScript"],
+    features: [
+      { icon: "chart", text: "Reading statistics, quotes & CSV export" },
+      { icon: "languages", text: "Fully localized in English & Turkish" },
+    ],
     screens: [
       { src: "/images/myshelfie/landing.webp", caption: "Landing — start a bookshelf, no sign-up needed" },
       { src: "/images/myshelfie/library.webp", caption: "Library — want to read, in progress & finished" },
@@ -219,13 +268,14 @@ export const projects: Project[] = [
     statusNote:
       "Google Books search, reading statistics, favorites & quotes, CSV export, guest-to-account sign-in, and self-serve account deletion.",
     links: [
-      { label: "Live App", href: "https://myshelfie.space" },
+      { label: "Live app", href: "https://myshelfie.space" },
       { label: "GitHub", href: "https://github.com/zeynepdundar/MyShelfie" },
     ],
   },
   {
-    eyebrow: "ACCENTURE · 2021–2022",
+    eyebrow: "ACCENTURE · FRONTEND ENGINEER · 2021–2022",
     title: "Mercedes-Benz B2B Connect",
+    subtitle: "Global B2B portal · 19+ markets",
     category: "Product & Systems",
     role: "Frontend Engineer · Accenture",
     brand: { mark: "mercedes", wordmark: "Mercedes-Benz" },
@@ -247,9 +297,13 @@ export const projects: Project[] = [
     ],
     tech: ["React", "Next.js", "Redux", "Storybook", "Umbraco CMS"],
     tags: ["Frontend Engineering", "Design Systems", "Enterprise UI"],
+    features: [
+      { icon: "component", text: "Reusable design-system components in Storybook" },
+      { icon: "globe", text: "Multi-market modules for a global partner portal" },
+    ],
     statusNote:
       "Built resilient, accessible, and highly reusable React UI components integrated into a multi-market global portal.",
-    links: [{ label: "View Live Platform", href: "https://b2bconnect.mercedes-benz.com/de" }],
+    links: [{ label: "Live platform", href: "https://b2bconnect.mercedes-benz.com/de" }],
   },
   {
     eyebrow: "Experiment",

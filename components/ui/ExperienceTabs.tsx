@@ -13,7 +13,7 @@ export function ExperienceTabs({ experiences }: Props) {
   const active = experiences[activeIndex];
 
   return (
-    <div className="mt-16 grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 md:gap-12">
+    <div className="mt-12 grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 md:gap-12">
       {/* LEFT — Tabs */}
       <div className="flex md:flex-col border-b md:border-b-0 md:border-l border-border/20 overflow-x-auto no-scrollbar">
         {experiences.map((exp, index) => {
@@ -22,7 +22,7 @@ export function ExperienceTabs({ experiences }: Props) {
             <button
               key={`${exp.company}-${index}`}
               onClick={() => setActiveIndex(index)}
-              className={`relative text-left px-4 py-2.5 text-sm whitespace-nowrap md:whitespace-normal transition-colors duration-200
+              className={`relative text-left px-4 py-2.5 text-body whitespace-nowrap md:whitespace-normal transition-colors duration-200
                 ${
                   isActive
                     ? "text-foreground font-medium"
@@ -68,18 +68,18 @@ export function ExperienceTabs({ experiences }: Props) {
           </a>
 
           <div>
-            <h3 className="text-lg font-medium text-foreground">
+            <h3 className="text-title text-foreground">
               {active.role}
             </h3>
-            <p className="text-sm text-foreground/60">{active.company}</p>
+            <p className="text-body text-foreground/60">{active.company}</p>
           </div>
         </div>
 
-        <span className="text-xs font-mono text-foreground/50">
+        <span className="text-meta normal-case! tracking-normal!">
           {active.period}
         </span>
 
-        <p className="text-foreground/75 text-base leading-relaxed max-w-xl">
+        <p className="text-body-lg max-w-xl text-foreground/70">
           {active.description}
         </p>
 
@@ -90,7 +90,7 @@ export function ExperienceTabs({ experiences }: Props) {
               href={active.link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground/70 transition-colors duration-300 hover:text-foreground"
+              className="text-link group"
             >
               <span>{active.link.label}</span>
               <span className="transition-transform duration-300 group-hover:translate-x-0.5 text-foreground/60">

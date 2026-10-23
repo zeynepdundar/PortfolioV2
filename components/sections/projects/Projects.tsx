@@ -1,13 +1,36 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChartColumn,
+  Component,
+  FileText,
+  Globe,
+  Languages,
+  Layers,
+  MessagesSquare,
+  RefreshCw,
+  ScanBarcode,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { PageSection } from "@/components/ui/PageSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionContainer } from "@/components/ui/SectionContainer";
-import { projects, type Project, type ProjectMediaItem } from "@/data/projects";
+import {
+  projects,
+  type Project,
+  type ProjectFeatureIcon,
+  type ProjectMediaItem,
+} from "@/data/projects";
 import { ProjectLinkIcon } from "@/components/ui/ProjectLinkIcon";
+import { ProjectGallery } from "@/components/ui/ProjectGallery";
+import { Button } from "@/components/ui/Button";
+import { Subsection } from "@/components/ui/Subsection";
 
 /* ------------------------------------------------------------------ */
 /* Media                                                              */
@@ -58,6 +81,56 @@ const BRAND_MARKS: Record<string, React.ReactNode> = {
   ),
 };
 
+/** Desktop app screens layered as overlapping windows, cropped by the frame
+ *  so each one is only partly visible. items[0] sits in front. */
+const STACK_LAYERS = [
+  // front
+  "left-[5%] top-[34%] w-[80%] z-30 group-hover:-translate-y-1.5",
+  // middle
+  "left-[13%] top-[19%] w-[80%] z-20 group-hover:translate-x-2 group-hover:-translate-y-2.5",
+  // back
+  "left-[21%] top-[5%] w-[80%] z-10 group-hover:translate-x-4 group-hover:-translate-y-3.5",
+];
+
+function StackedScreens({
+  items,
+  priority = false,
+}: {
+  items: ProjectMediaItem[];
+  priority?: boolean;
+}) {
+  return (
+    <div className="group relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-primary/[0.10] via-foreground/[0.03] to-foreground/[0.07]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-1/4 -top-1/3 h-2/3 w-2/3 rounded-full bg-primary/15 blur-3xl"
+      />
+      {items.map((item, i) => (
+        <div
+          key={item.src}
+          className={`absolute overflow-hidden rounded-lg border border-black/[0.08] bg-white shadow-[0_18px_44px_-14px_rgba(15,23,42,0.45)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${STACK_LAYERS[i]}`}
+        >
+          <div className="flex items-center gap-1 border-b border-black/[0.06] bg-[#f6f8fb] px-2 py-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-black/15" />
+            <span className="h-1.5 w-1.5 rounded-full bg-black/15" />
+            <span className="h-1.5 w-1.5 rounded-full bg-black/15" />
+          </div>
+          <div className="relative aspect-[2000/1092] w-full">
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              priority={priority && i === 0}
+              sizes="(max-width: 1024px) 85vw, 520px"
+              className="object-cover object-left-top"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ProjectVisual({
   project,
   priority = false,
@@ -96,6 +169,10 @@ function ProjectVisual({
     );
   }
 
+  if (project.display === "stack") {
+    return <StackedScreens items={project.media.slice(0, 3)} priority={priority} />;
+  }
+
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/40 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.5)]">
       {renderMedia(project.media[0], priority)}
@@ -107,9 +184,28 @@ function ProjectVisual({
 /* Featured row — big visual + minimal text (b-berger inspired)        */
 /* ------------------------------------------------------------------ */
 
+const FEATURE_ICONS: Record<ProjectFeatureIcon, LucideIcon> = {
+  document: FileText,
+  users: Users,
+  refresh: RefreshCw,
+  layers: Layers,
+  scan: ScanBarcode,
+  chat: MessagesSquare,
+  chart: ChartColumn,
+  languages: Languages,
+  component: Component,
+  globe: Globe,
+};
+
 function FeaturedRow({ project, index }: { project: Project; index: number }) {
   const mediaLeft = index % 2 === 1;
-  const period = project.eyebrow;
+  const [galleryOpen, setGalleryOpen] = useState(false);
+
+  const cardLinks = project.links.filter((l) => l.placement !== "detail");
+  const caseStudy = cardLinks.find((l) => l.href.startsWith("/"));
+  const iconLinks = cardLinks.filter((l) => !l.href.startsWith("/") && l.icon);
+  const textLinks = cardLinks.filter((l) => !l.href.startsWith("/") && !l.icon);
+  const canExplore = Boolean(caseStudy) || Boolean(project.screens?.length);
 
   return (
     <motion.article
@@ -124,62 +220,87 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
       </div>
 
       <div className={mediaLeft ? "lg:order-2" : "lg:order-1"}>
-        <header className="flex flex-col gap-4">
-          {period && (
-            <p className="text-[13px] font-normal leading-5 text-foreground/60 sm:text-sm">
-              {period}
+        <header>
+          {project.eyebrow && (
+            <p className="text-meta normal-case!">
+              {project.eyebrow}
             </p>
           )}
 
-          <div className="space-y-1">
-            <h3 className="text-2xl font-normal leading-tight tracking-tight text-foreground sm:text-[32px]">
-              {project.title}
-            </h3>
+          <h3
+            className="text-title mt-3 text-foreground"
+            style={{ fontFamily: "var(--font-perfectly-nineties)" }}
+          >
+            {project.title}
+          </h3>
 
-            {project.subtitle && (
-              <p className="text-sm font-normal leading-6 text-foreground/65">
-                {project.subtitle}
-              </p>
-            )}
-          </div>
+          {project.subtitle && (
+            <p
+              className="text-body-lg mt-1 text-accent"
+              style={{ fontFamily: "var(--font-perfectly-nineties)" }}
+            >
+              {project.subtitle}
+            </p>
+          )}
         </header>
 
-        <p className="mt-5 max-w-md text-base font-normal leading-7 text-foreground/75 sm:text-[17px] sm:leading-[1.65]">
+        <p className="text-body-lg mt-5 max-w-lg text-foreground/70">
           {project.summary[0]}
         </p>
 
+        {project.features?.length ? (
+          <ul className="mt-6 space-y-3">
+            {project.features.map((feature) => {
+              const Icon = FEATURE_ICONS[feature.icon];
+              return (
+                <li key={feature.text} className="flex items-center gap-4">
+                  <Icon aria-hidden strokeWidth={1.6} className="h-5 w-5 shrink-0 text-foreground/80" />
+                  <span className="text-body text-foreground/70">
+                    {feature.text}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
+
         {project.tags?.length ? (
-          <p className="mt-4 text-[13px] font-normal text-foreground/50 sm:text-sm">
+          <p className="text-body mt-6 text-foreground/50">
             {project.tags.join(" · ")}
           </p>
         ) : null}
 
-        {/* Dynamic Project Links (detail-only links are hidden on the card) */}
-        {(() => {
-          const cardLinks = project.links.filter((l) => l.placement !== "detail");
-          if (!cardLinks.length) return null;
-          return (
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
-              {cardLinks.map((link) => {
-                const cleanLabel = link.label.replace(/[→↗]/g, "").trim();
-                const isInternal = link.href.startsWith("/");
+        {(canExplore || textLinks.length > 0 || iconLinks.length > 0) && (
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            {caseStudy ? (
+              <Button href={caseStudy.href}>
+                Explore project
+                <ArrowRight aria-hidden strokeWidth={1.75} className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Button>
+            ) : project.screens?.length ? (
+              <Button onClick={() => setGalleryOpen(true)}>
+                Explore project
+                <ArrowRight aria-hidden strokeWidth={1.75} className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Button>
+            ) : null}
 
-                if (isInternal) {
-                  return (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-foreground/70 transition-colors duration-300 hover:text-foreground sm:text-base"
-                    >
-                      {cleanLabel}
-                      <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                        →
-                      </span>
-                    </Link>
-                  );
-                }
+            {textLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link group"
+              >
+                {link.label.replace(/[→↗]/g, "").trim()}
+                <ArrowUpRight aria-hidden strokeWidth={1.75} className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            ))}
 
-                if (link.icon) {
+            {iconLinks.length > 0 && (
+              <div className="flex items-center gap-2">
+                {iconLinks.map((link) => {
+                  const cleanLabel = link.label.replace(/[→↗]/g, "").trim();
                   return (
                     <a
                       key={link.label}
@@ -188,32 +309,26 @@ function FeaturedRow({ project, index }: { project: Project; index: number }) {
                       rel="noopener noreferrer"
                       aria-label={cleanLabel}
                       title={cleanLabel}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/50 text-foreground/70 transition-colors duration-300 hover:border-foreground/40 hover:text-foreground"
+                      className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 text-foreground/70 transition-colors duration-300 hover:border-foreground/40 hover:text-foreground"
                     >
-                      <ProjectLinkIcon name={link.icon} className="h-[18px] w-[18px]" />
+                      <ProjectLinkIcon name={link.icon!} className="h-[18px] w-[18px]" />
                     </a>
                   );
-                }
-
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-foreground/70 transition-colors duration-300 hover:text-foreground sm:text-base"
-                  >
-                    {cleanLabel}
-                    <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                      ↗
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-          );
-        })()}
+                })}
+              </div>
+            )}
+          </div>
+        )}
       </div>
+
+      {!caseStudy && project.screens?.length ? (
+        <ProjectGallery
+          title={project.title}
+          screens={project.screens}
+          open={galleryOpen}
+          onClose={() => setGalleryOpen(false)}
+        />
+      ) : null}
     </motion.article>
   );
 }
@@ -236,10 +351,10 @@ function ExperimentItem({ project }: { project: Project }) {
           {renderMedia(project.media[0])}
         </div>
       </div>
-      <h4 className="mt-4 text-base font-normal tracking-tight text-foreground/90 group-hover:text-foreground">
+      <h4 className="text-title mt-4 text-foreground/90 group-hover:text-foreground">
         {project.title}
       </h4>
-      <p className="mt-1 text-sm leading-relaxed text-foreground/70">
+      <p className="text-body mt-1 text-foreground/70">
         {project.summary[0]}
       </p>
     </a>
@@ -263,27 +378,23 @@ export default function Projects() {
             subtitle="Selected work across enterprise platforms, product engineering, and independent ventures."
           />
 
-          <div className="mt-14 space-y-16 sm:space-y-20">
+          <div className="space-y-24">
             {featured.map((project, idx) => (
               <FeaturedRow key={project.title} project={project} index={idx} />
             ))}
           </div>
 
           {experiments.length > 0 && (
-            <div className="mt-28 sm:mt-32">
-              <div className="flex items-center gap-4">
-                <span className="text-meta text-foreground/70">Experiments</span>
-                <span className="h-px flex-1 bg-foreground/15" />
-              </div>
-              <p className="mb-10 mt-3 max-w-md text-sm leading-6 text-foreground/60">
-                Smaller builds for exploring ideas, APIs, and interaction patterns.
-              </p>
-              <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            <Subsection
+              label="Experiments"
+              description="Smaller builds for exploring ideas, APIs, and interaction patterns."
+            >
+              <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                 {experiments.map((project) => (
                   <ExperimentItem key={project.title} project={project} />
                 ))}
               </div>
-            </div>
+            </Subsection>
           )}
         </SectionContainer>
       </div>

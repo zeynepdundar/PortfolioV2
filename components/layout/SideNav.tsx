@@ -25,14 +25,14 @@ export default function SideNav() {
             className={`group relative px-2.5 py-1.5 text-sm sm:px-3 font-medium transition-colors duration-300 ${
               isActive
                 ? "text-foreground"
-                : "text-foreground/80 hover:text-foreground"
+                : "text-foreground/80 hover:text-[var(--accent,#955568)]"
             }`}
           >
             {label}
-            {/* Pink underline — persistent when active, slides in on hover */}
+            {/* Accent underline — persistent when active, slides in on hover */}
             <span
               aria-hidden="true"
-              className={`pointer-events-none absolute -bottom-0.5 left-2.5 right-2.5 h-[2px] sm:left-3 sm:right-3 origin-left rounded-full bg-[var(--primary)] transition-transform duration-300 ease-out ${
+              className={`pointer-events-none absolute -bottom-0.5 left-2.5 right-2.5 h-[2px] sm:left-3 sm:right-3 origin-left rounded-full bg-[var(--accent,#955568)] transition-transform duration-300 ease-out ${
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               }`}
             />
