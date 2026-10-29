@@ -12,11 +12,9 @@ export default function About() {
     "React",
     "React Native",
     "TypeScript",
+    "Angular",
     "Next.js",
     "Node.js",
-    "Tailwind CSS",
-    "Gluestack UI",
-    "Angular",
   ];
 
   return (
@@ -32,19 +30,19 @@ export default function About() {
           {/* About narrative */}
           <div className="mt-10 max-w-2xl space-y-4 text-body-lg text-foreground/70">
             <p>
-              I&apos;m a software engineer with extensive experience in frontend architecture, full-stack application development, and cross-platform mobile solutions. I enjoy working on products where engineering decisions directly shape user experience from complex enterprise logistics systems to products built from zero.
+              I&apos;m a software engineer with a frontend focus, building web and cross-platform mobile applications since 2018. My experience spans enterprise logistics systems and products built from scratch. I enjoy working where engineering decisions directly shape the user experience.
             </p>
             <p>
-              I hold a B.S. in Computer Engineering from Istanbul Technical University and have been building software professionally since 2018. My work is driven by strong design intuition, tight UI consistency, and the engineering details that make products fast and dependable at scale.
+              I hold a B.S. in Computer Engineering from Istanbul Technical University. I take a hands-on approach across the stack, with particular attention to frontend architecture, consistent interfaces, and performance. I like understanding how the whole product works and carrying that understanding into the details people interact with.
             </p>
             <p>
-              Outside of work, I enjoy riding my motorcycle, training at the gym, playing guitar, and practicing capoeira. Exploring new places and experiences often inspires how I approach design and problem-solving.
+              Outside of work, you&apos;ll find me riding my motorcycle, training at the gym, playing guitar, or practicing capoeira. I&apos;m always curious about new places and experiences.
             </p>
 
             <div className="space-y-2 pt-6">
               <h3 className="text-meta">Core Technologies</h3>
               <p className="text-body text-foreground/70">
-                {coreTechnologies.join(" • ")}
+                {coreTechnologies.join(" · ")}
               </p>
             </div>
           </div>
