@@ -3,6 +3,8 @@ export type Experience = {
   company: string;
   period: string;
   description: string;
+  /** Bullet points for the experience card. Falls back to the description's sentences. */
+  highlights?: string[];
   stack?: string[];
   logo: string;
   companyUrl: string;
@@ -19,9 +21,14 @@ export const experiences: Experience[] = [
     period: "Apr 2026 – Present",
     description:
       "Architecting and delivering full-stack enterprise solutions for AI-powered logistics platform workflows. Building Quality Management Systems (QMS) and scalable customer portals using React, TypeScript, and modern frontend design systems.",
+    highlights: [
+      "Developing a pharmaceutical QMS with Angular and Node.js, covering document approvals, training, and role-based access.",
+      "Building customer portals for logistics operations, including order creation and inventory tracking.",
+      "Taking ownership from requirements and interface design through implementation, testing, and deployment.",
+    ],
     logo: "/logos/orax.png",
     companyUrl: "https://oraxai.com",
-    stack: ["React", "TypeScript", "Node.js", "Tailwind CSS", "Figma"],
+    stack: ["Angular", "React", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
   },
   {
     role: "Frontend Engineer",

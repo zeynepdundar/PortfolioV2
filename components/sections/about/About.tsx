@@ -6,6 +6,7 @@ import PhotoGallery from "@/components/ui/PhotoGallery";
 import { personalPhotos } from "@/data/photoGallery";
 import { ExperienceTabs } from "@/components/ui/ExperienceTabs";
 import { experiences } from "@/data/experiences";
+import { ArrowUpRight } from "lucide-react";
 
 export default function About() {
   const coreTechnologies = [
@@ -20,7 +21,7 @@ export default function About() {
   return (
     <PageSection id="about">
       <SectionContainer>
-        <PhotoGallery photos={personalPhotos} />
+        <PhotoGallery photos={personalPhotos} className="mb-10" />
         <div className="w-full">
           <SectionHeader
             title="About Me"
@@ -28,23 +29,42 @@ export default function About() {
           />
 
           {/* About narrative */}
-          <div className="mt-10 max-w-2xl space-y-4 text-body-lg text-foreground/70">
-            <p>
-              I&apos;m a software engineer with a frontend focus, building web and cross-platform mobile applications since 2018. My experience spans enterprise logistics systems and products built from scratch. I enjoy working where engineering decisions directly shape the user experience.
-            </p>
-            <p>
-              I hold a B.S. in Computer Engineering from Istanbul Technical University. I take a hands-on approach across the stack, with particular attention to frontend architecture, consistent interfaces, and performance. I like understanding how the whole product works and carrying that understanding into the details people interact with.
-            </p>
-            <p>
-              Outside of work, you&apos;ll find me riding my motorcycle, training at the gym, playing guitar, or practicing capoeira. I&apos;m always curious about new places and experiences.
-            </p>
-
-            <div className="space-y-2 pt-6">
-              <h3 className="text-meta">Core Technologies</h3>
-              <p className="text-body text-foreground/70">
-                {coreTechnologies.join(" · ")}
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16">
+            <div className="max-w-2xl space-y-5 text-body-lg text-foreground/70">
+              <p className="text-foreground">
+                I&apos;m a software engineer with a frontend focus, building web and cross-platform mobile applications since 2018.
+              </p>
+              <p>
+                My experience spans enterprise logistics systems and products built from scratch. I enjoy working where engineering decisions directly shape the user experience.
+              </p>
+              <p>
+                I hold a B.S. in Computer Engineering from Istanbul Technical University. I take a hands-on approach across the stack, with particular attention to frontend architecture, consistent interfaces, and performance. I like understanding how the whole product works and carrying that understanding into the details people interact with.
+              </p>
+              <p>
+                Outside of work, you&apos;ll find me riding my motorcycle, training at the gym, playing guitar, or practicing capoeira. I&apos;m always curious about new places and experiences.
               </p>
             </div>
+
+            <aside className="lg:self-start lg:border-l lg:border-foreground/10 lg:pl-10">
+              <h3 className="text-meta">Core Technologies</h3>
+              <ul className="mt-6 grid grid-flow-col grid-cols-2 grid-rows-3 gap-x-8 gap-y-3 text-body text-foreground/80">
+                {coreTechnologies.map((tech) => (
+                  <li key={tech}>{tech}</li>
+                ))}
+              </ul>
+
+              <div className="mt-8 border-t border-foreground/10 pt-6">
+                <a
+                  href="/docs/cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 border-b border-accent pb-1 text-sm font-medium text-foreground transition-colors duration-300 hover:text-accent"
+                >
+                  View my resume
+                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                </a>
+              </div>
+            </aside>
           </div>
 
           {/* Work subsection */}
